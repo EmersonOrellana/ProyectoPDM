@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tvHeaderTitle: TextView
+    private lateinit var incluirCabecera: View
+    private lateinit var incluirNav: View
+
     private lateinit var btnInicio: LinearLayout
     private lateinit var btnProveedores: LinearLayout
     private lateinit var btnMateriales: LinearLayout
@@ -21,11 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // SOLUCIÓN AL ERROR: Buscamos el TextView directamente.
-        // Si da error, asegúrate que layout_header.xml tenga el id: tvHeaderTitle
         tvHeaderTitle = findViewById(R.id.tvHeaderTitle)
 
-        // Inicializar botones del menú (asegúrate que layout_bottom_nav tenga estos IDs)
+        // Inicializamos las vistas de los "include" usando los IDs del XML
+        incluirCabecera = findViewById(R.id.incluir_cabecera)
+        incluirNav = findViewById(R.id.incluir_nav)
+
+        // Inicializar botones del menú
         btnInicio = findViewById(R.id.nav_inicio)
         btnProveedores = findViewById(R.id.nav_proveedores)
         btnMateriales = findViewById(R.id.nav_materiales)
@@ -33,7 +38,13 @@ class MainActivity : AppCompatActivity() {
         btnPerfil = findViewById(R.id.nav_perfil)
 
         if (savedInstanceState == null) {
-            cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
+            // Al cargar el Login, ocultamos todo lo de alrededor
+            incluirCabecera.visibility = View.GONE
+            incluirNav.visibility = View.GONE
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.content_container, LoginFragment())
+                .commit()
         }
 
         btnInicio.setOnClickListener { cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN") }
@@ -44,6 +55,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cambiarPantalla(fragmento: Fragment, idBoton: Int, titulo: String) {
+        // Al cambiar a cualquier otra pantalla (Inicio, Materiales, etc), volvemos a mostrar la barra y el header
+        incluirCabecera.visibility = View.VISIBLE
+        incluirNav.visibility = View.VISIBLE
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_container, fragmento)
             .commit()
