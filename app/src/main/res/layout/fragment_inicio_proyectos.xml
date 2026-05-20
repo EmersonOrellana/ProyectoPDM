@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtTituloProyectos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Proyectos de Construcción"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:id="@+id/containerBuscador"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:paddingHorizontal="12dp"
+                android:gravity="center_vertical"
+                android:elevation="4dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#FFFFFF">
+
+                <ImageView
+                    android:id="@+id/imgIconoLupa"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_search"/>
+
+                <EditText
+                    android:id="@+id/edtBuscarProyecto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="BUSCAR"
+                    android:background="@android:color/transparent"
+                    android:paddingStart="10dp"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProyectoX"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtNombreProyectoX"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Proyecto X"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:id="@+id/txtEstadoProyectoX"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Iniciado"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:background="#D9D3D3"
+                            android:paddingHorizontal="18dp"
+                            android:paddingVertical="8dp"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtFechaProyectoX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha: 15/04/2026"
+                        android:textSize="18sp"
+                        android:textColor="#000000"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <Button
+                        android:id="@+id/btnVerDetallesX"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ver Detalles"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#1565C0"/>
+
+                    <Button
+                        android:id="@+id/btnEditarX"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Editar"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#003366"
+                        android:backgroundTint="#A9C9E8"
+                        android:layout_marginTop="8dp"/>
+
+                    <Button
+                        android:id="@+id/btnEliminarX"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Eliminar"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#7A0000"
+                        android:backgroundTint="#F4A3A3"
+                        android:layout_marginTop="8dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProyectoY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtNombreProyectoY"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Proyecto Y"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:id="@+id/txtEstadoProyectoY"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="En cotización"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:background="#FFD54F"
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="8dp"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtFechaProyectoY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha: 03/04/2026"
+                        android:textSize="18sp"
+                        android:textColor="#000000"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <Button
+                        android:id="@+id/btnVerDetallesY"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ver Detalles"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#1565C0"/>
+
+                    <Button
+                        android:id="@+id/btnEditarY"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Editar"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#003366"
+                        android:backgroundTint="#A9C9E8"
+                        android:layout_marginTop="8dp"/>
+
+                    <Button
+                        android:id="@+id/btnEliminarY"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Eliminar"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#7A0000"
+                        android:backgroundTint="#F4A3A3"
+                        android:layout_marginTop="8dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProyectoZ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="80dp" app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtNombreProyectoZ"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Proyecto Z"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:id="@+id/txtEstadoProyectoZ"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Aprobado"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:background="#00E676"
+                            android:paddingHorizontal="18dp"
+                            android:paddingVertical="8dp"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtFechaProyectoZ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha: 05/03/2026"
+                        android:textSize="18sp"
+                        android:textColor="#000000"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <Button
+                        android:id="@+id/btnVerDetallesZ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ver Detalles"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#1565C0"/>
+
+                    <Button
+                        android:id="@+id/btnEditarZ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Editar"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#003366"
+                        android:backgroundTint="#A9C9E8"
+                        android:layout_marginTop="8dp"/>
+
+                    <Button
+                        android:id="@+id/btnEliminarZ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Eliminar"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:textColor="#7A0000"
+                        android:backgroundTint="#F4A3A3"
+                        android:layout_marginTop="8dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAgregarTransporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:src="@android:drawable/ic_menu_directions"
+            app:backgroundTint="#00E676"
+            app:tint="#FFFFFF"
+            app:fabSize="normal"
+            android:contentDescription="Agregar Transporte" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAgregarProyecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="#1565C0"
+            app:tint="#FFFFFF"
+            app:fabSize="normal"
+            android:contentDescription="Agregar Proyecto" />
+
+    </LinearLayout>
+
+</RelativeLayout>

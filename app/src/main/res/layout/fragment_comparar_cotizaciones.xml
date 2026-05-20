@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <ImageButton
+                android:id="@+id/btnAtrasComparar"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@android:drawable/ic_menu_revert"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Regresar"
+                app:tint="#000000" />
+
+            <TextView
+                android:id="@+id/tvTituloComparacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comparacion de cotizaciones"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:background="@android:drawable/edit_text"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="14dp"
+            android:elevation="3dp"
+            android:layout_marginBottom="6dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="#666666"/>
+
+            <EditText
+                android:id="@+id/edtBuscarCotizaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="BUSCAR"
+                android:textSize="15sp"
+                android:textColorHint="#999999"
+                android:background="@android:color/transparent"
+                android:paddingStart="8dp"
+                android:inputType="textCapCharacters" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Las cotizaciones se ordenan de la mejor a la menos factible"
+            android:textColor="#887A7A"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="4dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCotizacion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.9"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cotización 1"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proveedor:  Proveedor A"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha:        19/05/2026"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Costo Total:  $1,262.25"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:orientation="vertical"
+                    android:gravity="end">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnVerDetalle1"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:text="Ver Detalle"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:padding="0dp"
+                        app:icon="@android:drawable/ic_menu_view"
+                        app:iconSize="14dp"
+                        app:iconGravity="textStart"
+                        app:backgroundTint="#1565C0"
+                        app:cornerRadius="8dp"
+                        android:layout_marginBottom="6dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditar1"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:text="Editar"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        android:textColor="#1565C0"
+                        android:padding="0dp"
+                        app:icon="@android:drawable/ic_menu_edit"
+                        app:iconSize="14dp"
+                        app:iconGravity="textStart"
+                        app:iconTint="#1565C0"
+                        app:backgroundTint="#A9C9E8"
+                        app:cornerRadius="8dp"
+                        android:layout_marginBottom="6dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEliminar1"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:text="Eliminar"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        android:textColor="#FF1744"
+                        android:padding="0dp"
+                        app:icon="@android:drawable/ic_menu_delete"
+                        app:iconSize="14dp"
+                        app:iconGravity="textStart"
+                        app:iconTint="#FF1744"
+                        app:backgroundTint="#FFCDD2"
+                        app:cornerRadius="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCotizacion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.9"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cotización 2"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proveedor:  Proveedor B"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha:        19/05/2026"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Costo Total:  $1,050.00"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:orientation="vertical"
+                    android:gravity="end">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnVerDetalle2"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:text="Ver Detalle"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:padding="0dp"
+                        app:icon="@android:drawable/ic_menu_view"
+                        app:iconSize="14dp"
+                        app:iconGravity="textStart"
+                        app:backgroundTint="#1565C0"
+                        app:cornerRadius="8dp"
+                        android:layout_marginBottom="6dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditar2"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:text="Editar"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        android:textColor="#1565C0"
+                        android:padding="0dp"
+                        app:icon="@android:drawable/ic_menu_edit"
+                        app:iconSize="14dp"
+                        app:iconGravity="textStart"
+                        app:iconTint="#1565C0"
+                        app:backgroundTint="#A9C9E8"
+                        app:cornerRadius="8dp"
+                        android:layout_marginBottom="6dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEliminar2"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:text="Eliminar"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        android:textColor="#FF1744"
+                        android:padding="0dp"
+                        app:icon="@android:drawable/ic_menu_delete"
+                        app:iconSize="14dp"
+                        app:iconGravity="textStart"
+                        app:iconTint="#FF1744"
+                        app:backgroundTint="#FFCDD2"
+                        app:cornerRadius="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSeleccionarCotizacionFinal"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Seleccionar Cotización"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="#1565C0"
+            app:cornerRadius="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
