@@ -1,100 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#F5F5F5"
+    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvTituloInicio"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_marginTop="8dp"
+        android:text="Proyectos de Construcción"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Panel de Control"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#000000" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchBarInicio"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloInicio">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:src="@android:drawable/ic_search_category_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#9E9E9E" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:background="@android:color/transparent"
+                android:hint="BUSCAR"
+                android:textColorHint="#9E9E9E"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivSearch" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sistema COTMAN - El Salvador"
-            android:textColor="#816F6F" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBarInicio">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardMateriales"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="4dp">
+            android:orientation="vertical"
+            android:paddingBottom="80dp">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/construction"
-                    app:tint="#022DFF" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="15dp">
+                    android:padding="16dp">
                     <TextView
+                        android:id="@+id/titleX"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Materiales Registrados"
+                        android:text="Proyecto X"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textSize="18sp" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                     <TextView
-                        android:id="@+id/tvCountMateriales"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12 productos" />
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                        android:background="@drawable/bg_badge_gray"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="4dp"
+                        android:text="Iniciado"
+                        android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/dateX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="#666666"
+                        android:text="Fecha: 15/04/2026"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titleX" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#97B0C5">
+                    <Button
+                        android:id="@+id/btnDetallesX"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="#149BC3"
+                        android:text="Ver Detalles"
+                        android:textAllCaps="false"
+                        app:cornerRadius="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/dateX" />
+                    <Button
+                        android:id="@+id/btnEditarX"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="#A9C7EB"
+                        android:text="Editar"
+                        android:textAllCaps="false"
+                        android:textColor="#1A4A75"
+                        app:cornerRadius="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/btnDetallesX" />
+                    <Button
+                        android:id="@+id/btnEliminarX"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="#F79494"
+                        android:text="Eliminar"
+                        android:textAllCaps="false"
+                        android:textColor="#7A1D1D"
+                        app:cornerRadius="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/btnEditarX" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Última Comparativa"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/titleY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proyecto Y"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFE082"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="En cotización"
+                        android:textColor="#7F6400"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/dateY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="#666666"
+                        android:text="Fecha: 03/04/2026"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titleY" />
+                    <Button android:id="@+id/btnDetallesY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="12dp" android:backgroundTint="#149BC3" android:text="Ver Detalles" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/dateY" />
+                    <Button android:id="@+id/btnEditarY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#A9C7EB" android:text="Editar" android:textAllCaps="false" android:textColor="#1A4A75" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnDetallesY" />
+                    <Button android:id="@+id/btnEliminarY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#F79494" android:text="Eliminar" android:textAllCaps="false" android:textColor="#7A1D1D" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnEditarY" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FFFFFF">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mejor precio: Ferretería El Clavo"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/titleZ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proyecto Z"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-</ScrollView>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#A5D6A7"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:text="Aprobado"
+                            android:textColor="#1B5E20" />
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="8dp"
+                            android:src="@android:drawable/ic_menu_directions"
+                            app:tint="#2E7D32" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/dateZ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="#666666"
+                        android:text="Fecha: 05/03/2026"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titleZ" />
+                    <Button android:id="@+id/btnDetallesZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="12dp" android:backgroundTint="#149BC3" android:text="Ver Detalles" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/dateZ" />
+                    <Button android:id="@+id/btnEditarZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#A9C7EB" android:text="Editar" android:textAllCaps="false" android:textColor="#1A4A75" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnDetallesZ" />
+                    <Button android:id="@+id/btnEliminarZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#F79494" android:text="Eliminar" android:textAllCaps="false" android:textColor="#7A1D1D" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnEditarZ" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:src="@android:drawable/ic_menu_directions"
+        app:backgroundTint="#008000"
+        app:tint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/fabAgregarProyecto"
+        app:layout_constraintEnd_toEndOf="@+id/fabAgregarProyecto"
+        app:layout_constraintStart_toStartOf="@+id/fabAgregarProyecto" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgregarProyecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="#0046FF"
+        app:tint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

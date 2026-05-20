@@ -1,59 +1,58 @@
 package com.example.proyectopdm
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class MaterialesFragment : Fragment(R.layout.fragment_materiales) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MaterialesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MaterialesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        // 1. Vincular los componentes del XML corregido
+        val etBuscar = view.findViewById<EditText>(R.id.etBuscarMaterial)
+        val cardMaterial = view.findViewById<CardView>(R.id.cardMaterial)
+        val btnEditar = view.findViewById<Button>(R.id.btnEditarMaterial)
+        val btnBaja = view.findViewById<Button>(R.id.btnBajaMaterial)
+        val fabAgregar = view.findViewById<FloatingActionButton>(R.id.fabAgregarMaterial)
+
+
+        // 2. Configurar las acciones de los clicks
+        // Dentro del onViewCreated de tu MaterialesFragment.kt original, cambia el listener del botón editar:
+        btnEditar.setOnClickListener {
+            // Llama a la función del MainActivity para hacer la transición limpia de fragmento
+            (activity as? MainActivity)?.cambiarPantalla(
+                EditarMaterialFragment(),
+                R.id.nav_materiales,
+                "MATERIALES"
+            )
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_materiales, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MaterialesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MaterialesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        btnBaja.setOnClickListener {
+            // Creamos y mostramos la ventana flotante en una sola línea
+            ConfirmarDialog.newInstance(
+                titulo = "¿Dar de baja Cemento Holcim?",
+                textoBoton = "Sí, dar de baja",
+                accion = {
+                    // Todo lo que escribas aquí se ejecutará SOLO si presionas el botón rojo
+                    Toast.makeText(requireContext(), "¡Material inactivado con éxito!", Toast.LENGTH_SHORT).show()
                 }
-            }
+            ).show(parentFragmentManager, "dialog_baja")
+        }
+
+        // Dentro del onViewCreated de tu MaterialesFragment.kt original, edita el evento del botón agregar:
+        fabAgregar?.setOnClickListener {
+            // Abre la nueva pantalla de registro de materiales usando el cargador global
+            (activity as? MainActivity)?.cambiarPantalla(
+                RegistrarMaterialFragment(),
+                R.id.nav_materiales,
+                "MATERIALES"
+            )
+        }
     }
 }
