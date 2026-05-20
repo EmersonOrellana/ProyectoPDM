@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializamos las vistas de los "include" usando los IDs del XML
         incluirCabecera = findViewById(R.id.incluir_cabecera)
-        incluirNav = findViewById(R.id.incluir_nav)
+        incluirNav = findViewById(R.id.incluir_barra_navegacion)
 
         // Inicializar botones del menú
         btnInicio = findViewById(R.id.nav_inicio)
