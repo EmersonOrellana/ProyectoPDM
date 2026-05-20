@@ -2,32 +2,22 @@ package com.example.proyectopdm
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.cardview.widget.CardView
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-// Asegúrate que el layout se llame fragment_home o fragment_inicio
 class InicioFragment : Fragment(R.layout.fragment_inicio) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Referencias a las tarjetas del diseño
-        val cardMateriales = view.findViewById<CardView>(R.id.cardMateriales)
-        val tvContador = view.findViewById<TextView>(R.id.tvCountMateriales)
+        // Botones del Proyecto X (Como ejemplo)
+        val btnEliminarX = view.findViewById<Button>(R.id.btnEliminarX)
+        val fabAgregar = view.findViewById<FloatingActionButton>(R.id.fabAgregarProyecto)
 
-        // Texto dinámico opcional
-        tvContador.text = "25 productos"
-
-        // 2. Al dar clic en la tarjeta, saltamos a la pantalla de Materiales
-        cardMateriales.setOnClickListener {
-            (activity as? MainActivity)?.cambiarPantalla(
-                MaterialesFragment(),
-                R.id.nav_materiales,
-                "MATERIALES"
-            )
+        fabAgregar.setOnClickListener {
+            Toast.makeText(requireContext(), "Nuevo Proyecto", Toast.LENGTH_SHORT).show()
         }
-
-        // Aquí puedes añadir más tarjetas siguiendo el mismo ejemplo
     }
 }

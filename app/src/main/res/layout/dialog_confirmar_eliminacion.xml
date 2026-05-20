@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardCornerRadius="28dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#F4F9FC">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <ImageView
+            android:id="@+id/ivDialogIcono"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@android:drawable/stat_sys_warning"
+            android:contentDescription="Advertencia"
+            app:tint="#F57C00"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDialogTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Confirmar Eliminación"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivDialogIcono" />
+
+        <Button
+            android:id="@+id/btnDialogConfirmar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#F79494"
+            android:text="Sí, Eliminar"
+            android:textAllCaps="false"
+            android:textColor="#7A1D1D"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tvDialogTitulo" />
+
+        <Button
+            android:id="@+id/btnDialogCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#A9C7EB"
+            android:text="Cancelar"
+            android:textAllCaps="false"
+            android:textColor="#1A4A75"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/btnDialogConfirmar"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

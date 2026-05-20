@@ -66,8 +66,8 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginBottom="24dp"
-                    android:colorFilter="#1A237E"
-                    android:src="@drawable/ic_identification" />
+                    android:src="@drawable/ic_identification"
+                    app:tint="#1A237E" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -128,7 +128,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:textColor="#666666">
-                    <![CDATA[¿No tienes una cuenta? <font color="#1565C0"><u>Regístrate</u></font>]]>
                 </TextView>
 
             </LinearLayout>

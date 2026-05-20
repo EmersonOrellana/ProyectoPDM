@@ -56,8 +56,10 @@ class MainActivity : AppCompatActivity() {
         val listaBotones = listOf(btnInicio, btnProveedores, btnMateriales, btnPersonal, btnPerfil)
         listaBotones.forEach { boton ->
             if (boton.id == idSeleccionado) {
-                boton.setBackgroundColor(Color.parseColor("#816F6F"))
+                // UN GRIS OPACO SELECCIONADO (Estilo Slate/Gris Azulado)
+                boton.setBackgroundColor(Color.parseColor("#7A92A8"))
             } else {
+                // EL COLOR ORIGINAL DE TU BARRA
                 boton.setBackgroundColor(Color.parseColor("#97B0C5"))
             }
         }
