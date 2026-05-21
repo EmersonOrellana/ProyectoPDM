@@ -24,13 +24,21 @@ class LoginFragment : Fragment() {
         val btnIngresar = view.findViewById<MaterialButton>(R.id.btn_ingresar)
 
         btnIngresar.setOnClickListener {
-            // === MODO PRUEBA: PASAMOS DIRECTO AL INICIO ===
+            // === PASAMOS DIRECTO AL INICIO ===
 
             val mainActivity = activity as MainActivity
             mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
 
             // Un pequeño mensaje flotante de bienvenida
-            Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "¡Bienvenido Usuario a COTMAN!", Toast.LENGTH_SHORT).show()
+        }
+
+        //Texto de "Olvidé mi contraseña" (En mantenimiento)
+        val tvForgotPassword = view.findViewById<TextView>(R.id.tv_forgot_password)
+
+        tvForgotPassword.setOnClickListener {
+            // Muestra el mensaje flotante
+            Toast.makeText(requireContext(), "Función en proceso de creación", Toast.LENGTH_SHORT).show()
         }
 
         val tvRegister = view.findViewById<TextView>(R.id.tv_register)

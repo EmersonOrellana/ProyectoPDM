@@ -67,14 +67,21 @@ class AjustesFragment : Fragment() {
             builder.setPositiveButton("Sí") { dialog, _ ->
                 Toast.makeText(context, "Cerrando sesión en COTMAN...", Toast.LENGTH_SHORT).show()
 
-                // Ejecuta el cambio de pantalla al Login y oculta el menú inferior
-                (activity as? MainActivity)?.cambiarPantalla(
-                    LoginFragment(),
-                    0,
-                    "Iniciar Sesión"
-                )
-            }
+                val mainActivity = activity as? MainActivity
+                if (mainActivity != null) {
+                    //Ocultamos la cabecera global y la barra de navegación inferior
+                    mainActivity.findViewById<View>(R.id.incluir_cabecera)?.visibility = View.GONE
+                    mainActivity.findViewById<View>(R.id.incluir_barra_navegacion)?.visibility = View.GONE
 
+                    //Limpiamos el historial de navegación (para que no puedan volver con el botón de retroceso)
+                    mainActivity.supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
+                    //Cargamos el Login limpio
+                    mainActivity.supportFragmentManager.beginTransaction()
+                        .replace(R.id.content_container, LoginFragment())
+                        .commit()
+                }
+            }
             builder.setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
             }

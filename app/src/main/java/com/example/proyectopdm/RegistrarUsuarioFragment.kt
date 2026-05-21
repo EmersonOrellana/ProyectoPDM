@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButton
 
 class RegistrarUsuarioFragment : Fragment() {
 
@@ -24,5 +26,12 @@ class RegistrarUsuarioFragment : Fragment() {
             // Destruye esta pantalla y regresa al Login
             requireActivity().supportFragmentManager.popBackStack()
         }
+
+        val btnCrearCuenta = view.findViewById<MaterialButton>(R.id.btn_crear_cuenta)
+        btnCrearCuenta.setOnClickListener {
+            // Muestra un mensaje flotante al usuario
+            Toast.makeText(requireContext(), "Función en proceso de creación", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }
