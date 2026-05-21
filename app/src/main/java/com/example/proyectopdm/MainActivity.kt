@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         btnMateriales.setOnClickListener { cambiarPantalla(MaterialesFragment(), R.id.nav_materiales, "MATERIALES") }
         btnPersonal.setOnClickListener { cambiarPantalla(PersonalFragment(), R.id.nav_personal, "PERSONAL") }
         btnPerfil.setOnClickListener {
-            cambiarPantalla(AjustesFragment(), R.id.nav_perfil, "AJUSTES")
+            cambiarPantalla(PerfilFragment(), R.id.nav_perfil, "AJUSTES")
         }
     }
 

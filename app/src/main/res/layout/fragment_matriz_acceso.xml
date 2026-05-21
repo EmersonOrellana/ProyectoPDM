@@ -7,11 +7,6 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <include
-        android:id="@+id/include_header"
-        layout="@layout/layout_header"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/llTitle"
         android:layout_width="match_parent"
@@ -19,14 +14,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/include_header">
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/baseline_arrow_back_24"
-            android:contentDescription="Regresar"
-            app:tint="#000000" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,7 +22,6 @@
             android:text="Matriz de Accesos"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginStart="8dp"
             android:textColor="#000000" />
     </LinearLayout>
 
