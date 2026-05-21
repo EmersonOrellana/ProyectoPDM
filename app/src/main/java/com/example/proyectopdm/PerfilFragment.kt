@@ -61,7 +61,10 @@ class PerfilFragment : Fragment() {
         }
 
         cardCategorias.setOnClickListener {
-            Toast.makeText(context, "Catálogo: Categorías de Materiales", Toast.LENGTH_SHORT).show()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.content_container, CategoriasFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         btnPerfil.setOnClickListener {

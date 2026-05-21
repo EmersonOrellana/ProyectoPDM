@@ -22,15 +22,12 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val btnIngresar = view.findViewById<MaterialButton>(R.id.btn_ingresar)
-
         btnIngresar.setOnClickListener {
-            // === PASAMOS DIRECTO AL INICIO ===
+            requireView().visibility = View.GONE
 
             val mainActivity = activity as MainActivity
             mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
-
-            // Un pequeño mensaje flotante de bienvenida
-            Toast.makeText(requireContext(), "¡Bienvenido Usuario a COTMAN!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
         }
 
         //Texto de "Olvidé mi contraseña" (En mantenimiento)
