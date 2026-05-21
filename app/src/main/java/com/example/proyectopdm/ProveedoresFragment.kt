@@ -24,6 +24,14 @@ class ProveedoresFragment : Fragment(R.layout.fragment_proveedores) {
         // 2. Configurar el evento para el Botón Editar
         btnEditar.setOnClickListener {
             // Aquí irá la lógica o navegación para modificar el proveedor
+
+            //Navegacion al fragmento de Editar:
+            (activity as MainActivity).cambiarPantalla(
+                EditarProveedorFragment(),
+                R.id.nav_proveedores,
+                "COTMAN" // O el título que prefieras que aparezca en el header azul
+            )
+
             Toast.makeText(requireContext(), "Editar Proveedor 1", Toast.LENGTH_SHORT).show()
         }
 
@@ -36,6 +44,14 @@ class ProveedoresFragment : Fragment(R.layout.fragment_proveedores) {
         // 4. Configurar el evento para el Botón Flotante (+)
         fabAgregar.setOnClickListener {
             // Aquí abrirás el formulario o diálogo para registrar un nuevo proveedor
+
+            //Navegacion al fragmento de Nuevo proveedor:
+            (activity as MainActivity).cambiarPantalla(
+                NuevoProveedorFragment(),
+                R.id.nav_proveedores,
+                "COTMAN"
+            )
+
             Toast.makeText(requireContext(), "Agregar nuevo proveedor", Toast.LENGTH_SHORT).show()
         }
     }

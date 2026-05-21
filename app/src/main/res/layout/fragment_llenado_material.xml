@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="#1565C0"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="24dp">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@android:drawable/ic_menu_agenda"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Llenado de\nMateriales"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="16dp"
+                android:lineSpacingMultiplier="0.9"/>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detalle de Material Seleccionado"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Material:"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:id="@+id/edtLlenadoNombreMaterial"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@android:drawable/edit_text"
+                    android:backgroundTint="#D9D3D3"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:text="Cemento"
+                    android:textColor="#555555"
+                    android:paddingHorizontal="12dp"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@android:drawable/dialog_holo_light_frame"
+                    android:padding="16dp"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Datos:"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cantidad a cotizar"
+                        android:textColor="#444444"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="4dp"/>
+
+                    <EditText
+                        android:id="@+id/edtLlenadoCantidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@android:drawable/edit_text"
+                        android:backgroundTint="#FFFFFF"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="10dp"
+                        android:textSize="15sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unidad de medida"
+                        android:textColor="#444444"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="4dp"/>
+
+                    <Spinner
+                        android:id="@+id/spLlenadoUnidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:backgroundTint="#FFFFFF"
+                        android:spinnerMode="dropdown"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precio Unitario"
+                        android:textColor="#444444"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="4dp"/>
+
+                    <EditText
+                        android:id="@+id/edtLlenadoPrecioUnitario"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@android:drawable/edit_text"
+                        android:backgroundTint="#FFFFFF"
+                        android:inputType="numberDecimal"
+                        android:hint="$-,--"
+                        android:paddingHorizontal="10dp"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtLlenadoSubtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUBTOTAL: $---,--"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="24dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLlenadoConfirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Confirmar"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#1565C0"
+                    app:cornerRadius="12dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLlenadoCancelar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Cancelar"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    app:backgroundTint="#D9D3D3"
+                    app:cornerRadius="12dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>
