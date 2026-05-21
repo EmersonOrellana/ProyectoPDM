@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
@@ -30,6 +31,16 @@ class LoginFragment : Fragment() {
 
             // Un pequeño mensaje flotante de bienvenida
             Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
+        }
+
+        val tvRegister = view.findViewById<TextView>(R.id.tv_register)
+
+        tvRegister.setOnClickListener {
+            // Transición a la pantalla de Registro
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.content_container, RegistrarUsuarioFragment())
+                .addToBackStack(null) // Permite usar el botón físico de "Atrás" del teléfono
+                .commit()
         }
     }
 }
