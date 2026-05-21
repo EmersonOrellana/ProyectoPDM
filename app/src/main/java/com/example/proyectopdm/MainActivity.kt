@@ -51,7 +51,9 @@ class MainActivity : AppCompatActivity() {
         btnProveedores.setOnClickListener { cambiarPantalla(ProveedoresFragment(), R.id.nav_proveedores, "PROVEEDORES") }
         btnMateriales.setOnClickListener { cambiarPantalla(MaterialesFragment(), R.id.nav_materiales, "MATERIALES") }
         btnPersonal.setOnClickListener { cambiarPantalla(PersonalFragment(), R.id.nav_personal, "PERSONAL") }
-        btnPerfil.setOnClickListener { cambiarPantalla(AjustesFragment(), R.id.nav_perfil, "PERFIL") }
+        btnPerfil.setOnClickListener {
+            cambiarPantalla(AjustesFragment(), R.id.nav_perfil, "AJUSTES")
+        }
     }
 
     fun cambiarPantalla(fragmento: Fragment, idBoton: Int, titulo: String) {
