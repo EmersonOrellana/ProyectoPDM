@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
-class AjustesFragment : Fragment() {
+class PerfilFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_ajustes, container, false)
+        return inflater.inflate(R.layout.fragment_perfil, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +36,12 @@ class AjustesFragment : Fragment() {
 
         // EVENTOS DE CLIC
         cardMatriz.setOnClickListener {
-            Toast.makeText(context, "Módulo: Matriz de Acceso y Permisos", Toast.LENGTH_SHORT).show()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.content_container, MatrizAccesoFragment())
+                .commit()
+
+            // Cambiar el título del encabezado superior directamente
+            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "COTMAN"
         }
 
         cardRoles.setOnClickListener {
@@ -59,7 +65,12 @@ class AjustesFragment : Fragment() {
         }
 
         btnPerfil.setOnClickListener {
-            Toast.makeText(context, "Abriendo Perfil del Usuario", Toast.LENGTH_SHORT).show()
+            // Abre el fragmento de vista de lectura del perfil de forma local
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.content_container, VerPerfilFragment())
+                .commit()
+
+            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "COTMAN"
         }
 
         //BOTÓN CERRAR SESIÓN CON CONFIRMACIÓN
