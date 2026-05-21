@@ -24,7 +24,6 @@ class AgregarCotizacionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 1. Inicializar componentes base del encabezado
-        val btnAtras = view.findViewById<ImageButton>(R.id.btnAtrasCotizacion)
         val txtSubtitulo = view.findViewById<TextView>(R.id.txtSubtituloProyecto)
 
         // 2. Inicializar los botones de acciones exactos de tu XML
@@ -36,11 +35,6 @@ class AgregarCotizacionFragment : Fragment() {
         // Recuperar el nombre del proyecto dinámicamente enviado en los bundles
         val nombreProyecto = arguments?.getString("nombre_proyecto") ?: "Proyecto"
         txtSubtitulo.text = nombreProyecto
-
-        // Regresar a la pantalla anterior perfectamente
-        btnAtras.setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
 
         // ================= CONEXIÓN DEL PROVEEDOR EN EL PROPIO BOTÓN =================
         btnElegirProveedor.setOnClickListener {

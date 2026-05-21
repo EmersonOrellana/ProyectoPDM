@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnProveedores: LinearLayout
     private lateinit var btnMateriales: LinearLayout
     private lateinit var btnPersonal: LinearLayout
-    private lateinit var btnPerfil: LinearLayout
+    private lateinit var btnAjustes: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         btnProveedores = findViewById(R.id.nav_proveedores)
         btnMateriales = findViewById(R.id.nav_materiales)
         btnPersonal = findViewById(R.id.nav_personal)
-        btnPerfil = findViewById(R.id.nav_perfil)
+        btnAjustes = findViewById(R.id.nav_ajustes)
 
         if (savedInstanceState == null) {
             // Al cargar el Login, ocultamos todo lo de alrededor
@@ -51,18 +51,17 @@ class MainActivity : AppCompatActivity() {
         btnProveedores.setOnClickListener { cambiarPantalla(ProveedoresFragment(), R.id.nav_proveedores, "PROVEEDORES") }
         btnMateriales.setOnClickListener { cambiarPantalla(MaterialesFragment(), R.id.nav_materiales, "MATERIALES") }
         btnPersonal.setOnClickListener { cambiarPantalla(PersonalFragment(), R.id.nav_personal, "PERSONAL") }
-        btnPerfil.setOnClickListener {
-            cambiarPantalla(PerfilFragment(), R.id.nav_perfil, "AJUSTES")
-        }
+        btnAjustes.setOnClickListener { cambiarPantalla(AjustesFragment(), R.id.nav_ajustes, "AJUSTES") }
     }
 
     fun cambiarPantalla(fragmento: Fragment, idBoton: Int, titulo: String) {
-        // Al cambiar a cualquier otra pantalla (Inicio, Materiales, etc), volvemos a mostrar la barra y el header
         incluirCabecera.visibility = View.VISIBLE
         incluirNav.visibility = View.VISIBLE
 
+        // AGREGAMOS .addToBackStack(null) AQUÍ
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_container, fragmento)
+            .addToBackStack(null) // Esto permite volver a la pantalla anterior
             .commit()
 
         tvHeaderTitle.text = titulo
@@ -70,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun actualizarNavVisual(idSeleccionado: Int) {
-        val listaBotones = listOf(btnInicio, btnProveedores, btnMateriales, btnPersonal, btnPerfil)
+        val listaBotones = listOf(btnInicio, btnProveedores, btnMateriales, btnPersonal, btnAjustes)
         listaBotones.forEach { boton ->
             if (boton.id == idSeleccionado) {
                 // UN GRIS OPACO SELECCIONADO (Estilo Slate/Gris Azulado)

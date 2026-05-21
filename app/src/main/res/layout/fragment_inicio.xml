@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
@@ -110,38 +111,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titleX" />
 
-                    <Button
-                        android:id="@+id/btnDetallesX"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="12dp"
-                        android:backgroundTint="#149BC3"
-                        android:text="Ver Detalles"
-                        android:textAllCaps="false"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintTop_toBottomOf="@id/dateX" />
-                    <Button
-                        android:id="@+id/btnEditarX"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="4dp"
-                        android:backgroundTint="#A9C7EB"
-                        android:text="Editar"
-                        android:textAllCaps="false"
-                        android:textColor="#1A4A75"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintTop_toBottomOf="@id/btnDetallesX" />
-                    <Button
-                        android:id="@+id/btnEliminarX"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="4dp"
-                        android:backgroundTint="#F79494"
-                        android:text="Eliminar"
-                        android:textAllCaps="false"
-                        android:textColor="#7A1D1D"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintTop_toBottomOf="@id/btnEditarX" />
+                    <Button android:id="@+id/btnDetallesX" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="12dp" android:backgroundTint="#1565C0" android:textColor="#FFFFFF" android:text="Ver Detalles" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/dateX" />
+                    <Button android:id="@+id/btnEditarX" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#A9C9E8" android:textColor="#1565C0" android:text="Editar" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnDetallesX" />
+                    <Button android:id="@+id/btnEliminarX" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#F79494" android:textColor="#FFFFFF" android:text="Eliminar" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnEditarX" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -169,8 +141,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#FFE082"
-                        android:paddingHorizontal="12dp"
+                        android:background="@drawable/bg_badge_yellow"
+                        android:paddingHorizontal="16dp"
                         android:paddingVertical="4dp"
                         android:text="En cotización"
                         android:textColor="#7F6400"
@@ -185,9 +157,9 @@
                         android:text="Fecha: 03/04/2026"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titleY" />
-                    <Button android:id="@+id/btnDetallesY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="12dp" android:backgroundTint="#149BC3" android:text="Ver Detalles" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/dateY" />
-                    <Button android:id="@+id/btnEditarY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#A9C7EB" android:text="Editar" android:textAllCaps="false" android:textColor="#1A4A75" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnDetallesY" />
-                    <Button android:id="@+id/btnEliminarY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#F79494" android:text="Eliminar" android:textAllCaps="false" android:textColor="#7A1D1D" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnEditarY" />
+                    <Button android:id="@+id/btnDetallesY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="12dp" android:backgroundTint="#1565C0" android:textColor="#FFFFFF" android:text="Ver Detalles" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/dateY" />
+                    <Button android:id="@+id/btnEditarY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#A9C9E8" android:textColor="#1565C0" android:text="Editar" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnDetallesY" />
+                    <Button android:id="@+id/btnEliminarY" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#F79494" android:textColor="#FFFFFF" android:text="Eliminar" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnEditarY" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -211,7 +183,6 @@
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -222,19 +193,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#A5D6A7"
-                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_badge_green"
+                            android:paddingHorizontal="16dp"
                             android:paddingVertical="4dp"
                             android:text="Aprobado"
-                            android:textColor="#1B5E20" />
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_marginStart="8dp"
-                            android:src="@android:drawable/ic_menu_directions"
-                            app:tint="#2E7D32" />
+                            android:textColor="#1B5E20"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
                     </LinearLayout>
-
                     <TextView
                         android:id="@+id/dateZ"
                         android:layout_width="wrap_content"
@@ -244,9 +210,9 @@
                         android:text="Fecha: 05/03/2026"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/titleZ" />
-                    <Button android:id="@+id/btnDetallesZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="12dp" android:backgroundTint="#149BC3" android:text="Ver Detalles" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/dateZ" />
-                    <Button android:id="@+id/btnEditarZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#A9C7EB" android:text="Editar" android:textAllCaps="false" android:textColor="#1A4A75" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnDetallesZ" />
-                    <Button android:id="@+id/btnEliminarZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#F79494" android:text="Eliminar" android:textAllCaps="false" android:textColor="#7A1D1D" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnEditarZ" />
+                    <Button android:id="@+id/btnDetallesZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="12dp" android:backgroundTint="#1565C0" android:textColor="#FFFFFF" android:text="Ver Detalles" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/dateZ" />
+                    <Button android:id="@+id/btnEditarZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#A9C9E8" android:textColor="#1565C0" android:text="Editar" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnDetallesZ" />
+                    <Button android:id="@+id/btnEliminarZ" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="4dp" android:backgroundTint="#F79494" android:textColor="#FFFFFF" android:text="Eliminar" android:textAllCaps="false" app:cornerRadius="8dp" app:layout_constraintTop_toBottomOf="@id/btnEditarZ" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -259,7 +225,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:src="@android:drawable/ic_menu_directions"
-        app:backgroundTint="#008000"
+        app:backgroundTint="#1565C0"
         app:tint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/fabAgregarProyecto"
         app:layout_constraintEnd_toEndOf="@+id/fabAgregarProyecto"
@@ -272,7 +238,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="#0046FF"
+        app:backgroundTint="#1565C0"
         app:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

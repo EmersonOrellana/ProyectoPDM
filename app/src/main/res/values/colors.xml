@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="brand_primary">#022DFF</color>
-    <color name="nav_background">#97B0C5</color> <color name="nav_item_active">#816F6F</color> <color name="background_light">#F5F5F5</color>
-    <color name="text_dark">#1A1A1B</color>
+    <color name="primary_blue">#1565C0</color>
+    <color name="secondary_blue">#A9C9E8</color>
+    <color name="white">#FFFFFF</color>
+    <color name="text_black">#000000</color>
+    <color name="black">#000000</color>
 </resources>

@@ -3,7 +3,6 @@ package com.example.proyectopdm
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 
@@ -12,39 +11,33 @@ class MatrizAccesoFragment : Fragment(R.layout.fragment_matriz_acceso) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Ya no buscamos el btnBackMatriz, solo los botones del formulario
+        // 1. Vincular los botones
         val btnCancelar = view.findViewById<Button>(R.id.btnCancelarMatriz)
         val btnGuardar = view.findViewById<Button>(R.id.btnGuardarMatriz)
 
-        // 2. Función interna para regresar a la pantalla de Ajustes
-        fun regresarAlPerfil() {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, PerfilFragment())
-                .commit()
-
-            // Restablece el título del encabezado superior
-            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "AJUSTES"
+        // 2. Función simplificada para regresar (popBackStack es la clave)
+        fun volverAtras() {
+            if (parentFragmentManager.backStackEntryCount > 0) {
+                parentFragmentManager.popBackStack()
+            }
         }
 
-        // 3. Eventos de los botones principales
+        // 3. Eventos de los botones
         btnCancelar.setOnClickListener {
-            regresarAlPerfil()
+            volverAtras()
         }
 
         btnGuardar.setOnClickListener {
-            // Lógica para guardar la configuración de permisos
-            regresarAlPerfil()
+            // Aquí puedes añadir tu lógica de guardado
+            volverAtras()
         }
 
-        // 4. CONTROL DE GESTOS Y BOTONES DIGITALES DEL SISTEMA
-        // Esto es lo que captura cuando deslizas el dedo desde el borde o tocas la flecha digital de Android
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    regresarAlPerfil()
-                }
+        // 4. Manejo del botón físico de atrás de Android
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                volverAtras()
             }
-        )
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 }

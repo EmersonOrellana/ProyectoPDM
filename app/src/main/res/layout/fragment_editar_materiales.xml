@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/tvTituloEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="20dp"
         android:text="Editar Material"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,160 +21,65 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="4dp"
         app:cardBackgroundColor="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@id/tvTituloEditar"
-        app:layout_constraintBottom_toTopOf="@id/btnActualizarMaterial"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/btnActualizarMaterial">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:padding="20dp">
 
-                <TextView
-                    android:id="@+id/lblNombreMaterial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre del Material"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nombre del Material" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
+                <EditText android:id="@+id/etNombreMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_edittext" android:paddingHorizontal="16dp" android:hint="Material" android:layout_marginBottom="16dp" />
 
-                <EditText
-                    android:id="@+id/etNombreMaterial"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
-                    android:backgroundTint="#EAEAEA"
-                    android:hint="Material"
-                    android:inputType="text"
-                    android:paddingHorizontal="12dp"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    app:layout_constraintTop_toBottomOf="@id/lblNombreMaterial" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Categoría" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
+                <Spinner android:id="@+id/spCategoriaMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_edittext" android:layout_marginBottom="16dp"/>
 
-                <TextView
-                    android:id="@+id/lblCategoria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Categoría"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/etNombreMaterial" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Unidad de medida" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
+                <EditText android:id="@+id/etUnidadMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_edittext" android:paddingHorizontal="16dp" android:hint="Sacos" android:layout_marginBottom="16dp" />
 
-                <Spinner
-                    android:id="@+id/spCategoriaMaterial"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="6dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:backgroundTint="#EAEAEA"
-                    android:paddingHorizontal="12dp"
-                    app:layout_constraintTop_toBottomOf="@id/lblCategoria" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Descripción técnica" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
+                <EditText android:id="@+id/etDescripcionMaterial" android:layout_width="match_parent" android:layout_height="100dp" android:background="@drawable/bg_edittext" android:padding="16dp" android:gravity="top|start" android:hint="Detalles..." android:inputType="textMultiLine" />
 
-                <TextView
-                    android:id="@+id/lblUnidadMedida"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Unidad de medida por defecto"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spCategoriaMaterial" />
-
-                <EditText
-                    android:id="@+id/etUnidadMaterial"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
-                    android:backgroundTint="#EAEAEA"
-                    android:hint="Sacos"
-                    android:inputType="text"
-                    android:paddingHorizontal="12dp"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    app:layout_constraintTop_toBottomOf="@id/lblUnidadMedida" />
-
-                <TextView
-                    android:id="@+id/lblDescripcionTecnica"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Descripción técnica"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/etUnidadMaterial" />
-
-                <EditText
-                    android:id="@+id/etDescripcionMaterial"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="6dp"
-                    android:background="@android:drawable/editbox_background_normal"
-                    android:backgroundTint="#EAEAEA"
-                    android:gravity="top|start"
-                    android:hint="Para que funciona, peso etc."
-                    android:inputType="textMultiLine"
-                    android:padding="12dp"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    app:layout_constraintTop_toBottomOf="@id/lblDescripcionTecnica" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnActualizarMaterial"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#149BC3"
+        android:layout_height="55dp"
+        android:textColor="#FFFFFF"
         android:text="Actualizar Material"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
         android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@id/btnCancelarEditar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:backgroundTint="#1565C0"
+        app:cornerRadius="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@id/btnCancelarEditar" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCancelarEditar"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#A9C7EB"
+        android:layout_height="55dp"
         android:text="Cancelar"
         android:textAllCaps="false"
-        android:textColor="#1A4A75"
-        android:textSize="16sp"
         android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="#1565C0"
+        app:backgroundTint="#A9C9E8"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

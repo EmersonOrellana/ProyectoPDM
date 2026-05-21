@@ -3,7 +3,6 @@ package com.example.proyectopdm
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 
 class EditarProveedorFragment : Fragment(R.layout.fragment_editar_proveedor) {
@@ -11,14 +10,12 @@ class EditarProveedorFragment : Fragment(R.layout.fragment_editar_proveedor) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnBack = view.findViewById<ImageView>(R.id.btnBackEditarProveedor)
+        // Eliminamos la referencia a btnBackEditarProveedor
         val btnCancelar = view.findViewById<Button>(R.id.btnCancelarEditProveedor)
 
-        val regresarAccion = View.OnClickListener {
+        // Mantenemos solo el botón de cancelar para regresar
+        btnCancelar.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-
-        btnBack.setOnClickListener(regresarAccion)
-        btnCancelar.setOnClickListener(regresarAccion)
     }
 }

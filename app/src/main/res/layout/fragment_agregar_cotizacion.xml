@@ -19,15 +19,6 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="24dp">
 
-            <ImageButton
-                android:id="@+id/btnAtrasCotizacion"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:src="@android:drawable/ic_menu_revert"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:tint="#000000"
-                android:contentDescription="Regresar" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -27,7 +27,6 @@ class CompararCotizacionesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 1. Inicializar botón de regreso del encabezado y buscador
-        val btnAtras = view.findViewById<ImageButton>(R.id.btnAtrasComparar)
         val edtBuscar = view.findViewById<EditText>(R.id.edtBuscarCotizaciones)
 
         // 2. Inicializar tarjetas interactivas
@@ -44,11 +43,6 @@ class CompararCotizacionesFragment : Fragment() {
         val btnEliminar2 = view.findViewById<MaterialButton>(R.id.btnEliminar2)
 
         val btnSeleccionarCotizacionFinal = view.findViewById<MaterialButton>(R.id.btnSeleccionarCotizacionFinal)
-
-        // ================= ACCIÓN DEL BOTÓN ATRÁS (CONFIGURADO AL 100%) =================
-        btnAtras.setOnClickListener {
-            parentFragmentManager.popBackStack() // Saca este fragmento de la pila y regresa a la pestaña previa
-        }
 
         // ================= SELECCIÓN DE LAS COTIZACIONES =================
         cardCotizacion1.setOnClickListener {

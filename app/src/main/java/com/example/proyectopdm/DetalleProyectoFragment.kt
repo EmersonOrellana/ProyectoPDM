@@ -30,7 +30,6 @@ class DetalleProyectoFragment : Fragment() {
         // Inicializar vistas del encabezado
         txtNombreProyecto = view.findViewById(R.id.txtDetalleNombreProyecto)
         spEstado = view.findViewById(R.id.spDetalleEstado)
-        val btnAtras = view.findViewById<ImageButton>(R.id.btnAtrasDetalle)
 
         // Inicializar botones de acciones
         val btnElegirEncargado = view.findViewById<Button>(R.id.btnElegirEncargado)
@@ -55,9 +54,6 @@ class DetalleProyectoFragment : Fragment() {
             "Proyecto Y" -> spEstado.setSelection(1) // En proceso
             "Proyecto Z" -> spEstado.setSelection(2) // Finalizado
         }
-
-        // Listeners para regresar sin romper el flujo de la MainActivity
-        btnAtras.setOnClickListener { parentFragmentManager.popBackStack() }
 
         // Evento para abrir el Diálogo de Seleccionar Encargado
         btnElegirEncargado.setOnClickListener {
