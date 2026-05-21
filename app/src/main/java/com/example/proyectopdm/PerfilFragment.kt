@@ -48,7 +48,6 @@ class PerfilFragment : Fragment() {
             Toast.makeText(context, "Módulo: Gestión y Creación de Roles", Toast.LENGTH_SHORT).show()
         }
 
-        //CONEXIÓN A UNIDADES DE MEDIDA
         cardMedida.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.content_container, UnidadesMedidaFragment())
@@ -57,7 +56,11 @@ class PerfilFragment : Fragment() {
         }
 
         cardConversion.setOnClickListener {
-            Toast.makeText(context, "Catálogo: Reglas de Conversión", Toast.LENGTH_SHORT).show()
+            // Esto es lo que hace la magia de abrir la VENTANA completa
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.content_container, ReglasConversionFragment())
+                .addToBackStack(null) // Para poder regresar con el celular
+                .commit()
         }
 
         cardCategorias.setOnClickListener {
