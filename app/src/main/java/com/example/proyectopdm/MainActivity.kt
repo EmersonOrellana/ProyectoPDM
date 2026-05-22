@@ -3,6 +3,7 @@ package com.example.proyectopdm
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvHeaderTitle: TextView
     private lateinit var incluirCabecera: View
     private lateinit var incluirNav: View
+    private var ivUserIcon: ImageView? = null
 
     private lateinit var btnInicio: LinearLayout
     private lateinit var btnProveedores: LinearLayout
@@ -24,13 +26,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvHeaderTitle = findViewById(R.id.tvHeaderTitle)
-
-        // Inicializamos las vistas de los "include" usando los IDs del XML
+        // Inicializar vistas
         incluirCabecera = findViewById(R.id.incluir_cabecera)
         incluirNav = findViewById(R.id.incluir_barra_navegacion)
+        tvHeaderTitle = findViewById(R.id.tvHeaderTitle)
 
-        // Inicializar botones del menú
+        // Inicializar icono y clic
+        ivUserIcon = incluirCabecera.findViewById(R.id.iv_user_icon)
+        ivUserIcon?.setImageResource(R.drawable.account_circle)
+
+        ivUserIcon?.setOnClickListener {
+            // Cambiamos el título a "MI PERFIL" y abrimos el fragmento
+            cambiarPantalla(VerPerfilFragment(), -1, "MI PERFIL")
+        }
+
+        // Inicializar botones navegación
         btnInicio = findViewById(R.id.nav_inicio)
         btnProveedores = findViewById(R.id.nav_proveedores)
         btnMateriales = findViewById(R.id.nav_materiales)
@@ -38,10 +48,8 @@ class MainActivity : AppCompatActivity() {
         btnAjustes = findViewById(R.id.nav_ajustes)
 
         if (savedInstanceState == null) {
-            // Al cargar el Login, ocultamos todo lo de alrededor
             incluirCabecera.visibility = View.GONE
             incluirNav.visibility = View.GONE
-
             supportFragmentManager.beginTransaction()
                 .replace(R.id.content_container, LoginFragment())
                 .commit()
@@ -58,10 +66,9 @@ class MainActivity : AppCompatActivity() {
         incluirCabecera.visibility = View.VISIBLE
         incluirNav.visibility = View.VISIBLE
 
-        // AGREGAMOS .addToBackStack(null) AQUÍ
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_container, fragmento)
-            .addToBackStack(null) // Esto permite volver a la pantalla anterior
+            .addToBackStack(null)
             .commit()
 
         tvHeaderTitle.text = titulo
@@ -71,13 +78,8 @@ class MainActivity : AppCompatActivity() {
     private fun actualizarNavVisual(idSeleccionado: Int) {
         val listaBotones = listOf(btnInicio, btnProveedores, btnMateriales, btnPersonal, btnAjustes)
         listaBotones.forEach { boton ->
-            if (boton.id == idSeleccionado) {
-                // UN GRIS OPACO SELECCIONADO (Estilo Slate/Gris Azulado)
-                boton.setBackgroundColor(Color.parseColor("#7A92A8"))
-            } else {
-                // EL COLOR ORIGINAL DE TU BARRA
-                boton.setBackgroundColor(Color.parseColor("#97B0C5"))
-            }
+            boton.setBackgroundColor(if (idSeleccionado != -1 && boton.id == idSeleccionado)
+                Color.parseColor("#7A92A8") else Color.parseColor("#97B0C5"))
         }
     }
 }

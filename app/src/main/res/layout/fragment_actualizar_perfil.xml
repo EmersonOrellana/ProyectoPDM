@@ -23,7 +23,7 @@
                 android:id="@+id/btnBackPerfil"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="@drawable/account_circle"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="5dp"
                 android:src="@drawable/baseline_person_24" />
 
@@ -43,7 +43,7 @@
             android:layout_gravity="center"
             app:cardCornerRadius="25dp"
             app:cardElevation="4dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#149BC3"
+                    android:background="@color/primary_blue"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Subir Foto"
@@ -71,8 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:alignmentMode="alignMargins"
-            android:layout_marginTop="10dp">
+            android:alignmentMode="alignMargins">
 
             <LinearLayout android:layout_width="0dp" android:layout_columnWeight="1" android:orientation="vertical" android:padding="5dp">
                 <TextView android:text="Nombre" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
@@ -83,17 +82,13 @@
                 <TextView android:text="Apellidos" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                 <EditText android:id="@+id/etApellidos" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Rodríguez" android:textSize="15sp"/>
             </LinearLayout>
-
-            <LinearLayout android:layout_width="0dp" android:layout_columnWeight="1" android:orientation="vertical" android:padding="5dp">
-                <TextView android:text="Usuario" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <EditText android:id="@+id/etUser" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="crodriguez" android:textSize="15sp"/>
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="0dp" android:layout_columnWeight="1" android:orientation="vertical" android:padding="5dp">
-                <TextView android:text="NIT" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <EditText android:id="@+id/etNit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0000-000000-000-0" android:textSize="15sp"/>
-            </LinearLayout>
         </GridLayout>
+
+        <TextView android:text="Usuario" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
+        <EditText android:id="@+id/etUser" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="crodriguez" android:textSize="15sp"/>
+
+        <TextView android:text="NIT" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15dp"/>
+        <EditText android:id="@+id/etNit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0000-000000-000-0" android:textSize="15sp"/>
 
         <TextView android:text="Fecha de Registro" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15dp"/>
         <EditText android:id="@+id/etFecha" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="DD/MM/YYYY" android:drawableEnd="@android:drawable/ic_menu_my_calendar"/>
@@ -111,9 +106,9 @@
             android:id="@+id/btnActualizarPerfil"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="#149BC3"
+            android:backgroundTint="@color/primary_blue"
             android:text="ACTUALIZAR PERFIL"
             android:textColor="#FFFFFF"
             android:textStyle="bold"

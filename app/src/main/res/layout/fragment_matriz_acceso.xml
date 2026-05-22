@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/llTitle"
@@ -15,14 +15,13 @@
         android:padding="16dp"
         android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Matriz de Accesos"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#000000" />
+            android:textColor="@color/primary_blue" />
     </LinearLayout>
 
     <LinearLayout
@@ -32,63 +31,43 @@
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
         android:paddingBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@id/llTitle">
-
+        app:layout_constraintTop_toBottomOf="@id/llTitle"
+        android:gravity="center_vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ROL:"
-            android:textStyle="bold" />
-
-        <Spinner
+            android:textStyle="bold"
+            android:textColor="@color/text_black" />
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/spinnerRoles"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            tools:listitem="@android:layout/simple_spinner_item" />
+            android:text="Seleccionar Rol"
+            android:textAllCaps="false"
+            android:gravity="start|center_vertical"
+            app:icon="@android:drawable/arrow_down_float"
+            app:iconGravity="end"
+            app:iconTint="@color/primary_blue"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/primary_blue"
+            android:textColor="@color/primary_blue" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llTableHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#D1D9E1"
+        android:background="#F5F5F5"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="8dp"
         app:layout_constraintTop_toBottomOf="@id/llRoleSelect">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.2"
-            android:text="" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Ver\nPantalla"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Crear/\nEditar"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Eliminar"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.2" android:text="Módulo" android:textStyle="bold" android:paddingStart="8dp" android:textColor="#555555"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Ver Pantalla" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/primary_blue" />
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Crear/Editar" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/primary_blue" />
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Eliminar" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/primary_blue" />
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -96,41 +75,59 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/llButtons"
         app:layout_constraintTop_toBottomOf="@id/llTableHeader">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/item_matriz_fila" tools:layout_editor_absoluteX="0dp" />
             <include layout="@layout/item_matriz_fila" />
             <include layout="@layout/item_matriz_fila" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFF176"
+                android:background="@color/white"
                 android:orientation="horizontal"
-                android:padding="8dp"
+                android:paddingVertical="8dp"
                 android:gravity="center_vertical">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
                     android:text="Personal"
-                    android:textStyle="bold" />
+                    android:paddingStart="16dp"
+                    android:textColor="@color/text_black" />
+
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    style="@null"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    app:useMaterialThemeColors="false"
+                    app:thumbTint="@color/switch_thumb"
+                    app:trackTint="@color/switch_track" />
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    style="@null"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    app:useMaterialThemeColors="false"
+                    app:thumbTint="@color/switch_thumb"
+                    app:trackTint="@color/switch_track" />
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    style="@null"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    app:useMaterialThemeColors="false"
+                    app:thumbTint="@color/switch_thumb"
+                    app:trackTint="@color/switch_track" />
             </LinearLayout>
 
             <include layout="@layout/item_matriz_fila" />
@@ -144,24 +141,24 @@
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarMatriz"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#0D47A1"
+            android:layout_height="50dp"
+            android:textColor="#FFFFFF"
             android:text="Guardar Cambios"
-            android:textAllCaps="false" />
-
-        <Button
+            android:textAllCaps="false"
+            app:backgroundTint="@color/primary_blue"
+            app:cornerRadius="25dp" />
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelarMatriz"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#D3D3D3"
             android:text="Cancelar"
             android:textAllCaps="false"
-            android:textColor="#000000" />
+            android:textColor="@color/primary_blue"
+            app:backgroundTint="@color/secondary_blue"
+            app:cornerRadius="25dp" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
