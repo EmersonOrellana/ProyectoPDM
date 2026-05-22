@@ -129,14 +129,14 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_marginEnd="8dp"
-                            android:src="@android:drawable/ic_menu_edit"
+                            android:src="@drawable/ic_gestion_roles"
                             app:tint="#1565C0"/>
 
                         <ImageView
                             android:id="@+id/btn_eliminar_categoria"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_delete"
+                            android:src="@drawable/delete"
                             app:tint="#D32F2F"/>
                     </LinearLayout>
                 </RelativeLayout>

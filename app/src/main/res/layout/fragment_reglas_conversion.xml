@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5">
@@ -10,7 +11,7 @@
         android:id="@+id/toolbar_reglas"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#FFFFFF"
+        android:background="@android:color/white"
         android:elevation="2dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -21,40 +22,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Reglas de Conversión"
-            android:textColor="#000000"
+            android:textColor="@color/primary_blue"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/search_bar_container_reglas"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:background="@drawable/bg_input_box"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/toolbar_reglas">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@android:drawable/ic_menu_search"
-            app:tint="#ABABAB" />
-
-        <EditText
-            android:id="@+id/et_buscar_reglas"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
-            android:background="@null"
-            android:hint="BUSCAR REGLA"
-            android:inputType="text"
-            android:textColor="#333333"
-            android:textColorHint="#ABABAB"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="#ABABAB" />
+
+            <EditText
+                android:id="@+id/et_buscar_reglas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:background="@null"
+                android:hint="BUSCAR REGLA"
+                android:inputType="text"
+                android:textColor="#333333"
+                android:textColorHint="#ABABAB"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -73,10 +81,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp">
+                app:cardElevation="2dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -87,18 +94,18 @@
                         android:id="@+id/img_icon_regla"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@android:drawable/ic_menu_directions"
                         android:layout_centerVertical="true"
-                        app:tint="#F57C00" />
+                        android:src="@drawable/ic_reglas_conversion"
+                        app:tint="@color/primary_blue" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/img_icon_regla"
-                        android:layout_toStartOf="@id/contenedor_acciones_reglas"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/img_icon_regla"
+                        android:layout_toStartOf="@id/contenedor_acciones_reglas"
                         android:orientation="vertical">
 
                         <TextView
@@ -130,15 +137,15 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_marginEnd="8dp"
-                            android:src="@android:drawable/ic_menu_edit"
-                            app:tint="#1565C0"/>
+                            android:src="@drawable/ic_gestion_roles"
+                            app:tint="@color/primary_blue" />
 
                         <ImageView
                             android:id="@+id/btn_eliminar_regla"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_delete"
-                            app:tint="#D32F2F"/>
+                            android:src="@drawable/delete"
+                            app:tint="#D32F2F" />
                     </LinearLayout>
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -153,10 +160,9 @@
         android:layout_margin="24dp"
         android:contentDescription="Agregar Regla"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="#1565C0"
-        app:fabSize="normal"
+        app:backgroundTint="@color/primary_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="#FFFFFF" />
+        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

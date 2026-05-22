@@ -43,9 +43,17 @@ class AjustesFragment : Fragment() {
                 .commit()
         }
 
+        // ====== AQUÍ ACTUALIZAMOS LA NAVEGACIÓN DE ROLES ======
         cardRoles.setOnClickListener {
-            Toast.makeText(context, "Módulo: Gestión de Roles", Toast.LENGTH_SHORT).show()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.content_container, RolesListaFragment())
+                .addToBackStack("Ajustes") // Vital para mantener el historial
+                .commit()
+
+            // Actualizar título al diseño principal
+            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "COTMAN"
         }
+        // =======================================================
 
         cardMedida.setOnClickListener {
             parentFragmentManager.beginTransaction()

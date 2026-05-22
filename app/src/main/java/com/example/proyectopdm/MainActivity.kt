@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         ivUserIcon?.setImageResource(R.drawable.account_circle)
 
         ivUserIcon?.setOnClickListener {
-            cambiarPantalla(PerfilFragment(), -1, "PERFIL")
+            // Cambiamos el título a "MI PERFIL" y abrimos el fragmento
+            cambiarPantalla(VerPerfilFragment(), -1, "MI PERFIL")
         }
 
         // Inicializar botones navegación
