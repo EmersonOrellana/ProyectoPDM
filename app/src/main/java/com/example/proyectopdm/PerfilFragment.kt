@@ -11,27 +11,26 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
-class AjustesFragment : Fragment() {
+class PerfilFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Asegúrate de que el XML se llame fragment_ajustes
-        return inflater.inflate(R.layout.fragment_ajustes, container, false)
+        return inflater.inflate(R.layout.fragment_ver_perfil, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Inicializar Tarjetas (IDs según tu XML anterior)
+        // Inicializar Tarjetas de Opciones
         val cardMatriz = view.findViewById<MaterialCardView>(R.id.cardMatrizAcceso)
         val cardRoles = view.findViewById<MaterialCardView>(R.id.cardGestionRoles)
         val cardMedida = view.findViewById<MaterialCardView>(R.id.cardUnidadMedida)
         val cardConversion = view.findViewById<MaterialCardView>(R.id.cardReglasConversion)
         val cardCategorias = view.findViewById<MaterialCardView>(R.id.cardCategorias)
 
-        // 2. Inicializar Botones (IDs según tu XML anterior)
+        // Inicializar Botones Inferiores
         val btnPerfil = view.findViewById<MaterialButton>(R.id.btnVerPerfilAjustes)
         val btnSalir = view.findViewById<MaterialButton>(R.id.btnCerrarSesionAjustes)
 
@@ -39,73 +38,69 @@ class AjustesFragment : Fragment() {
         cardMatriz.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, MatrizAccesoFragment())
-                .addToBackStack("Ajustes")
-                .commit()
-        }
-
-        // ====== AQUÍ ACTUALIZAMOS LA NAVEGACIÓN DE ROLES ======
-        cardRoles.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, RolesListaFragment())
-                .addToBackStack("Ajustes") // Vital para mantener el historial
                 .commit()
 
-            // Actualizar título al diseño principal
+            // Cambiar el título del encabezado superior directamente
             activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "COTMAN"
         }
-        // =======================================================
 
-        cardMedida.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, UnidadesMedidaFragment())
-                .addToBackStack(null)
-                .commit()
+        cardRoles.setOnClickListener {
+            Toast.makeText(context, "Módulo: Gestión y Creación de Roles", Toast.LENGTH_SHORT).show()
         }
 
-        cardCategorias.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, CategoriasFragment())
-                .addToBackStack("Ajustes") // Vital para poder volver atrás
+        //CONEXIÓN A UNIDADES DE MEDIDA
+        cardMedida.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.content_container, UnidadesMedidaFragment())
+                .addToBackStack(null) // Permite regresar a Ajustes con el botón/gesto "Atrás" del celular
                 .commit()
-
-            // Actualizar título
-            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "CATEGORÍAS"
         }
 
         cardConversion.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, ReglasConversionFragment()) // Asegúrate de crear este fragmento
-                .addToBackStack("Ajustes")
-                .commit()
-
-            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "REGLAS DE CONVERSIÓN"
+            Toast.makeText(context, "Catálogo: Reglas de Conversión", Toast.LENGTH_SHORT).show()
         }
 
-
+        cardCategorias.setOnClickListener {
+            Toast.makeText(context, "Catálogo: Categorías de Materiales", Toast.LENGTH_SHORT).show()
+        }
 
         btnPerfil.setOnClickListener {
+            // Abre el fragmento de vista de lectura del perfil de forma local
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, VerPerfilFragment())
                 .commit()
+
+            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "COTMAN"
         }
 
-        // BOTÓN CERRAR SESIÓN
+        //BOTÓN CERRAR SESIÓN CON CONFIRMACIÓN
         btnSalir.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Cerrar Sesión")
             builder.setMessage("¿Estás seguro que deseas cerrar sesión?")
-            builder.setPositiveButton("Sí") { _, _ ->
+
+            builder.setPositiveButton("Sí") { dialog, _ ->
+                Toast.makeText(context, "Cerrando sesión en COTMAN...", Toast.LENGTH_SHORT).show()
+
                 val mainActivity = activity as? MainActivity
-                mainActivity?.let {
-                    it.findViewById<View>(R.id.incluir_cabecera)?.visibility = View.GONE
-                    it.findViewById<View>(R.id.incluir_barra_navegacion)?.visibility = View.GONE
-                    it.supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    it.supportFragmentManager.beginTransaction()
+                if (mainActivity != null) {
+                    //Ocultamos la cabecera global y la barra de navegación inferior
+                    mainActivity.findViewById<View>(R.id.incluir_cabecera)?.visibility = View.GONE
+                    mainActivity.findViewById<View>(R.id.incluir_barra_navegacion)?.visibility = View.GONE
+
+                    //Limpiamos el historial de navegación (para que no puedan volver con el botón de retroceso)
+                    mainActivity.supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
+                    //Cargamos el Login limpio
+                    mainActivity.supportFragmentManager.beginTransaction()
                         .replace(R.id.content_container, LoginFragment())
                         .commit()
                 }
             }
-            builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            builder.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+
             builder.create().show()
         }
     }

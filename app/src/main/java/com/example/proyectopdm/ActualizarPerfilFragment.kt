@@ -13,18 +13,35 @@ class ActualizarPerfilFragment : Fragment(R.layout.fragment_actualizar_perfil) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val btnBack = view.findViewById<ImageView>(R.id.btnBackPerfil)
         val btnActualizar = view.findViewById<Button>(R.id.btnActualizarPerfil)
 
-        btnActualizar.setOnClickListener {
-            // Lógica de guardado aquí
-
-            // Regresar a Ver Perfil
+        // Función local para volver a la pantalla de vista previa de perfil
+        fun regresarAVerPerfil() {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, VerPerfilFragment())
                 .commit()
 
-            // Actualizar título del header
-            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "MI PERFIL"
+            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "COTMAN"
         }
+
+        btnBack.setOnClickListener {
+            regresarAVerPerfil()
+        }
+
+        btnActualizar.setOnClickListener {
+            // Aquí irá tu código futuro de actualización (SQL/Firebase)
+            regresarAVerPerfil()
+        }
+
+        // Capturar gestos del teléfono para regresar a la vista de perfil en vez de cerrar la app
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    regresarAVerPerfil()
+                }
+            }
+        )
     }
 }
