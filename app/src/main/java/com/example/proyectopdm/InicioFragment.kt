@@ -23,16 +23,25 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) { // Asegúrate que el
 
     private fun configurarProyecto(view: View, nombreProyecto: String, idDetalle: Int, idEditar: Int, idEliminar: Int) {
         view.findViewById<Button>(idDetalle).setOnClickListener {
-            // Lógica de navegación a DetalleProyectoFragment
-            val fragmentoDetalle = DetalleProyectoFragment().apply {
-                arguments = Bundle().apply {
-                    putString("nombre_proyecto", nombreProyecto)
+            // ─── AGREGADO MANUAL PARA EL BOTÓN VERDE ───
+            if (idDetalle == R.id.btnDetallesZ) {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.content_container, TransportistasFragment())
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                // Lógica original para Proyecto X e Y
+                val fragmentoDetalle = DetalleProyectoFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("nombre_proyecto", nombreProyecto)
+                    }
                 }
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.content_container, fragmentoDetalle)
+                    .addToBackStack(null)
+                    .commit()
             }
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, fragmentoDetalle) // Asegúrate que este ID existe en tu Activity principal
-                .addToBackStack(null)
-                .commit()
+            // ───────────────────────────────────────────
         }
 
         view.findViewById<Button>(idEditar).setOnClickListener {
@@ -55,8 +64,13 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) { // Asegúrate que el
                 .commit()
         }
 
+        // ─── CAMBIO AQUÍ: Navegación al botón del rombo ───
         fabAuto.setOnClickListener {
-            Toast.makeText(context, "Acción rápida de transporte", Toast.LENGTH_SHORT).show()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.content_container, TransportistasFragment())
+                .addToBackStack(null)
+                .commit()
         }
+        // ──────────────────────────────────────────────────
     }
 }
