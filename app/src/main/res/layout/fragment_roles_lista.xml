@@ -5,62 +5,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F5F5F5">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/layout_header"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/llTitle"
+    <TextView
+        android:id="@+id/tvTituloRoles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/header">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/baseline_arrow_back_24" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Roles"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:layout_margin="20dp"
+        android:text="Roles disponibles"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etBuscar"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBuscar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="16dp"
-        android:background="@android:drawable/editbox_background"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="10dp"
-        android:hint="BUSCAR"
-        android:paddingStart="15dp"
-        app:layout_constraintTop_toBottomOf="@id/llTitle" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:strokeColor="#1565C0"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloRoles">
+
+        <EditText
+            android:id="@+id/etBuscar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="10dp"
+            android:hint="BUSCAR"
+            android:paddingHorizontal="16dp"
+            android:textColorHint="#9E9E9E"
+            app:drawableTint="#1565C0" />
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRoles"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_rol"
-        app:layout_constraintTop_toBottomOf="@id/etBuscar"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardBuscar"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp"
+        tools:listitem="@layout/item_rol" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabNuevoRol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:backgroundTint="#0D47A1"
         android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="#1565C0"
+        app:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="#FFFFFF" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

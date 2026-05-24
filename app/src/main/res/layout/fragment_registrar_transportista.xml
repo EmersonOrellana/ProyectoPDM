@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
@@ -18,19 +17,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btnAtrasRegistrar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_revert"
-            app:tint="#000000" />
-
         <TextView
             android:id="@+id/tvTituloRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:text="Registrar Nuevo Transportista"
             android:textColor="#000000"
             android:textSize="20sp"
@@ -40,19 +30,20 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="12dp"
         android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/lytHeaderRegistrar"
         app:layout_constraintBottom_toTopOf="@id/btnCrearUsuario">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="3dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardElevation="2dp"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -66,283 +57,105 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="16dp">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardFotoPerfil"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         app:cardCornerRadius="20dp"
                         app:cardBackgroundColor="#E0E0E0"
                         app:cardElevation="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
-
+                        app:strokeColor="#1565C0"
+                        app:strokeWidth="1dp"
+                        app:layout_constraintTop_toTopOf="parent">
                         <ImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:src="@android:drawable/ic_menu_report_image"
                             app:tint="#666666" />
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSubirFoto"
                         android:layout_width="100dp"
                         android:layout_height="32dp"
                         android:text="Subir Foto"
                         android:textSize="11sp"
-                        android:textColor="#FFFFFF"
-                        android:backgroundTint="#1565C0"
                         android:textAllCaps="false"
-                        android:padding="0dp"
+                        app:backgroundTint="#1565C0"
                         app:cornerRadius="6dp"
                         app:layout_constraintTop_toBottomOf="@id/cardFotoPerfil"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre Completo"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:layout_marginBottom="4dp" />
-                <EditText
-                    android:id="@+id/etNombreCompleto"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@drawable/bg_input_rounded"
-                    android:hint="Nombre"
-                    android:textColorHint="#9E9E9E"
-                    android:textColor="#000000"
-                    android:textSize="14sp"
-                    android:paddingHorizontal="16dp"
-                    android:inputType="textPersonName"
-                    android:layout_marginBottom="12dp" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Nombre Completo" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/etNombreCompleto" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" android:hint="Nombre" android:paddingHorizontal="16dp" android:layout_marginBottom="12dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginBottom="12dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginEnd="6dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="DUI"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:layout_marginBottom="4dp" />
-                        <EditText
-                            android:id="@+id/etDui"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@drawable/bg_input_rounded"
-                            android:hint="00000000-0"
-                            android:textColorHint="#9E9E9E"
-                            android:textColor="#000000"
-                            android:textSize="14sp"
-                            android:paddingHorizontal="16dp"
-                            android:inputType="number" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2" android:layout_marginBottom="12dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DUI" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                        <EditText android:id="@+id/etDui" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" android:hint="00000000-0" android:paddingHorizontal="16dp" android:inputType="number" />
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="6dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NIT"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:layout_marginBottom="4dp" />
-                        <EditText
-                            android:id="@+id/etNit"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@drawable/bg_input_rounded"
-                            android:hint="00000000-0"
-                            android:textColorHint="#9E9E9E"
-                            android:textColor="#000000"
-                            android:textSize="14sp"
-                            android:paddingHorizontal="16dp"
-                            android:inputType="number" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NIT" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                        <EditText android:id="@+id/etNit" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" android:hint="00000000-0" android:paddingHorizontal="16dp" android:inputType="number" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginBottom="12dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginEnd="6dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Placa"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:layout_marginBottom="4dp" />
-                        <EditText
-                            android:id="@+id/etPlaca"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@drawable/bg_input_rounded"
-                            android:hint="P123-456"
-                            android:textColorHint="#9E9E9E"
-                            android:textColor="#000000"
-                            android:textSize="14sp"
-                            android:paddingHorizontal="16dp"
-                            android:inputType="textCapCharacters" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2" android:layout_marginBottom="12dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Placa" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                        <EditText android:id="@+id/etPlaca" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" android:hint="P123-456" android:paddingHorizontal="16dp" android:inputType="textCapCharacters" />
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="6dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="N° de Licencia"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:layout_marginBottom="4dp" />
-                        <EditText
-                            android:id="@+id/etLicencia"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@drawable/bg_input_rounded"
-                            android:textColor="#000000"
-                            android:textSize="14sp"
-                            android:paddingHorizontal="16dp"
-                            android:inputType="number" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="N° de Licencia" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                        <EditText android:id="@+id/etLicencia" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" android:paddingHorizontal="16dp" android:inputType="number" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginBottom="12dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginEnd="6dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Telefono"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:layout_marginBottom="4dp" />
-                        <EditText
-                            android:id="@+id/etTelefono"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@drawable/bg_input_rounded"
-                            android:hint="2222-2222"
-                            android:textColorHint="#9E9E9E"
-                            android:textColor="#000000"
-                            android:textSize="14sp"
-                            android:paddingHorizontal="16dp"
-                            android:inputType="phone" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2" android:layout_marginBottom="12dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Telefono" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                        <EditText android:id="@+id/etTelefono" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" android:hint="2222-2222" android:paddingHorizontal="16dp" android:inputType="phone" />
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="6dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tipo de Licencia"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:layout_marginBottom="4dp" />
-                        <Spinner
-                            android:id="@+id/spTipoLicencia"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@drawable/bg_input_rounded"
-                            android:paddingHorizontal="16dp" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tipo de Licencia" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                        <Spinner android:id="@+id/spTipoLicencia" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Correo Electronico"
-                    android:textStyle="bold"
-                    android:textColor="#000000"
-                    android:layout_marginBottom="4dp" />
-                <EditText
-                    android:id="@+id/etCorreoElectronico"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@drawable/bg_input_rounded"
-                    android:hint="nombre@Empresa.sv"
-                    android:textColorHint="#9E9E9E"
-                    android:textColor="#000000"
-                    android:textSize="14sp"
-                    android:paddingHorizontal="16dp"
-                    android:inputType="textEmailAddress"
-                    android:layout_marginBottom="8dp" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Correo Electronico" android:textStyle="bold" android:textColor="#000000" android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/etCorreoElectronico" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_input_rounded" android:hint="nombre@Empresa.sv" android:paddingHorizontal="16dp" android:inputType="textEmailAddress" />
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
     </ScrollView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCrearUsuario"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#1565C0"
         android:text="Crear Usuario"
-        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textAllCaps="false"
-        app:cornerRadius="10dp"
+        app:backgroundTint="#1565C0"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/btnCancelarRegistro" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCancelarRegistro"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#A9C9E8"
         android:text="Cancelar"
-        android:textColor="#1565C0"
         android:textStyle="bold"
         android:textAllCaps="false"
-        app:cornerRadius="10dp"
+        android:textColor="#1565C0"
+        app:strokeColor="#1565C0"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

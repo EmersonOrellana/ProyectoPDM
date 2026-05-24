@@ -76,10 +76,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun actualizarNavVisual(idSeleccionado: Int) {
-        val listaBotones = listOf(btnInicio, btnProveedores, btnMateriales, btnPersonal, btnAjustes)
-        listaBotones.forEach { boton ->
-            boton.setBackgroundColor(if (idSeleccionado != -1 && boton.id == idSeleccionado)
-                Color.parseColor("#7A92A8") else Color.parseColor("#97B0C5"))
+        val botones = listOf(
+            Triple(btnInicio, findViewById<ImageView>(R.id.iv_inicio), findViewById<TextView>(R.id.tv_inicio)),
+            Triple(btnProveedores, findViewById<ImageView>(R.id.iv_proveedores), findViewById<TextView>(R.id.tv_proveedores)),
+            Triple(btnMateriales, findViewById<ImageView>(R.id.iv_materiales), findViewById<TextView>(R.id.tv_materiales)),
+            Triple(btnPersonal, findViewById<ImageView>(R.id.iv_personal), findViewById<TextView>(R.id.tv_personal)),
+            Triple(btnAjustes, findViewById<ImageView>(R.id.iv_ajustes), findViewById<TextView>(R.id.tv_ajustes))
+        )
+
+        botones.forEach { (boton, icono, texto) ->
+            val estaSeleccionado = (boton.id == idSeleccionado)
+
+            if (estaSeleccionado) {
+                // Fondo azul redondeado (usando un drawable o setBackgroundResource)
+                boton.setBackgroundResource(R.drawable.bg_nav_selected)
+                icono.setColorFilter(Color.WHITE)
+                texto.setTextColor(Color.WHITE)
+            } else {
+                // Fondo blanco
+                boton.setBackgroundColor(Color.TRANSPARENT)
+                icono.setColorFilter(Color.parseColor("#757575"))
+                texto.setTextColor(Color.parseColor("#757575"))
+            }
         }
     }
 }

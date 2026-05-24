@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="20dp"
-    app:cardElevation="6dp">
+    app:cardElevation="6dp"
+    app:strokeColor="#1565C0"
+    app:strokeWidth="1dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,25 +31,28 @@
             android:layout_alignParentEnd="true"
             android:orientation="vertical">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEditar"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
-                android:backgroundTint="#97B0C5"
                 android:text="Editar"
                 android:textAllCaps="false"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="#1565C0"
+                app:backgroundTint="#A9C9E8"
+                app:cornerRadius="8dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEliminar"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="5dp"
-                android:backgroundTint="#F8BBD0"
                 android:text="Eliminar"
                 android:textAllCaps="false"
-                android:textColor="#D32F2F"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textColor="#FF1744"
+                app:backgroundTint="#FFCDD2"
+                app:cornerRadius="8dp" />
         </LinearLayout>
     </RelativeLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

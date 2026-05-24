@@ -31,10 +31,6 @@ class RegistrarTransportistaFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerLicencia.adapter = adapter
 
-        // 2. Configurar botón Atrás para regresar a la lista de transportistas
-        view.findViewById<ImageButton>(R.id.btnAtrasRegistrar).setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
 
         // 3. Configurar botón Cancelar
         view.findViewById<Button>(R.id.btnCancelarRegistro).setOnClickListener {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#F5F5F5"
     android:fillViewport="true">
 
     <RelativeLayout
@@ -40,19 +40,21 @@
                 android:spinnerMode="dropdown" />
         </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardPersonal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lytHeaderDetalle"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
                 android:padding="20dp">
 
                 <TextView
@@ -109,21 +111,23 @@
                         android:layout_marginStart="10dp"/>
                 </LinearLayout>
             </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardMateriales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardPersonal"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
                 android:orientation="vertical"
                 android:padding="20dp"
                 android:gravity="center_horizontal">
@@ -165,54 +169,26 @@
                             <TextView android:text="Cantidad" android:textStyle="bold" android:textColor="#000000" android:gravity="center" android:textSize="15sp"/>
                             <TextView android:text="Unidad" android:textStyle="bold" android:textColor="#000000" android:gravity="center" android:textSize="15sp"/>
                         </TableRow>
-
-                        <TableRow android:layout_marginBottom="6dp">
-                            <TextView android:text="Cemento" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="100" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="U" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                        </TableRow>
-
-                        <TableRow android:layout_marginBottom="6dp">
-                            <TextView android:text="Hierro" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="50" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="QQ" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                        </TableRow>
-
-                        <TableRow android:layout_marginBottom="6dp">
-                            <TextView android:text="Arena" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="12" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="M3" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                        </TableRow>
-
-                        <TableRow android:layout_marginBottom="6dp">
-                            <TextView android:text="Grava" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="8" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="M3" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                        </TableRow>
-
-                        <TableRow>
-                            <TextView android:text="Ladrillo" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="450" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                            <TextView android:text="U" android:textColor="#333333" android:gravity="center" android:textSize="15sp"/>
-                        </TableRow>
                     </TableLayout>
                 </androidx.core.widget.NestedScrollView>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardCostos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardMateriales"
             android:layout_marginBottom="24dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -224,106 +200,6 @@
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:layout_marginBottom="12dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:orientation="horizontal"
-                    android:background="@android:drawable/edit_text"
-                    android:backgroundTint="#FFFFFF"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="14dp"
-                    android:layout_marginBottom="16dp"
-                    android:elevation="1dp">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@android:drawable/ic_menu_search"
-                        app:tint="#666666"/>
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="BUSCAR"
-                        android:textSize="15sp"
-                        android:background="@android:color/transparent"
-                        android:paddingStart="8dp"
-                        android:inputType="text"/>
-                </LinearLayout>
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:stretchColumns="*"
-                    android:layout_marginBottom="18dp">
-
-                    <TableRow android:layout_marginBottom="8dp">
-                        <TextView android:text="Proveedor" android:textStyle="bold" android:textColor="#000000" android:gravity="start" android:textSize="15sp" android:paddingStart="8dp"/>
-                        <TextView android:text="Valor" android:textStyle="bold" android:textColor="#000000" android:gravity="end" android:textSize="15sp" android:paddingEnd="8dp"/>
-                    </TableRow>
-
-                    <TableRow android:layout_marginBottom="8dp">
-                        <View android:layout_height="1dp" android:background="#DDDDDD" android:layout_span="2"/>
-                    </TableRow>
-
-                    <LinearLayout
-                        android:id="@+id/lytListaCotizacionesAgregadas"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_span="2">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2"
-                            android:paddingVertical="6dp">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="• Proveedor A"
-                                android:textColor="#333333"
-                                android:textSize="15sp"
-                                android:paddingStart="4dp"/>
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="$ 1,262.25"
-                                android:textColor="#000000"
-                                android:textStyle="bold"
-                                android:gravity="end"
-                                android:paddingEnd="4dp"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2"
-                            android:paddingVertical="6dp">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="• Proveedor B "
-                                android:textColor="#2E7D32"
-                                android:textStyle="bold"
-                                android:textSize="15sp"
-                                android:paddingStart="4dp"/>
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="$ 1,050.00"
-                                android:textColor="#2E7D32"
-                                android:textStyle="bold"
-                                android:gravity="end"
-                                android:paddingEnd="4dp"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </TableLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAgregarCotizacion"
@@ -348,7 +224,7 @@
                     app:backgroundTint="#A9C9E8"
                     app:cornerRadius="24dp"/>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarDetalles"

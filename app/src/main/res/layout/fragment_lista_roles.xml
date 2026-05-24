@@ -22,17 +22,18 @@
                 android:id="@+id/btnBackListaRoles"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/account_circle"
                 android:padding="6dp"
                 android:src="@drawable/baseline_arrow_back_24"
-                app:tint="#000000" /> <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Roles"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Roles"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <EditText
@@ -59,73 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="80dp"> <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="ROL: Administrador"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnEditarRolAdmin"
-                            android:layout_width="100dp"
-                            android:layout_height="36dp"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="Editar"
-                            android:textAllCaps="false"
-                            android:textColor="#1565C0"
-                            android:textSize="12sp"
-                            app:backgroundTint="#A9C9E8"
-                            app:cornerRadius="8dp"
-                            app:icon="@android:drawable/ic_menu_edit"
-                            app:iconTint="#1565C0"
-                            app:iconSize="14dp"
-                            app:iconPadding="4dp"/>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnEliminarRolAdmin"
-                            android:layout_width="100dp"
-                            android:layout_height="36dp"
-                            android:layout_marginTop="4dp"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:text="Eliminar"
-                            android:textAllCaps="false"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            app:backgroundTint="#F1948A"
-                            app:cornerRadius="8dp"
-                            app:icon="@android:drawable/ic_menu_delete"
-                            app:iconTint="#FFFFFF"
-                            app:iconSize="14dp"
-                            app:iconPadding="4dp"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:paddingBottom="80dp">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
@@ -134,7 +69,75 @@
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
+                    app:cardBackgroundColor="@android:color/white"
+                    app:strokeColor="#1565C0"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ROL: Administrador"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnEditarRolAdmin"
+                                android:layout_width="100dp"
+                                android:layout_height="36dp"
+                                android:text="Editar"
+                                android:textAllCaps="false"
+                                android:textColor="#1565C0"
+                                android:textSize="12sp"
+                                app:backgroundTint="#A9C9E8"
+                                app:cornerRadius="8dp"
+                                app:icon="@android:drawable/ic_menu_edit"
+                                app:iconTint="#1565C0"
+                                app:iconSize="14dp"
+                                app:iconPadding="4dp"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnEliminarRolAdmin"
+                                android:layout_width="100dp"
+                                android:layout_height="36dp"
+                                android:layout_marginTop="4dp"
+                                android:text="Eliminar"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"
+                                app:backgroundTint="#F1948A"
+                                app:cornerRadius="8dp"
+                                app:icon="@android:drawable/ic_menu_delete"
+                                app:iconTint="#FFFFFF"
+                                app:iconSize="14dp"
+                                app:iconPadding="4dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:strokeColor="#1565C0"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -161,8 +164,6 @@
                                 android:id="@+id/btnEditarRolOperativo"
                                 android:layout_width="100dp"
                                 android:layout_height="36dp"
-                                android:insetTop="0dp"
-                                android:insetBottom="0dp"
                                 android:text="Editar"
                                 android:textAllCaps="false"
                                 android:textColor="#1565C0"
@@ -179,8 +180,6 @@
                                 android:layout_width="100dp"
                                 android:layout_height="36dp"
                                 android:layout_marginTop="4dp"
-                                android:insetTop="0dp"
-                                android:insetBottom="0dp"
                                 android:text="Eliminar"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
@@ -205,7 +204,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#1565C0"
+        app:backgroundTint="#1565C0"
         android:src="@android:drawable/ic_input_add"
         app:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

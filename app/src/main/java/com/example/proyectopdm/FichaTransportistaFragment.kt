@@ -20,10 +20,7 @@ class FichaTransportistaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Botón Atrás
-        view.findViewById<ImageButton>(R.id.btnAtrasFicha).setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
+
 
         // ¡Aquí está el truco! Este botón te manda al MISMO fragment de edición
         view.findViewById<Button>(R.id.btnFichaEditarInfo).setOnClickListener {

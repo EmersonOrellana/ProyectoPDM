@@ -14,12 +14,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp"
             android:layout_margin="4dp">
 
             <LinearLayout
@@ -36,14 +38,15 @@
                     android:background="#E0E0E0"
                     android:src="@android:drawable/ic_menu_camera"
                     android:scaleType="centerInside"/>
-                <Button
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSubirFoto"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:text="Subir Foto"
-                    android:backgroundTint="#0D47A1"
+                    app:backgroundTint="#0D47A1"
                     android:textColor="#FFFFFF"
                     app:cornerRadius="8dp"/>
 
@@ -55,8 +58,6 @@
                     android:hint="Nombre Completo"
                     app:boxStrokeColor="#0D47A1"
                     app:boxStrokeWidth="2dp"
-                    app:hintTextColor="#BDBDBD"
-                    android:textColorHint="#BDBDBD"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -83,8 +84,6 @@
                         android:hint="DUI"
                         app:boxStrokeColor="#0D47A1"
                         app:boxStrokeWidth="2dp"
-                        app:hintTextColor="#BDBDBD"
-                        android:textColorHint="#BDBDBD"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -103,8 +102,6 @@
                         android:hint="NIT"
                         app:boxStrokeColor="#0D47A1"
                         app:boxStrokeWidth="2dp"
-                        app:hintTextColor="#BDBDBD"
-                        android:textColorHint="#BDBDBD"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -124,8 +121,6 @@
                     android:hint="Fecha de contratación"
                     app:boxStrokeColor="#0D47A1"
                     app:boxStrokeWidth="2dp"
-                    app:hintTextColor="#BDBDBD"
-                    android:textColorHint="#BDBDBD"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -156,8 +151,6 @@
                         android:hint="Teléfono"
                         app:boxStrokeColor="#0D47A1"
                         app:boxStrokeWidth="2dp"
-                        app:hintTextColor="#BDBDBD"
-                        android:textColorHint="#BDBDBD"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -176,8 +169,6 @@
                         android:hint="Rol"
                         app:boxStrokeColor="#0D47A1"
                         app:boxStrokeWidth="2dp"
-                        app:hintTextColor="#BDBDBD"
-                        android:textColorHint="#BDBDBD"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -198,8 +189,6 @@
                     android:hint="Correo Electrónico"
                     app:boxStrokeColor="#0D47A1"
                     app:boxStrokeWidth="2dp"
-                    app:hintTextColor="#BDBDBD"
-                    android:textColorHint="#BDBDBD"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -218,8 +207,6 @@
                     android:hint="Contraseña"
                     app:boxStrokeColor="#0D47A1"
                     app:boxStrokeWidth="2dp"
-                    app:hintTextColor="#BDBDBD"
-                    android:textColorHint="#BDBDBD"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -231,29 +218,30 @@
                         android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCrearUsuario"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="24dp"
                     android:text="Crear Usuario"
-                    android:backgroundTint="#0D47A1"
+                    app:backgroundTint="#0D47A1"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
-                    app:cornerRadius="10dp"/>
+                    app:cornerRadius="12dp"/>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCancelar"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="8dp"
                     android:text="Cancelar"
-                    android:backgroundTint="#B3D4F5"
+                    app:backgroundTint="#B3D4F5"
                     android:textColor="#0D47A1"
                     android:textSize="16sp"
-                    app:cornerRadius="10dp"/>
+                    app:cornerRadius="12dp"/>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

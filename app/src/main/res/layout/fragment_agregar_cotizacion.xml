@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
+    android:background="#F5F5F5"
     android:fillViewport="true">
 
     <RelativeLayout
@@ -44,14 +44,17 @@
             </LinearLayout>
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardRequerimientos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lytHeaderCotizacion"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,13 +62,17 @@
                 android:orientation="vertical"
                 android:padding="20dp"
                 android:gravity="center_horizontal">
-                <androidx.cardview.widget.CardView
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardProveedorCotizacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="24dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:strokeColor="#1565C0"
+                    app:strokeWidth="1dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -107,7 +114,6 @@
                             android:orientation="vertical"
                             android:layout_marginTop="6dp">
 
-
                             <TextView
                                 android:id="@+id/txtContactoProveedor"
                                 android:layout_width="wrap_content"
@@ -118,7 +124,8 @@
                                 android:layout_marginStart="10dp"/>
                         </LinearLayout>
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -138,46 +145,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:stretchColumns="*">
-
-                    <TableRow android:layout_marginBottom="12dp">
-                        <TextView android:text="Material" android:textStyle="bold" android:textColor="#000000" android:gravity="center" android:textSize="13sp"/>
-                        <TextView android:text="Cantidad" android:textStyle="bold" android:textColor="#000000" android:gravity="center" android:textSize="13sp"/>
-                        <TextView android:text="Unidad de\nMedida" android:textStyle="bold" android:textColor="#000000" android:gravity="center" android:textSize="13sp"/>
-                        <TextView android:text="Precio\nUnitario" android:textStyle="bold" android:textColor="#000000" android:gravity="center" android:textSize="13sp"/>
-                        <TextView android:text="Subtotal" android:textStyle="bold" android:textColor="#000000" android:gravity="center" android:textSize="13sp"/>
-                    </TableRow>
-
-                    <TableRow android:layout_marginBottom="10dp">
-                        <TextView android:text="Cemento" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="100" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="U" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                    </TableRow>
-
-                    <TableRow android:layout_marginBottom="10dp">
-                        <TextView android:text="Hierro" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="2" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="qq" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                    </TableRow>
-
-                    <TableRow android:layout_marginBottom="10dp">
-                        <TextView android:text="Ladrillo" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="5" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="U" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                    </TableRow>
-
-                    <TableRow android:layout_marginBottom="16dp">
-                        <TextView android:text="Grava" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="10" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="m3" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                        <TextView android:text="-" android:textColor="#333333" android:gravity="center" android:textSize="14sp"/>
-                    </TableRow>
                 </TableLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -191,16 +158,19 @@
                     app:backgroundTint="#1565C0"
                     app:cornerRadius="12dp"/>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardTransporte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardRequerimientos"
             android:layout_marginBottom="20dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -246,7 +216,7 @@
                     app:backgroundTint="#1565C0"
                     app:cornerRadius="12dp"/>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarCotizacionFinal"

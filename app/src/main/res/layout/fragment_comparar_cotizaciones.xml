@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
+    android:background="#F5F5F5"
     android:fillViewport="true">
 
     <LinearLayout
@@ -23,41 +23,43 @@
                 android:id="@+id/tvTituloComparacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Comparacion de cotizaciones"
+                android:text="Comparación de cotizaciones"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:orientation="horizontal"
-            android:background="@android:drawable/edit_text"
-            android:backgroundTint="#FFFFFF"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="14dp"
-            android:elevation="3dp"
-            android:layout_marginBottom="6dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@android:drawable/ic_menu_search"
-                app:tint="#666666"/>
-
-            <EditText
-                android:id="@+id/edtBuscarCotizaciones"
+            android:layout_marginBottom="6dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="BUSCAR"
-                android:textSize="15sp"
-                android:textColorHint="#999999"
-                android:background="@android:color/transparent"
-                android:paddingStart="8dp"
-                android:inputType="textCapCharacters" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="14dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:tint="#666666"/>
+                <EditText
+                    android:id="@+id/edtBuscarCotizaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="BUSCAR"
+                    android:textSize="15sp"
+                    android:textColorHint="#999999"
+                    android:background="@android:color/transparent"
+                    android:paddingStart="8dp"
+                    android:inputType="textCapCharacters" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,11 +75,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
-            android:clickable="true"
-            android:focusable="true"
             app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
-            app:strokeWidth="0dp">
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -101,26 +102,9 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Proveedor:  Proveedor A"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fecha:        19/05/2026"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Costo Total:  $1,262.25"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Proveedor:  Proveedor A" android:textColor="#333333" android:textSize="15sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fecha:        19/05/2026" android:textColor="#333333" android:textSize="15sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Costo Total:  $1,262.25" android:textColor="#333333" android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -137,8 +121,6 @@
                         android:text="Ver Detalle"
                         android:textSize="11sp"
                         android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:padding="0dp"
                         app:icon="@android:drawable/ic_menu_view"
                         app:iconSize="14dp"
                         app:iconGravity="textStart"
@@ -154,11 +136,9 @@
                         android:textSize="11sp"
                         android:textAllCaps="false"
                         android:textColor="#1565C0"
-                        android:padding="0dp"
                         app:icon="@android:drawable/ic_menu_edit"
                         app:iconSize="14dp"
                         app:iconGravity="textStart"
-                        app:iconTint="#1565C0"
                         app:backgroundTint="#A9C9E8"
                         app:cornerRadius="8dp"
                         android:layout_marginBottom="6dp"/>
@@ -171,11 +151,9 @@
                         android:textSize="11sp"
                         android:textAllCaps="false"
                         android:textColor="#FF1744"
-                        android:padding="0dp"
                         app:icon="@android:drawable/ic_menu_delete"
                         app:iconSize="14dp"
                         app:iconGravity="textStart"
-                        app:iconTint="#FF1744"
                         app:backgroundTint="#FFCDD2"
                         app:cornerRadius="8dp"/>
                 </LinearLayout>
@@ -187,11 +165,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:clickable="true"
-            android:focusable="true"
             app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
-            app:strokeWidth="0dp">
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -215,26 +192,9 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Proveedor:  Proveedor B"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fecha:        19/05/2026"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Costo Total:  $1,050.00"
-                        android:textColor="#333333"
-                        android:textSize="15sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Proveedor:  Proveedor B" android:textColor="#333333" android:textSize="15sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fecha:        19/05/2026" android:textColor="#333333" android:textSize="15sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Costo Total:  $1,050.00" android:textColor="#333333" android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -251,8 +211,6 @@
                         android:text="Ver Detalle"
                         android:textSize="11sp"
                         android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:padding="0dp"
                         app:icon="@android:drawable/ic_menu_view"
                         app:iconSize="14dp"
                         app:iconGravity="textStart"
@@ -268,11 +226,9 @@
                         android:textSize="11sp"
                         android:textAllCaps="false"
                         android:textColor="#1565C0"
-                        android:padding="0dp"
                         app:icon="@android:drawable/ic_menu_edit"
                         app:iconSize="14dp"
                         app:iconGravity="textStart"
-                        app:iconTint="#1565C0"
                         app:backgroundTint="#A9C9E8"
                         app:cornerRadius="8dp"
                         android:layout_marginBottom="6dp"/>
@@ -285,11 +241,9 @@
                         android:textSize="11sp"
                         android:textAllCaps="false"
                         android:textColor="#FF1744"
-                        android:padding="0dp"
                         app:icon="@android:drawable/ic_menu_delete"
                         app:iconSize="14dp"
                         app:iconGravity="textStart"
-                        app:iconTint="#FF1744"
                         app:backgroundTint="#FFCDD2"
                         app:cornerRadius="8dp"/>
                 </LinearLayout>

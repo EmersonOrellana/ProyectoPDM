@@ -37,12 +37,14 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="center"
             app:cardCornerRadius="25dp"
             app:cardElevation="4dp"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp"
             android:layout_marginBottom="20dp">
 
             <LinearLayout
@@ -57,7 +59,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/primary_blue"
+                    android:background="#1565C0"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Subir Foto"
@@ -65,7 +67,7 @@
                     android:textSize="11sp"
                     android:textStyle="bold" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <GridLayout
             android:layout_width="match_parent"
@@ -102,13 +104,13 @@
         <TextView android:text="Correo Corporativo" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15dp"/>
         <EditText android:id="@+id/etCorreo" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="carlos.rodriguez@cotman.sv" android:inputType="textEmailAddress"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnActualizarPerfil"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/primary_blue"
+            app:backgroundTint="#1565C0"
             android:text="ACTUALIZAR PERFIL"
             android:textColor="#FFFFFF"
             android:textStyle="bold"

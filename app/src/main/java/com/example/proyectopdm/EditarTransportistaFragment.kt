@@ -26,8 +26,7 @@ class EditarTransportistaFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerLicencia.adapter = adapter
 
-        // 2. Botón Atrás y Cancelar
-        view.findViewById<ImageButton>(R.id.btnAtrasEditar).setOnClickListener { parentFragmentManager.popBackStack() }
+        // 2. Botón Cancelar
         view.findViewById<Button>(R.id.btnCancelarEditar).setOnClickListener { parentFragmentManager.popBackStack() }
 
         // 3. Botón Actualizar
