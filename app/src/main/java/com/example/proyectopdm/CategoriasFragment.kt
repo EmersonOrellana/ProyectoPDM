@@ -1,16 +1,19 @@
 package com.example.proyectopdm
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class CategoriasFragment : Fragment() {
+class CategoriasFragment : Fragment(), OnCategoriaActualizadaListener {
 
     private lateinit var rvCategorias: RecyclerView
     private lateinit var adapter: CategoriaAdapter
@@ -30,35 +33,44 @@ class CategoriasFragment : Fragment() {
         rvCategorias = view.findViewById(R.id.rv_categorias)
         rvCategorias.layoutManager = LinearLayoutManager(requireContext())
 
-        // Cargar los datos desde SQLite
+        // 1. CONECTAR BUSCADOR
+        val etBuscar = view.findViewById<EditText>(R.id.et_buscar_categorias)
+        etBuscar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s.toString()
+                if (query.isEmpty()) {
+                    cargarLista() // Si borra todo, muestra todo
+                } else {
+                    val listaFiltrada = dbHelper.buscarCategorias(query)
+                    adapter.actualizarLista(listaFiltrada) // Filtra al instante
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         cargarLista()
 
-        // BOTÓN FLOTANTE (+) -> AGREGAR
-        val fabAgregar = view.findViewById<FloatingActionButton>(R.id.fab_agregar_categoria)
-        fabAgregar.setOnClickListener {
-            val dialog = CategoriaDialog(esEdicion = false)
+        view.findViewById<FloatingActionButton>(R.id.fab_agregar_categoria).setOnClickListener {
+            val dialog = CategoriaDialog(esEdicion = false, listener = this)
             dialog.show(parentFragmentManager, "CategoriaDialog")
         }
     }
 
-    // Esta función se ejecuta siempre que regreses a esta pantalla
-    override fun onResume() {
-        super.onResume()
-        cargarLista() // Refresca la lista si agregaste algo nuevo
+    // 2. Método llamado por el listener del Dialog
+    override fun onCategoriaActualizada() {
+        cargarLista()
     }
 
     private fun cargarLista() {
         val lista = dbHelper.obtenerCategorias()
-
         adapter = CategoriaAdapter(lista,
-            onEditarClick = { categoriaSeleccionada ->
-                // Acción de Editar
-                val dialog = CategoriaDialog(esEdicion = true)
+            onEditarClick = { categoria ->
+                val dialog = CategoriaDialog(esEdicion = true, categoriaParaEditar = categoria, listener = this)
                 dialog.show(parentFragmentManager, "CategoriaDialog_Edit")
             },
-            onEliminarClick = { categoriaSeleccionada ->
-                // Tu Acción de Eliminar (Diálogo personalizado)
-                mostrarDialogoEliminar(categoriaSeleccionada)
+            onEliminarClick = { categoria ->
+                mostrarDialogoEliminar(categoria)
             }
         )
         rvCategorias.adapter = adapter
@@ -76,9 +88,14 @@ class CategoriasFragment : Fragment() {
         val btnConfirmar = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_confirmar_eliminar)
 
         btnCancelar.setOnClickListener { alertDialog.dismiss() }
+
         btnConfirmar.setOnClickListener {
-            // Aquí iría tu lógica db.delete(...) más adelante
-            Toast.makeText(context, "Categoría ${categoria.nombreCategoria} eliminada", Toast.LENGTH_SHORT).show()
+            if (dbHelper.eliminarCategoria(categoria.idCategoria)) {
+                Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
+                cargarLista()
+            } else {
+                Toast.makeText(context, "Error al eliminar", Toast.LENGTH_SHORT).show()
+            }
             alertDialog.dismiss()
         }
         alertDialog.show()
