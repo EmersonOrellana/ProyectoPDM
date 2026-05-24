@@ -2,52 +2,72 @@ package com.example.proyectopdm
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 
-class EditarMaterialFragment : Fragment(R.layout.fragment_editar_materiales) {
+class EditarMaterialFragment(private val material: Material) : Fragment(R.layout.fragment_editar_materiales) {
+
+    private lateinit var dbHelper: DatabaseHelper
+    private var listaCategorias = listOf<Categoria>()
+    private var listaUnidades = listOf<Unidad>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dbHelper = DatabaseHelper(requireContext())
 
-        // 1. Enlazar componentes del XML
         val etNombre = view.findViewById<EditText>(R.id.etNombreMaterial)
         val spCategoria = view.findViewById<Spinner>(R.id.spCategoriaMaterial)
-        val etUnidad = view.findViewById<EditText>(R.id.etUnidadMaterial)
+        val spUnidad = view.findViewById<Spinner>(R.id.spUnidadMaterial)
         val etDescripcion = view.findViewById<EditText>(R.id.etDescripcionMaterial)
         val btnActualizar = view.findViewById<Button>(R.id.btnActualizarMaterial)
         val btnCancelar = view.findViewById<Button>(R.id.btnCancelarEditar)
 
-        // 2. Poblar el Spinner de Categorías de muestra
-        val categorias = listOf("Obra Gris", "Acabados", "Fontanería", "Electricidad", "Herramientas")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categorias)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spCategoria.adapter = adapter
+        // 1. Cargar datos reales
+        listaCategorias = dbHelper.obtenerCategorias()
+        listaUnidades = dbHelper.recuperarUnidadesMedida()
 
-        // Prellenar con los datos actuales de prueba (Mockup)
-        etNombre.setText("Cemento holcim fuerte")
-        etUnidad.setText("Sacos")
+        // 2. Configurar adaptadores
+        val adapterCat = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, listaCategorias.map { it.nombreCategoria })
+        adapterCat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spCategoria.adapter = adapterCat
 
-        // 3. Comportamiento del botón Actualizar
+        val adapterUni = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, listaUnidades.map { it.nombreUnidad })
+        adapterUni.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spUnidad.adapter = adapterUni
+
+        // 3. Preseleccionar valores actuales (ESTO CORRIGE EL ID 1 AUTOMÁTICO)
+        // Buscamos la posición de la categoría y unidad que ya tiene el material
+        val posCat = listaCategorias.indexOfFirst { it.nombreCategoria == material.nombreCategoria }
+        val posUni = listaUnidades.indexOfFirst { it.nombreUnidad == material.nombreUnidad }
+
+        if (posCat != -1) spCategoria.setSelection(posCat)
+        if (posUni != -1) spUnidad.setSelection(posUni)
+
+        etNombre.setText(material.nombre)
+        etDescripcion.setText(material.descripcion)
+
+        // 4. Botón Actualizar (Lógica real)
         btnActualizar.setOnClickListener {
-            val nombreTxt = etNombre.text.toString()
-            if (nombreTxt.isNotEmpty()) {
-                Toast.makeText(requireContext(), "¡$nombreTxt actualizado exitosamente!", Toast.LENGTH_SHORT).show()
+            // AQUÍ ESTABA EL ERROR: Usamos la posición del spinner para sacar el ID real de la lista
+            val idCat = listaCategorias[spCategoria.selectedItemPosition].idCategoria
+            val idUni = listaUnidades[spUnidad.selectedItemPosition].idUnidad
 
-                // Regresar a la lista de Materiales
+            val exito = dbHelper.actualizarMaterial(
+                material.idMaterial,
+                etNombre.text.toString(),
+                idCat,
+                idUni,
+                etDescripcion.text.toString()
+            )
+
+            if (exito) {
+                Toast.makeText(requireContext(), "Actualizado!", Toast.LENGTH_SHORT).show()
                 (activity as? MainActivity)?.cambiarPantalla(MaterialesFragment(), R.id.nav_materiales, "MATERIALES")
-            } else {
-                Toast.makeText(requireContext(), "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // 4. Comportamiento del botón Cancelar
+        // 5. Botón Cancelar (Corregido)
         btnCancelar.setOnClickListener {
-            // Volver directo sin guardar nada
             (activity as? MainActivity)?.cambiarPantalla(MaterialesFragment(), R.id.nav_materiales, "MATERIALES")
         }
     }

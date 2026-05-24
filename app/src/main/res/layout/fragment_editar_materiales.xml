@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    android:padding="20dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/tvTituloEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:text="Editar Material"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,15 +22,15 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="24dp"
         app:cardElevation="2dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:strokeColor="#1565C0"
-        app:strokeWidth="1dp"
+        app:layout_constraintBottom_toTopOf="@id/btnActualizarMaterial"
         app:layout_constraintTop_toBottomOf="@id/tvTituloEditar"
-        app:layout_constraintBottom_toTopOf="@id/btnActualizarMaterial">
+        app:strokeColor="#1565C0"
+        app:strokeWidth="1dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -43,16 +44,16 @@
                 android:padding="20dp">
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nombre del Material" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
-                <EditText android:id="@+id/etNombreMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_edittext" android:paddingHorizontal="16dp" android:hint="Material" android:layout_marginBottom="16dp" />
+                <EditText android:id="@+id/etNombreMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="#EAEAEA" android:paddingHorizontal="16dp" android:hint="Ej. Cemento Holcim" android:layout_marginBottom="16dp" />
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Categoría" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
-                <Spinner android:id="@+id/spCategoriaMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_edittext" android:layout_marginBottom="16dp"/>
+                <Spinner android:id="@+id/spCategoriaMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="#EAEAEA" android:layout_marginBottom="16dp"/>
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Unidad de medida" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
-                <EditText android:id="@+id/etUnidadMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/bg_edittext" android:paddingHorizontal="16dp" android:hint="Sacos" android:layout_marginBottom="16dp" />
+                <Spinner android:id="@+id/spUnidadMaterial" android:layout_width="match_parent" android:layout_height="50dp" android:background="#EAEAEA" android:layout_marginBottom="16dp"/>
 
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Descripción técnica" android:textColor="#000000" android:textStyle="bold" android:layout_marginBottom="6dp" />
-                <EditText android:id="@+id/etDescripcionMaterial" android:layout_width="match_parent" android:layout_height="100dp" android:background="@drawable/bg_edittext" android:padding="16dp" android:gravity="top|start" android:hint="Detalles..." android:inputType="textMultiLine" />
+                <EditText android:id="@+id/etDescripcionMaterial" android:layout_width="match_parent" android:layout_height="100dp" android:background="#EAEAEA" android:padding="16dp" android:gravity="top|start" android:hint="Detalles..." android:inputType="textMultiLine" />
 
             </LinearLayout>
         </ScrollView>
@@ -62,13 +63,13 @@
         android:id="@+id/btnActualizarMaterial"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:textColor="#FFFFFF"
-        android:text="Actualizar Material"
+        android:layout_marginBottom="8dp"
+        android:text="Actualizar"
         android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:backgroundTint="#1565C0"
         app:cornerRadius="12dp"
-        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toTopOf="@id/btnCancelarEditar" />
 
     <com.google.android.material.button.MaterialButton
@@ -76,11 +77,10 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:layout_marginBottom="4dp"
         android:text="Cancelar"
         android:textAllCaps="false"
-        android:textStyle="bold"
         android:textColor="#1565C0"
-        app:backgroundTint="#A9C9E8"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 

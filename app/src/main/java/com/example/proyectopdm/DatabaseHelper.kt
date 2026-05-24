@@ -149,4 +149,111 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         db.close()
         return lista
     }
+    //CRUD DE MATERIALES
+    // Método para recuperar unidades reales de la BD
+// Agrega esto a DatabaseHelper.kt
+    fun recuperarUnidadesMedida(): List<Unidad> {
+        val lista = ArrayList<Unidad>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT ID_UNIDAD, NOMBRE_UNIDAD FROM UNIDAD_MEDIDA", null)
+        if (cursor.moveToFirst()) {
+            do {
+                lista.add(Unidad(cursor.getInt(0), cursor.getString(1)))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return lista
+    }
+
+    fun registrarMaterial(nombre: String, idCat: Int, idUni: Int, desc: String): Boolean {
+        val db = this.writableDatabase
+        val valores = ContentValues().apply {
+            put("NOMBRE_MATERIAL", nombre)
+            put("ID_CATEGORIA", idCat)
+            put("ID_UNIDAD", idUni) // Ahora enviamos el entero
+            put("DESCRIPCION", desc)
+        }
+        val resultado = db.insert("MATERIAL", null, valores)
+        db.close()
+        return resultado != -1L
+    }
+    fun obtenerMateriales(): List<Material> {
+        val lista = ArrayList<Material>()
+        val db = this.readableDatabase
+
+        // Usamos JOIN para obtener los nombres reales en lugar de los IDs
+        val sql = """
+            SELECT M.ID_MATERIAL, M.NOMBRE_MATERIAL, C.NOMBRE_CATEGORIA, U.NOMBRE_UNIDAD, M.DESCRIPCION 
+            FROM MATERIAL M
+            INNER JOIN CATEGORIA C ON M.ID_CATEGORIA = C.ID_CATEGORIA
+            INNER JOIN UNIDAD_MEDIDA U ON M.ID_UNIDAD = U.ID_UNIDAD
+        """.trimIndent()
+
+        val cursor = db.rawQuery(sql, null)
+        if (cursor.moveToFirst()) {
+            do {
+                lista.add(Material(
+                    cursor.getInt(0),      // ID_MATERIAL
+                    cursor.getString(1),   // NOMBRE_MATERIAL
+                    cursor.getString(2),   // NOMBRE_CATEGORIA
+                    cursor.getString(3),   // NOMBRE_UNIDAD
+                    cursor.getString(4)    // DESCRIPCION
+                ))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return lista
+    }
+    // Método para eliminar un material
+    fun eliminarMaterial(idMaterial: Int): Boolean {
+        val db = this.writableDatabase
+        val resultado = db.delete("MATERIAL", "ID_MATERIAL = ?", arrayOf(idMaterial.toString()))
+        db.close()
+        return resultado > 0
+    }
+
+    // Método para buscar materiales por nombre
+    fun buscarMateriales(query: String): List<Material> {
+        val lista = ArrayList<Material>()
+        val db = this.readableDatabase
+
+        // Unimos con JOIN para mostrar los nombres reales al buscar
+        val sql = """
+            SELECT M.ID_MATERIAL, M.NOMBRE_MATERIAL, C.NOMBRE_CATEGORIA, U.NOMBRE_UNIDAD, M.DESCRIPCION 
+            FROM MATERIAL M
+            INNER JOIN CATEGORIA C ON M.ID_CATEGORIA = C.ID_CATEGORIA
+            INNER JOIN UNIDAD_MEDIDA U ON M.ID_UNIDAD = U.ID_UNIDAD
+            WHERE M.NOMBRE_MATERIAL LIKE ?
+        """.trimIndent()
+
+        val cursor = db.rawQuery(sql, arrayOf("%$query%"))
+        if (cursor.moveToFirst()) {
+            do {
+                lista.add(Material(
+                    cursor.getInt(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getString(3), cursor.getString(4)
+                ))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return lista
+    }
+    fun actualizarMaterial(id: Int, nombre: String, idCat: Int, idUni: Int, desc: String): Boolean {
+        val db = this.writableDatabase
+        val valores = ContentValues().apply {
+            put("NOMBRE_MATERIAL", nombre)
+            put("ID_CATEGORIA", idCat)
+            put("ID_UNIDAD", idUni)
+            put("DESCRIPCION", desc)
+        }
+
+        // El 'WHERE' es ID_MATERIAL = ?
+        val resultado = db.update("MATERIAL", valores, "ID_MATERIAL = ?", arrayOf(id.toString()))
+        db.close()
+        return resultado > 0
+    }
+
 }

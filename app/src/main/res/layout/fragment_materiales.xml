@@ -53,112 +53,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardMaterial"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListaMateriales"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:strokeColor="#1565C0"
-        app:strokeWidth="1dp"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/searchBarContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/tvNombreMaterial"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Cemento holcim fuerte"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvCategoriaLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Categoria:"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvNombreMaterial" />
-
-            <TextView
-                android:id="@+id/tvUnidadLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Unidad: Sacos"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvCategoriaLabel" />
-
-            <TextView
-                android:id="@+id/tvDescripcionLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Descripción: ----------------------------------------\n-------------------------------------------------------"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvCategoriaLabel" />
-
-            <Button
-                android:id="@+id/btnEditarMaterial"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="6dp"
-                android:backgroundTint="#A9C7EB"
-                android:text="Editar"
-                android:textAllCaps="false"
-                android:textColor="#1A4A75"
-                android:textStyle="bold"
-                app:cornerRadius="20dp"
-                android:drawableStart="@android:drawable/ic_menu_edit"
-                android:drawableTint="#1A4A75"
-                android:paddingStart="16dp"
-                app:layout_constraintTop_toBottomOf="@id/tvDescripcionLabel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnBajaMaterial" />
-
-            <Button
-                android:id="@+id/btnBajaMaterial"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:backgroundTint="#F79494"
-                android:text="Baja"
-                android:textAllCaps="false"
-                android:textColor="#7A1D1D"
-                android:textStyle="bold"
-                app:cornerRadius="20dp"
-                android:drawableStart="@android:drawable/ic_menu_delete"
-                android:drawableTint="#7A1D1D"
-                android:paddingStart="16dp"
-                app:layout_constraintTop_toTopOf="@id/btnEditarMaterial"
-                app:layout_constraintBottom_toBottomOf="@id/btnEditarMaterial"
-                app:layout_constraintStart_toEndOf="@id/btnEditarMaterial"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregarMaterial"

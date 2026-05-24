@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:strokeColor="#1565C0"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvNombreMaterial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nombre Material"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCategoriaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Categoría: -"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNombreMaterial" />
+
+        <TextView
+            android:id="@+id/tvUnidadLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unidad: -"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvCategoriaLabel" />
+
+        <Button
+            android:id="@+id/btnEditarMaterial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            android:backgroundTint="#A9C7EB"
+            android:text="Editar"
+            android:textAllCaps="false"
+            android:textColor="#1A4A75"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tvCategoriaLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnBajaMaterial" />
+
+        <Button
+            android:id="@+id/btnBajaMaterial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:backgroundTint="#F79494"
+            android:text="Baja"
+            android:textAllCaps="false"
+            android:textColor="#7A1D1D"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintTop_toTopOf="@id/btnEditarMaterial"
+            app:layout_constraintBottom_toBottomOf="@id/btnEditarMaterial"
+            app:layout_constraintStart_toEndOf="@id/btnEditarMaterial"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
