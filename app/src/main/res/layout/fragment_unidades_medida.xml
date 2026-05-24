@@ -65,94 +65,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:scrollbars="none"
         android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/searchBarUnidades"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchBarUnidades">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
+            android:id="@+id/llContenedorUnidades"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="80dp">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:strokeColor="#1565C0"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:id="@+id/img_item_unit"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/manufacturing"
-                        app:tint="#1565C0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvNombreUnidad"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="Kilogramos (Kg)"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@id/img_item_unit"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/layoutBotones" />
-
-                    <TextView
-                        android:id="@+id/tvDescUnidad"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="4dp"
-                        android:text="Unidad de masa para cemento, acero, etc."
-                        android:textColor="#666666"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@id/img_item_unit"
-                        app:layout_constraintTop_toBottomOf="@id/tvNombreUnidad"
-                        app:layout_constraintEnd_toStartOf="@+id/layoutBotones" />
-
-                    <LinearLayout
-                        android:id="@+id/layoutBotones"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
-
-                        <ImageView
-                            android:id="@+id/btn_editar_item"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/ic_gestion_roles"
-                            app:tint="#1565C0"/>
-
-                        <ImageView
-                            android:id="@+id/btn_eliminar_item"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/delete"
-                            app:tint="#D32F2F"/>
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
     </ScrollView>
 
