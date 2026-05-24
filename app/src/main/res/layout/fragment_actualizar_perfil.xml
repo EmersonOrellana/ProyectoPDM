@@ -86,12 +86,11 @@
             </LinearLayout>
         </GridLayout>
 
-        <TextView android:text="Usuario" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
-        <EditText android:id="@+id/etUser" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="crodriguez" android:textSize="15sp"/>
+        <TextView android:text="Usuario (DUI)" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp"/>
+        <EditText android:id="@+id/etUser" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="00000000-0" android:textSize="15sp" android:inputType="number" android:maxLength="10"/>
 
         <TextView android:text="NIT" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15dp"/>
-        <EditText android:id="@+id/etNit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0000-000000-000-0" android:textSize="15sp"/>
-
+        <EditText android:id="@+id/etNit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0000-000000-000-0" android:textSize="15sp" android:inputType="number" android:maxLength="17"/>
         <TextView android:text="Fecha de Registro" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="15dp"/>
         <EditText android:id="@+id/etFecha" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="DD/MM/YYYY" android:drawableEnd="@android:drawable/ic_menu_my_calendar"/>
 
