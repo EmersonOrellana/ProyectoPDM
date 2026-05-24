@@ -20,28 +20,23 @@
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
 
-
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ficha de Empleado:"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="#555555"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Empleado 1"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -51,8 +46,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
+            app:cardElevation="0dp"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +61,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/account_circle"
-                    app:tint="#757575" />
+                    app:tint="#1565C0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rol"
-                        android:textColor="#000000"
+                        android:textColor="#1565C0"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -104,8 +100,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
+            app:cardElevation="0dp"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,15 +127,15 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@android:drawable/ic_menu_recent_history"
-                            app:tint="#000000" />
+                            app:tint="#1565C0" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contratación" android:textColor="#000000" android:textStyle="bold" android:textSize="13sp"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11/04/2026" android:textColor="#555555" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contratación" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11/04/2026" android:textColor="#000000" android:textSize="13sp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -153,15 +150,15 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/baseline_person_24"
-                            app:tint="#000000" />
+                            app:tint="#1565C0" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rol" android:textColor="#000000" android:textStyle="bold" android:textSize="13sp"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Operativo" android:textColor="#555555" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rol" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Operativo" android:textColor="#000000" android:textSize="13sp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -184,14 +181,15 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@android:drawable/ic_menu_camera"
-                            app:tint="#000000" /> <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DUI" android:textColor="#000000" android:textStyle="bold" android:textSize="13sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="000000-0" android:textColor="#555555" android:textSize="13sp"/>
-                    </LinearLayout>
+                            app:tint="#1565C0" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DUI" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="000000-0" android:textColor="#000000" android:textSize="13sp"/>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -205,19 +203,18 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@android:drawable/ic_menu_call"
-                            app:tint="#000000" />
+                            app:tint="#1565C0" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Telefono" android:textColor="#000000" android:textStyle="bold" android:textSize="13sp"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2222-2222" android:textColor="#555555" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Telefono" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2222-2222" android:textColor="#000000" android:textSize="13sp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -226,8 +223,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
+            app:cardElevation="0dp"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -246,7 +244,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Email Coorporativo:"
-                        android:textColor="#000000"
+                        android:textColor="#1565C0"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -254,7 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Usuario@Empresa.sv"
-                        android:textColor="#555555"
+                        android:textColor="#000000"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -262,7 +260,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@android:drawable/ic_dialog_email"
-                    app:tint="#000000" />
+                    app:tint="#1565C0" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -271,8 +269,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
+            app:cardElevation="0dp"
+            app:strokeColor="#1565C0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -290,15 +289,15 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:src="@drawable/baseline_person_24"
-                        app:tint="#000000" />
+                        app:tint="#1565C0" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Usuario:" android:textColor="#000000" android:textStyle="bold" android:textSize="14sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nombre12" android:textColor="#555555" android:textSize="14sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Usuario:" android:textColor="#1565C0" android:textStyle="bold" android:textSize="14sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nombre12" android:textColor="#000000" android:textSize="14sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -313,14 +312,14 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:src="@android:drawable/ic_lock_idle_lock"
-                        app:tint="#000000" />
+                        app:tint="#1565C0" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contraseña:" android:textColor="#000000" android:textStyle="bold" android:textSize="14sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contraseña:" android:textColor="#1565C0" android:textStyle="bold" android:textSize="14sp"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="*************" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -336,7 +335,7 @@
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            app:cornerRadius="10dp"
+            app:cornerRadius="12dp"
             android:layout_marginBottom="20dp" />
 
     </LinearLayout>

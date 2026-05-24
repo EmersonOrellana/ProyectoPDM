@@ -62,14 +62,22 @@ class MainActivity : AppCompatActivity() {
         btnAjustes.setOnClickListener { cambiarPantalla(AjustesFragment(), R.id.nav_ajustes, "AJUSTES") }
     }
 
-    fun cambiarPantalla(fragmento: Fragment, idBoton: Int, titulo: String) {
+    fun cambiarPantalla(fragmento: Fragment, idBoton: Int, titulo: String, esDetalle: Boolean = false) {
         incluirCabecera.visibility = View.VISIBLE
         incluirNav.visibility = View.VISIBLE
 
-        supportFragmentManager.beginTransaction()
+        val transaction = supportFragmentManager.beginTransaction()
             .replace(R.id.content_container, fragmento)
-            .addToBackStack(null)
-            .commit()
+
+        // Solo añadimos a la pila si es una pantalla de detalle (ej: editar, ficha, etc.)
+        if (esDetalle) {
+            transaction.addToBackStack(null)
+        } else {
+            // Si es navegación principal, limpiamos todo el historial previo
+            supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+
+        transaction.commit()
 
         tvHeaderTitle.text = titulo
         actualizarNavVisual(idBoton)
