@@ -17,7 +17,8 @@ class PerfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_ver_perfil, container, false)
+        // ¡LA ÚNICA CORRECCIÓN!: Cambiamos 'fragment_ver_perfil' por 'fragment_ajustes'
+        return inflater.inflate(R.layout.fragment_ajustes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class PerfilFragment : Fragment() {
         val btnPerfil = view.findViewById<MaterialButton>(R.id.btnVerPerfilAjustes)
         val btnSalir = view.findViewById<MaterialButton>(R.id.btnCerrarSesionAjustes)
 
-        // EVENTOS DE CLIC
+        // EVENTOS DE CLIC (¡Mantenemos todo tu código intacto!)
         cardMatriz.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, MatrizAccesoFragment())

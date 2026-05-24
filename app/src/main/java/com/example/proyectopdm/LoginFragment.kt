@@ -21,6 +21,34 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // --- INICIO PRUEBA BASE DE DATOS ---
+        try {
+            // 1. Instanciamos nuestra clase Helper
+            val dbHelper = DatabaseHelper(requireContext())
+
+            // 2. Abrimos la base de datos en modo lectura/escritura
+            val db = dbHelper.openDatabase()
+
+            // 3. Hacemos una consulta de prueba a la tabla ROL
+            val cursor = db.rawQuery("SELECT * FROM ROL", null)
+
+            if (cursor.moveToFirst()) {
+                do {
+                    // Extraemos el nombre del rol
+                    val nombreRol = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_ROL"))
+                    // Lo imprimimos en la consola de Android Studio (Logcat)
+                    android.util.Log.d("PRUEBA_BD", "Rol encontrado en SQLite: $nombreRol")
+                } while (cursor.moveToNext())
+            }
+
+            // 4. Siempre cerramos el cursor y la base de datos
+            cursor.close()
+            db.close()
+        } catch (e: Exception) {
+            android.util.Log.e("PRUEBA_BD", "Error al leer la base de datos", e)
+        }
+        // --- FIN PRUEBA BASE DE DATOS ---
+
         val btnIngresar = view.findViewById<MaterialButton>(R.id.btn_ingresar)
         btnIngresar.setOnClickListener {
             requireView().visibility = View.GONE
