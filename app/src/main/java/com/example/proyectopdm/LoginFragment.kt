@@ -50,12 +50,32 @@ class LoginFragment : Fragment() {
         // --- FIN PRUEBA BASE DE DATOS ---
 
         val btnIngresar = view.findViewById<MaterialButton>(R.id.btn_ingresar)
-        btnIngresar.setOnClickListener {
-            requireView().visibility = View.GONE
+        // Ahora usamos los IDs que acabamos de poner en el XML
+        val etEmail = view.findViewById<android.widget.EditText>(R.id.et_email)
+        val etPassword = view.findViewById<android.widget.EditText>(R.id.et_password)
 
-            val mainActivity = activity as MainActivity
-            mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
-            Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
+        btnIngresar.setOnClickListener {
+            val email = etEmail.text.toString().trim()
+            val password = etPassword.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Validamos con la base de datos
+            val dbHelper = DatabaseHelper(requireContext())
+            val esValido = dbHelper.validarUsuario(email, password)
+
+            if (esValido) {
+                Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
+
+                requireView().visibility = View.GONE
+                val mainActivity = activity as MainActivity
+                mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
+            } else {
+                Toast.makeText(requireContext(), "Correo o contraseña incorrectos", Toast.LENGTH_LONG).show()
+            }
         }
 
         //Texto de "Olvidé mi contraseña" (En mantenimiento)

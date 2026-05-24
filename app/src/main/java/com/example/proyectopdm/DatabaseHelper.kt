@@ -56,4 +56,41 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
             SQLiteDatabase.OPEN_READWRITE
         )
     }
+
+    // Método para validar credenciales en la tabla USUARIO
+    fun validarUsuario(correo: String, contrasena: String): Boolean {
+        val db = this.readableDatabase
+
+        // Consultamos si existe un registro que coincida con el correo y la contraseña
+        val query = "SELECT * FROM USUARIO WHERE CORREO_ELECTRONICO = ? AND CONTRASENA = ?"
+        val cursor = db.rawQuery(query, arrayOf(correo, contrasena))
+
+        val existe = cursor.count > 0
+
+        cursor.close()
+        db.close()
+
+        return existe
+    }
+
+    fun registrarUsuario(nombres: String, apellidos: String, correo: String, contrasena: String): Boolean {
+        val db = this.writableDatabase
+        val valores = android.content.ContentValues().apply {
+            put("NOMBRE_USUARIO", nombres)
+            put("APELLIDO_USUARIO", apellidos)
+            put("CORREO_ELECTRONICO", correo)
+            put("CONTRASENA", contrasena)
+            // Valores por defecto para cumplir con el 'not null' de la tabla
+            put("ESTADO", "Activo")
+            put("DUI_USUARIO", "00000000-0")
+            put("NIT_USUARIO", "0000-000000-000-0")
+            put("FECHA_CONTRATACION", "2026-05-24")
+            put("TELEFONO_USUARIO", "0000-0000")
+            put("ID_ROL", 2) // Asumiendo que 2 es Usuario Operativo
+        }
+
+        val resultado = db.insert("USUARIO", null, valores)
+        db.close()
+        return resultado != -1L
+    }
 }
