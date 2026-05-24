@@ -1,13 +1,26 @@
 package com.example.proyectopdm
 
+import android.database.Cursor
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 
 class TransportistasFragment : Fragment() {
+
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: TransportistaAdapter
+    private lateinit var etBuscar: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,71 +32,136 @@ class TransportistasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Botón flotante (+) -> REGISTRAR
+        dbHelper = DatabaseHelper(requireContext())
+
+        // 1. Vincular los componentes
+        recyclerView = view.findViewById(R.id.recyclerViewTransportistas)
+        etBuscar = view.findViewById(R.id.etBuscar)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        // 2. Cargar los datos iniciales y configurar las acciones de cada botón
+        val listaTransportistas = obtenerTransportistasDeBD()
+        adapter = TransportistaAdapter(
+            listaTransportistas,
+            onVerFichaClick = { transportista ->
+                // Acción Ver Ficha
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.content_container, FichaTransportistaFragment())
+                    .addToBackStack(null)
+                    .commit()
+            },
+            onEditarClick = { transportista ->
+                // Acción Editar
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.content_container, EditarTransportistaFragment())
+                    .addToBackStack(null)
+                    .commit()
+            },
+            onBajaClick = { transportista ->
+                // Acción Baja: Llama a tu diálogo pasándole el transportista seleccionado
+                mostrarDialogoEliminar(transportista)
+            }
+        )
+        recyclerView.adapter = adapter
+
+        // 3. Escuchador del buscador para filtrar en tiempo real
+        etBuscar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filtrar(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // 4. Botón flotante (+) -> Ir a Registrar
         view.findViewById<View>(R.id.fabAgregarTransportista)?.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, RegistrarTransportistaFragment())
                 .addToBackStack(null)
                 .commit()
         }
-
-        // 2. Botón Celeste (Editar) -> EDICIÓN DIRECTA
-        view.findViewById<View>(R.id.btnEditarTrans)?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, EditarTransportistaFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        // 3. Botón Azul Oscuro (Ver Ficha) -> NUEVA PANTALLA DETALLE
-        view.findViewById<View>(R.id.btnVerFicha)?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, FichaTransportistaFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        // ─── AGREGADO: BOTÓN ROJO (BAJA) PARA MOSTRAR EL DIÁLOGO REUTILIZADO ───
-        view.findViewById<View>(R.id.btnBajaTrans)?.setOnClickListener {
-            mostrarDialogoEliminar()
-        }
     }
-    private fun mostrarDialogoEliminar() {
-        // Inflamos el XML reutilizable que ya tienen en el grupo
+
+    // 🔍 FUNCIÓN QUE EXTRAE LOS MOTORISTAS DE TU SQLITE
+    private fun obtenerTransportistasDeBD(): List<Transportista> {
+        val lista = mutableListOf<Transportista>()
+        try {
+            val db = dbHelper.openDatabase()
+            val cursor: Cursor = db.rawQuery("SELECT * FROM TRANSPORTISTA", null)
+
+            if (cursor.moveToFirst()) {
+                do {
+                    val id = cursor.getInt(cursor.getColumnIndexOrThrow("ID_TRANSPORTISTA"))
+                    val nombre = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_TRANSPORTISTA"))
+                    val dui = cursor.getString(cursor.getColumnIndexOrThrow("DUI_TRANSPORTISTA"))
+                    val nit = cursor.getString(cursor.getColumnIndexOrThrow("NIT_TRANSPORTISTA"))
+                    val placa = cursor.getString(cursor.getColumnIndexOrThrow("PLACA_TRANSPORTISTA"))
+                    val licencia = cursor.getString(cursor.getColumnIndexOrThrow("NO_LICENCIA"))
+                    val tipoLicencia = cursor.getString(cursor.getColumnIndexOrThrow("TIPO_LICENCIA"))
+                    val telefono = cursor.getString(cursor.getColumnIndexOrThrow("TELEFONO_TRANSPORTISTA"))
+                    val correo = cursor.getString(cursor.getColumnIndexOrThrow("CORREO_TRANSPORTISTA"))
+
+                    lista.add(Transportista(id, nombre, dui, nit, placa, licencia, tipoLicencia, telefono, correo))
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+            db.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return lista
+    }
+
+    // ─── TU DIÁLOGO ORIGINAL PERO CON LÓGICA DE BORRADO REAL ───
+    private fun mostrarDialogoEliminar(transportista: Transportista) {
         val vistaDialogo = layoutInflater.inflate(R.layout.dialog_eliminar, null)
 
-        // Personalizamos los textos dinámicamente para que coincida con tu diseño de Transportistas
-        val tvTitulo = vistaDialogo.findViewById<android.widget.TextView>(R.id.tv_titulo_eliminar)
-        val btnEliminar = vistaDialogo.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_confirmar_eliminar)
-        val btnCancelar = vistaDialogo.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_cancelar_eliminar)
-        val ivIcono = vistaDialogo.findViewById<android.widget.ImageView>(android.R.id.custom) // O búscalo si tiene id asignado
+        val tvTitulo = vistaDialogo.findViewById<TextView>(R.id.tv_titulo_eliminar)
+        val btnEliminar = vistaDialogo.findViewById<MaterialButton>(R.id.btn_confirmar_eliminar)
+        val btnCancelar = vistaDialogo.findViewById<MaterialButton>(R.id.btn_cancelar_eliminar)
 
-        // Cambiamos los textos al vuelo
         tvTitulo?.text = "Confirmar Eliminación"
         btnEliminar?.text = "Si Eliminar"
 
-        // Construimos el AlertDialog flotante
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
             .setView(vistaDialogo)
             .setCancelable(true)
 
         val dialog = builder.create()
-
-        // Hacer que el fondo sea transparente para que respete las esquinas redondeadas del CardView
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        // Acción del botón Cancelar
-        btnCancelar?.setOnClickListener {
-            dialog.dismiss()
-        }
+        btnCancelar?.setOnClickListener { dialog.dismiss() }
 
-        // Acción del botón Si Eliminar
+        // AL DAR CLIC EN "SI ELIMINAR" BORRA DE LA BD LOCAL
         btnEliminar?.setOnClickListener {
-            android.widget.Toast.makeText(context, "Transportista dado de baja", android.widget.Toast.LENGTH_SHORT).show()
+            try {
+                val db = dbHelper.openDatabase()
+                // Borramos usando el ID único del transportista seleccionado
+                val filasAfectadas = db.delete("TRANSPORTISTA", "ID_TRANSPORTISTA = ?", arrayOf(transportista.id.toString()))
+                db.close()
+
+                if (filasAfectadas > 0) {
+                    Toast.makeText(context, "${transportista.nombre} dado de baja", Toast.LENGTH_SHORT).show()
+                    // Recargamos la lista al instante
+                    adapter.actualizarLista(obtenerTransportistasDeBD())
+                } else {
+                    Toast.makeText(context, "No se pudo eliminar", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(context, "Error al eliminar: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
             dialog.dismiss()
-            // Aquí irá la lógica para borrarlo de la lista real más adelante
         }
 
         dialog.show()
+    }
+
+    // Recarga la lista automáticamente si regresas de insertar un motorista nuevo
+    override fun onResume() {
+        super.onResume()
+        if (::adapter.isInitialized) {
+            adapter.actualizarLista(obtenerTransportistasDeBD())
+        }
     }
 }
