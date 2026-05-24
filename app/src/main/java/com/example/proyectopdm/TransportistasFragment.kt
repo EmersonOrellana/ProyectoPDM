@@ -44,16 +44,26 @@ class TransportistasFragment : Fragment() {
         adapter = TransportistaAdapter(
             listaTransportistas,
             onVerFichaClick = { transportista ->
-                // Acción Ver Ficha
+                // ─── COMPLETO: Acción Ver Ficha pasando el objeto seleccionado ───
+                val fragmentoFicha = FichaTransportistaFragment()
+                val bundle = Bundle()
+                bundle.putSerializable("transportista", transportista)
+                fragmentoFicha.arguments = bundle
+
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.content_container, FichaTransportistaFragment())
+                    .replace(R.id.content_container, fragmentoFicha)
                     .addToBackStack(null)
                     .commit()
             },
             onEditarClick = { transportista ->
-                // Acción Editar
+                // ─── COMPLETO: Acción Editar pasando el objeto seleccionado ───
+                val fragmentoEditar = EditarTransportistaFragment()
+                val bundle = Bundle()
+                bundle.putSerializable("transportista", transportista)
+                fragmentoEditar.arguments = bundle
+
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.content_container, EditarTransportistaFragment())
+                    .replace(R.id.content_container, fragmentoEditar)
                     .addToBackStack(null)
                     .commit()
             },
@@ -112,7 +122,7 @@ class TransportistasFragment : Fragment() {
         return lista
     }
 
-    // ─── TU DIÁLOGO ORIGINAL PERO CON LÓGICA DE BORRADO REAL ───
+    // ─── DIÁLOGO CON LÓGICA DE BORRADO REAL ───
     private fun mostrarDialogoEliminar(transportista: Transportista) {
         val vistaDialogo = layoutInflater.inflate(R.layout.dialog_eliminar, null)
 
@@ -157,7 +167,7 @@ class TransportistasFragment : Fragment() {
         dialog.show()
     }
 
-    // Recarga la lista automáticamente si regresas de insertar un motorista nuevo
+    // Recarga la lista automáticamente si regresas de insertar o editar un motorista nuevo
     override fun onResume() {
         super.onResume()
         if (::adapter.isInitialized) {

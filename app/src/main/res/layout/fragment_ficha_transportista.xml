@@ -15,13 +15,14 @@
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Ficha de Transportista:\nMotorista 1"
+            android:text="Ficha de Transportista"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -34,7 +35,9 @@
         android:layout_marginBottom="16dp"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/lytHeaderFicha"
-        app:layout_constraintBottom_toTopOf="@id/btnFichaEditarInfo">
+        app:layout_constraintBottom_toTopOf="@id/btnFichaEditarInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,9 +73,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="Motorista 1"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
+                        android:text="Nombre del Motorista"
+                        android:textColor="#1565C0"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@id/ivFichaAvatar"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -82,23 +85,13 @@
                         android:id="@+id/tvFichaSubtitulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Tipo de Licencia"
+                        android:text="DUI: 00000000-0"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold"
+                        android:layout_marginTop="4dp"
                         app:layout_constraintStart_toStartOf="@id/tvFichaNombre"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvFichaNombre" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="DUI: 000000-0"
-                        android:textColor="#666666"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="@id/tvFichaSubtitulo"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvFichaSubtitulo" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -119,10 +112,10 @@
                     android:padding="16dp">
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="16dp" android:layout_marginEnd="8dp">
-                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_today" app:tint="#1565C0" />
+                        <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_agenda" app:tint="#1565C0" />
                         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="8dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fecha de Registro" android:textStyle="bold" android:textColor="#000000" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11/04/2026" android:textColor="#666666" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Número de Placa" android:textStyle="bold" android:textColor="#000000" android:textSize="12sp" />
+                            <TextView android:id="@+id/tvFichaPlaca" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="P000-000" android:textColor="#666666" android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -130,15 +123,15 @@
                         <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_myplaces" app:tint="#1565C0" />
                         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="8dp">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tipo de Licencia" android:textStyle="bold" android:textColor="#000000" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Liviana" android:textColor="#666666" android:textSize="12sp" />
+                            <TextView android:id="@+id/tvFichaTipoLicencia" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Liviana" android:textColor="#666666" android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginEnd="8dp">
                         <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_view" app:tint="#1565C0" />
                         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="8dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DUI" android:textStyle="bold" android:textColor="#000000" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="000000-0" android:textColor="#666666" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="N° Licencia" android:textStyle="bold" android:textColor="#000000" android:textSize="12sp" />
+                            <TextView android:id="@+id/tvFichaLicencia" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="000000" android:textColor="#666666" android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -146,7 +139,7 @@
                         <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/ic_menu_call" app:tint="#1565C0" />
                         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="8dp">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Teléfono" android:textStyle="bold" android:textColor="#000000" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2222-2222" android:textColor="#666666" android:textSize="12sp" />
+                            <TextView android:id="@+id/tvFichaTelefono" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2222-2222" android:textColor="#666666" android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </GridLayout>
@@ -161,10 +154,12 @@
                 app:cardElevation="2dp"
                 app:strokeColor="#1565C0"
                 app:strokeWidth="1dp">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp">
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -173,9 +168,25 @@
                         app:layout_constraintEnd_toStartOf="@id/ivFichaMailIcon"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Email Corporativo:" android:textStyle="bold" android:textColor="#000000" android:textSize="14sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Usuario@Empresa.sv" android:textColor="#666666" android:textSize="14sp" android:layout_marginTop="2dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Email Corporativo:"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/tvFichaCorreo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="usuario@empresa.sv"
+                            android:textColor="#666666"
+                            android:textSize="14sp"
+                            android:layout_marginTop="2dp"/>
                     </LinearLayout>
+
                     <ImageView
                         android:id="@+id/ivFichaMailIcon"
                         android:layout_width="32dp"
@@ -197,12 +208,14 @@
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         app:backgroundTint="#0D47A1"
-        android:text="Editar Informacion"
+        android:text="Editar Información"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
