@@ -93,4 +93,24 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         db.close()
         return resultado != -1L
     }
+
+    // Metodo para obtener las categorías desde la tabla CATEGORIA
+    fun obtenerCategorias(): List<Categoria> {
+        val listaCategorias = ArrayList<Categoria>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM CATEGORIA", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow("ID_CATEGORIA"))
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_CATEGORIA"))
+                val codigo = cursor.getString(cursor.getColumnIndexOrThrow("CODIGO_CATEGORIA"))
+                val descripcion = cursor.getString(cursor.getColumnIndexOrThrow("DESCRIPCION"))
+
+                listaCategorias.add(Categoria(id, nombre, codigo, descripcion))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return listaCategorias
+    }
 }
