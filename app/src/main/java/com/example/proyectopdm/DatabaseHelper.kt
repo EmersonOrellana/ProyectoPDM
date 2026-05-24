@@ -1,6 +1,8 @@
 package com.example.proyectopdm
 
+import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.io.File
@@ -75,7 +77,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
 
     fun registrarUsuario(nombres: String, apellidos: String, correo: String, contrasena: String): Boolean {
         val db = this.writableDatabase
-        val valores = android.content.ContentValues().apply {
+        val valores = ContentValues().apply {
             put("NOMBRE_USUARIO", nombres)
             put("APELLIDO_USUARIO", apellidos)
             put("CORREO_ELECTRONICO", correo)
@@ -112,5 +114,27 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         }
         cursor.close()
         return listaCategorias
+    }
+
+    // ─── AGREGADO: MÉTODO PARA GUARDAR TRANSPORTISTAS NUEVOS DESDE EL FORMULARIO DE REGISTRO ───
+    fun registrarTransportista(
+        nombre: String, dui: String, nit: String, placa: String,
+        licencia: String, tipoLicencia: String, telefono: String, correo: String
+    ): Boolean {
+        val db = this.writableDatabase
+        val valores = ContentValues().apply {
+            put("NOMBRE_TRANSPORTISTA", nombre)
+            put("DUI_TRANSPORTISTA", dui)
+            put("NIT_TRANSPORTISTA", nit)
+            put("PLACA_TRANSPORTISTA", placa)
+            put("NO_LICENCIA", licencia)
+            put("TIPO_LICENCIA", tipoLicencia)
+            put("TELEFONO_TRANSPORTISTA", telefono)
+            put("CORREO_TRANSPORTISTA", correo)
+        }
+
+        val resultado = db.insert("TRANSPORTISTA", null, valores)
+        db.close()
+        return resultado != -1L
     }
 }
