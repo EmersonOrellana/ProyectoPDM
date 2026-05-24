@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class CategoriaAdapter(
-    private var lista: List<Categoria>,
+    private var lista: List<Categoria>, // 'var' es correcto para permitir filtros
     private val onEditarClick: (Categoria) -> Unit,
     private val onEliminarClick: (Categoria) -> Unit
 ) : RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder>() {
@@ -27,20 +27,28 @@ class CategoriaAdapter(
     }
 
     override fun onBindViewHolder(holder: CategoriaViewHolder, position: Int) {
+        // Obtenemos el objeto de la posición actual
         val categoria = lista[position]
+
         holder.tvNombre.text = categoria.nombreCategoria
         holder.tvCodigo.text = categoria.codigoCategoria
         holder.tvDescripcion.text = categoria.descripcion
 
-        // Eventos de los botones de ESTA tarjeta en específico
-        holder.btnEditar.setOnClickListener { onEditarClick(categoria) }
-        holder.btnEliminar.setOnClickListener { onEliminarClick(categoria) }
+        // Usamos setOnClickListener asegurándonos de que cada evento sabe qué objeto editar/borrar
+        holder.btnEditar.setOnClickListener {
+            onEditarClick(categoria)
+        }
+
+        holder.btnEliminar.setOnClickListener {
+            onEliminarClick(categoria)
+        }
     }
 
     override fun getItemCount(): Int = lista.size
 
+    // Método vital para el buscador que acabamos de implementar
     fun actualizarLista(nuevaLista: List<Categoria>) {
-        lista = nuevaLista
-        notifyDataSetChanged()
+        this.lista = nuevaLista
+        notifyDataSetChanged() // Notifica al RecyclerView que los datos cambiaron
     }
 }
