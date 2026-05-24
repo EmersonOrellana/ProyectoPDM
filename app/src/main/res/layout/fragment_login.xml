@@ -102,7 +102,7 @@
                 app:tint="#ABABAB" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/et_email"  android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
                 android:background="@null"
@@ -129,7 +129,7 @@
                 app:tint="#ABABAB" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/et_password" android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
                 android:background="@null"
