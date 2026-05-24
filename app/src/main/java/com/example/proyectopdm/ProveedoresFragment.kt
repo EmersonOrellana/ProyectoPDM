@@ -1,11 +1,12 @@
 package com.example.proyectopdm
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -14,45 +15,86 @@ class ProveedoresFragment : Fragment(R.layout.fragment_proveedores) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Vincular los componentes del XML con Kotlin
-        val etBuscar = view.findViewById<EditText>(R.id.etBuscarProveedor)
-        val cardProveedor = view.findViewById<CardView>(R.id.cardProveedor)
-        val btnEditar = view.findViewById<Button>(R.id.btnEditarProveedor)
-        val btnEliminar = view.findViewById<Button>(R.id.btnEliminarProveedor)
         val fabAgregar = view.findViewById<FloatingActionButton>(R.id.fabAgregarProveedor)
+        val contenedorProveedores = view.findViewById<LinearLayout>(R.id.llContenedorProveedores)
 
-        // 2. Configurar el evento para el Botón Editar
-        btnEditar.setOnClickListener {
-            // Aquí irá la lógica o navegación para modificar el proveedor
+        // =========================================================
+        // LÓGICA DINÁMICA: LEER DE BD Y DIBUJAR TARJETAS
+        // =========================================================
+        val repo = ProveedorRepository(requireContext())
+        val listaProveedores = repo.obtenerProveedores()
 
-            //Navegacion al fragmento de Editar:
-            (activity as MainActivity).cambiarPantalla(
-                EditarProveedorFragment(),
-                R.id.nav_proveedores,
-                "COTMAN" // O el título que prefieras que aparezca en el header azul
-            )
+        // Limpiamos el contenedor
+        contenedorProveedores?.removeAllViews()
 
-            Toast.makeText(requireContext(), "Editar Proveedor 1", Toast.LENGTH_SHORT).show()
+        for (proveedor in listaProveedores) {
+            // Inflamos la tarjeta molde
+            val vistaTarjeta = LayoutInflater.from(context).inflate(R.layout.item_proveedor, contenedorProveedores, false)
+
+            // Buscamos los elementos visuales de ESA tarjeta específica
+            val tvNombre = vistaTarjeta.findViewById<TextView>(R.id.tvNombreProveedor)
+            val tvDatos = vistaTarjeta.findViewById<TextView>(R.id.tvDatosProveedor)
+            val btnEditar = vistaTarjeta.findViewById<Button>(R.id.btnEditarProveedor)
+            val btnEliminar = vistaTarjeta.findViewById<Button>(R.id.btnEliminarProveedor)
+
+            // Asignamos los datos reales
+            tvNombre.text = proveedor.nombreProveedor
+            tvDatos.text = "${proveedor.telefonoProveedor}\n${proveedor.correoProveedor}\n${proveedor.direccionProveedor}"
+
+            // Configurar botón Editar (Pasando el ID)
+            btnEditar.setOnClickListener {
+                val fragment = EditarProveedorFragment()
+                val bundle = Bundle()
+                bundle.putInt("ID_PROVEEDOR", proveedor.idProveedor)
+                fragment.arguments = bundle
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.content_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+
+                activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "EDITAR PROVEEDOR"
+            }
+
+
+            btnEliminar.setOnClickListener {
+                // 1. Crear un cuadro de diálogo de confirmación
+                androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                    .setTitle("Eliminar Proveedor")
+                    .setMessage("¿Estás seguro de que deseas eliminar a ${proveedor.nombreProveedor}? Esta acción no se puede deshacer.")
+                    .setPositiveButton("Sí, eliminar") { dialog, _ ->
+
+                        // 2. Si el usuario confirma, llamamos al repositorio
+                        if (repo.eliminarProveedor(proveedor.idProveedor)) {
+                            Toast.makeText(requireContext(), "Proveedor eliminado", Toast.LENGTH_SHORT).show()
+
+                            // 3. Truco visual: Desaparecemos la tarjeta de la pantalla instantáneamente
+                            contenedorProveedores?.removeView(vistaTarjeta)
+                        } else {
+                            Toast.makeText(requireContext(), "Error al eliminar", Toast.LENGTH_SHORT).show()
+                        }
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Cancelar") { dialog, _ ->
+                        // Si cancela, solo cerramos el cuadro
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+
+            // Agregamos la tarjeta a la pantalla
+            contenedorProveedores?.addView(vistaTarjeta)
         }
+        // =========================================================
 
-        // 3. Configurar el evento para el Botón Eliminar
-        btnEliminar.setOnClickListener {
-            // Aquí irá la lógica para borrar el registro (por ejemplo, de la base de datos)
-            Toast.makeText(requireContext(), "Eliminar Proveedor 1", Toast.LENGTH_SHORT).show()
-        }
-
-        // 4. Configurar el evento para el Botón Flotante (+)
+        // Navegación para Agregar Proveedor
         fabAgregar.setOnClickListener {
-            // Aquí abrirás el formulario o diálogo para registrar un nuevo proveedor
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.content_container, NuevoProveedorFragment())
+                .addToBackStack(null)
+                .commit()
 
-            //Navegacion al fragmento de Nuevo proveedor:
-            (activity as MainActivity).cambiarPantalla(
-                NuevoProveedorFragment(),
-                R.id.nav_proveedores,
-                "COTMAN"
-            )
-
-            Toast.makeText(requireContext(), "Agregar nuevo proveedor", Toast.LENGTH_SHORT).show()
+            activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "NUEVO PROVEEDOR"
         }
     }
 }
