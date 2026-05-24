@@ -33,9 +33,10 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tvFichaTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Empleado 1"
+                    android:text="Cargando..."
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -70,14 +71,16 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvFichaNombreCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Empleado 1"
+                        android:text="Nombre"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvFichaRolCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rol"
@@ -86,9 +89,10 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvFichaNit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NIT: 000000-0"
+                        android:text="NIT: -"
                         android:textColor="#555555"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -135,7 +139,7 @@
                             android:layout_marginStart="8dp"
                             android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contratación" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11/04/2026" android:textColor="#000000" android:textSize="13sp"/>
+                            <TextView android:id="@+id/tvFichaFecha" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" android:textColor="#000000" android:textSize="13sp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -157,8 +161,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rol" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Operativo" android:textColor="#000000" android:textSize="13sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DUI" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
+                            <TextView android:id="@+id/tvFichaDui" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" android:textColor="#000000" android:textSize="13sp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -180,28 +184,6 @@
                         <ImageView
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:src="@android:drawable/ic_menu_camera"
-                            app:tint="#1565C0" />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DUI" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="000000-0" android:textColor="#000000" android:textSize="13sp"/>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
                             android:src="@android:drawable/ic_menu_call"
                             app:tint="#1565C0" />
 
@@ -211,7 +193,7 @@
                             android:layout_marginStart="8dp"
                             android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Telefono" android:textColor="#1565C0" android:textStyle="bold" android:textSize="13sp"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2222-2222" android:textColor="#000000" android:textSize="13sp"/>
+                            <TextView android:id="@+id/tvFichaTelefono" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" android:textColor="#000000" android:textSize="13sp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -243,15 +225,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email Coorporativo:"
+                        android:text="Email Corporativo:"
                         android:textColor="#1565C0"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvFichaCorreo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Usuario@Empresa.sv"
+                        android:text="-"
                         android:textColor="#000000"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -297,7 +280,7 @@
                         android:layout_marginStart="12dp"
                         android:orientation="vertical">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Usuario:" android:textColor="#1565C0" android:textStyle="bold" android:textSize="14sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nombre12" android:textColor="#000000" android:textSize="14sp"/>
+                        <TextView android:id="@+id/tvFichaUsuario" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" android:textColor="#000000" android:textSize="14sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
