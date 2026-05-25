@@ -107,4 +107,5 @@ class DetalleProyectoFragment : Fragment(), SeleccionarEncargadoDialog.OnEncarga
         super.onResume()
         actualizarDatos()
     }
+
 }
