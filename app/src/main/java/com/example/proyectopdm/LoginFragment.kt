@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment() {
 
@@ -26,77 +21,78 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val etEmail = view.findViewById<EditText>(R.id.et_email)
-        val etPassword = view.findViewById<EditText>(R.id.et_password)
+        // --- INICIO PRUEBA BASE DE DATOS ---
+        try {
+            // 1. Instanciamos nuestra clase Helper
+            val dbHelper = DatabaseHelper(requireContext())
+
+            // 2. Abrimos la base de datos en modo lectura/escritura
+            val db = dbHelper.openDatabase()
+
+            // 3. Hacemos una consulta de prueba a la tabla ROL
+            val cursor = db.rawQuery("SELECT * FROM ROL", null)
+
+            if (cursor.moveToFirst()) {
+                do {
+                    // Extraemos el nombre del rol
+                    val nombreRol = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_ROL"))
+                    // Lo imprimimos en la consola de Android Studio (Logcat)
+                    android.util.Log.d("PRUEBA_BD", "Rol encontrado en SQLite: $nombreRol")
+                } while (cursor.moveToNext())
+            }
+
+            // 4. Siempre cerramos el cursor y la base de datos
+            cursor.close()
+            db.close()
+        } catch (e: Exception) {
+            android.util.Log.e("PRUEBA_BD", "Error al leer la base de datos", e)
+        }
+        // --- FIN PRUEBA BASE DE DATOS ---
+
         val btnIngresar = view.findViewById<MaterialButton>(R.id.btn_ingresar)
-        val tvRegister = view.findViewById<TextView>(R.id.tv_register)
+        // Ahora usamos los IDs que acabamos de poner en el XML
+        val etEmail = view.findViewById<android.widget.EditText>(R.id.et_email)
+        val etPassword = view.findViewById<android.widget.EditText>(R.id.et_password)
 
         btnIngresar.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            // Validamos con la base de datos
             val dbHelper = DatabaseHelper(requireContext())
-            val credenciales = LoginRequest(email, password)
+            val esValido = dbHelper.validarUsuario(email, password)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val response = RetrofitClient.instance.loginUsuario(credenciales)
+            if (esValido) {
+                Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
 
-                    withContext(Dispatchers.Main) {
-                        if (response.isSuccessful && response.body()?.status == "success") {
-                            val usuarioRemoto = response.body()?.usuario
-
-                            // CAMBIO: Protección con "?: " para evitar NullPointerException
-                            if (usuarioRemoto != null) {
-                                dbHelper.registrarUsuario(
-                                    usuarioRemoto.NOMBRE_USUARIO ?: "",
-                                    usuarioRemoto.APELLIDO_USUARIO ?: "",
-                                    usuarioRemoto.CORREO_ELECTRONICO ?: "",
-                                    usuarioRemoto.CONTRASENA ?: ""
-                                )
-                                Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
-                                val mainActivity = activity as MainActivity
-                                mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
-                            } else {
-                                Toast.makeText(requireContext(), "Error: Datos de usuario incompletos", Toast.LENGTH_SHORT).show()
-                            }
-                        } else {
-                            // Si el servidor falla, probamos con SQLite
-                            if (dbHelper.validarUsuario(email, password)) {
-                                Toast.makeText(requireContext(), "Bienvenido (Modo Offline)", Toast.LENGTH_SHORT).show()
-                                val mainActivity = activity as MainActivity
-                                mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
-                            } else {
-                                Toast.makeText(requireContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        // Fallo total de red, probamos última opción: Local
-                        val dbHelperOffline = DatabaseHelper(requireContext())
-                        if (dbHelperOffline.validarUsuario(email, password)) {
-                            Toast.makeText(requireContext(), "Modo Offline (Sin red)", Toast.LENGTH_SHORT).show()
-                            val mainActivity = activity as MainActivity
-                            mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
-                        } else {
-                            Toast.makeText(requireContext(), "Error de red y usuario no encontrado local", Toast.LENGTH_LONG).show()
-                        }
-                        android.util.Log.e("ERROR_CONEXION", "Fallo: ", e)
-                    }
-                }
+                requireView().visibility = View.GONE
+                val mainActivity = activity as MainActivity
+                mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
+            } else {
+                Toast.makeText(requireContext(), "Correo o contraseña incorrectos", Toast.LENGTH_LONG).show()
             }
         }
 
+        //Texto de "Olvidé mi contraseña" (En mantenimiento)
+        val tvForgotPassword = view.findViewById<TextView>(R.id.tv_forgot_password)
+
+        tvForgotPassword.setOnClickListener {
+            // Muestra el mensaje flotante
+            Toast.makeText(requireContext(), "Función en proceso de creación", Toast.LENGTH_SHORT).show()
+        }
+
+        val tvRegister = view.findViewById<TextView>(R.id.tv_register)
+
         tvRegister.setOnClickListener {
+            // Transición a la pantalla de Registro
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.content_container, RegistrarUsuarioFragment())
-                .addToBackStack(null)
+                .addToBackStack(null) // Permite usar el botón físico de "Atrás" del teléfono
                 .commit()
         }
     }
