@@ -254,6 +254,222 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         val resultado = db.update("MATERIAL", valores, "ID_MATERIAL = ?", arrayOf(id.toString()))
         db.close()
         return resultado > 0
+    }fun recargarDatosIniciales() {
+        val db = this.writableDatabase
+        db.beginTransaction()
+        try {
+            // 1. Limpieza total de tablas
+            db.execSQL("DELETE FROM MUNICIPIO")
+            db.execSQL("DELETE FROM DEPARTAMENTO")
+
+            // 2. Inserción de Departamentos
+            val departamentos = mapOf(
+                1 to "Ahuachapán", 2 to "Santa Ana", 3 to "Sonsonate", 4 to "Chalatenango",
+                5 to "La Libertad", 6 to "San Salvador", 7 to "Cuscatlán", 8 to "La Paz",
+                9 to "Cabañas", 10 to "San Vicente", 11 to "Usulután", 12 to "San Miguel",
+                13 to "Morazán", 14 to "La Unión"
+            )
+            departamentos.forEach { (id, nombre) ->
+                db.execSQL("INSERT INTO DEPARTAMENTO (ID_DEPARTAMENTO, NOMBRE_DEPARTAMENTO) VALUES ($id, '$nombre')")
+            }
+
+            // 3. Inserción de Municipios
+            val municipios = mapOf(
+                1 to listOf("Atiquizaya", "El Refugio", "San Lorenzo", "Turín", "Ahuachapán", "Apaneca", "Concepción de Ataco", "Tacuba", "Guaymango", "Jujutla", "San Francisco Menéndez", "San Pedro Puxtla"),
+                2 to listOf("Masahuat", "Metapán", "Santa Rosa Guachipilín", "Texistepeque", "Santa Ana", "Candelaria de la Frontera", "Chalchuapa", "El Porvenir", "San Sebastián Salitrillo", "Santiago de la Frontera", "Coatepeque", "El Congo"),
+                3 to listOf("Juayúa", "Nahuizalco", "Salcoatitán", "Santa Catarina Masahuat", "Sonsonate", "Sonzacate", "Izalco", "Nahulingo", "San Antonio del Monte", "Caluco", "Armenia", "Cuisnahuat", "Julian Alvarenga", "San Julián", "Santa Isabel Ishuatán", "Acajutla"),
+                4 to listOf("Citalá", "La Palma", "San Ignacio", "Agua Caliente", "Dulce Nombre de María", "El Paraíso", "La Reina", "Nueva Concepción", "San Fernando", "San Francisco Morazán", "San Rafael", "Santa Rita", "Arcatao", "Azacualpa", "Cancasque", "Chalatenango", "Comalapa", "Concepción Quezaltepeque", "El Carrizal", "Las Vueltas", "Nombre de Jesús", "Nueva Trinidad", "Ojos de Agua", "Potonico", "San Antonio de la Cruz", "San Antonio Los Ranchos", "San Francisco Lempa", "San Isidro Labrador", "San José Las Flores", "San Luis del Carmen"),
+                5 to listOf("Quezaltepeque", "San Matías", "San Pablo Tacachico", "San Juan Opico", "Ciudad Arce", "Colón", "Sacacoyo", "Tepecoyo", "Jayaque", "Talnique", "Antiguo Cuscatlán", "Huizúcar", "Nuevo Cuscatlán", "San José Villanueva", "Zaragoza", "Chiltiupán", "Jicalapa", "La Libertad", "Tamanique", "Teotepeque", "Santa Tecla", "Comasagua"),
+                6 to listOf("Aguilares", "El Paisnal", "Guazapa", "Apopa", "Nejapa", "Ayutuxtepeque", "Mejicanos", "San Salvador", "San Marcos", "Santo Tomás", "Santiago Texacuangos", "Ilopango", "San Martín", "Soyapango", "Tonacatepeque", "Panchimalco", "Rosario de Mora"),
+                7 to listOf("Suchitoto", "San José Guayabal", "Oratorio de Concepción", "San Bartolomé Perulapía", "San Pedro Perulapán", "Cojutepeque", "San Rafael Cedros", "Candelaria", "El Carmen", "El Rosario", "Monte San Juan", "San Cristóbal", "Santa Cruz Analquito", "Santa Cruz Michapa", "Tenancingo", "Ramón Grande", "San Ramón"),
+                8 to listOf("San Pedro Masahuat", "Santiago Nonualco", "Santa María Ostuma", "El Rosario", "Jerusalén", "Mercedes La Ceiba", "Paraíso de Osorio", "San Antonio Masahuat", "San Emigdio", "San Juan Tepezontes", "San Miguel Tepezontes", "San Pedro Nonualco", "Tapalhuaca", "Cuyultitán", "Olocuilta", "San Francisco Chinameca", "San Juan Talpa", "San Luis Talpa", "San Luis La Herradura", "San Juan Nonualco", "San Rafael Obrajuelo", "Zacatecoluca"),
+                9 to listOf("Sensuntepeque", "Victoria", "Dolores", "Guacotecti", "San Isidro", "Ilobasco", "Tejutepeque", "Jutiapa", "Cinquera"),
+                10 to listOf("Apastepeque", "Santa Clara", "San Ildefonso", "San Esteban Catarina", "San Sebastián", "San Lorenzo", "San Vicente", "Guadalupe", "Verapaz", "Tepetitán", "Tecoluca", "San Cayetano Istepeque"),
+                11 to listOf("Santiago de María", "Alegría", "Berlín", "Mercedes Umaña", "Jucuapa", "El Triunfo", "Nueva Granada", "San Bonaventura", "Usulután", "Jiquilisco", "Puerto El Triunfo", "San Dionisio", "Concepción Batres", "San Francisco Javier", "Santa Elena", "Santa María", "Tecapán", "Jucuarán", "San Agustín"),
+                12 to listOf("Ciudad Barrios", "Sesori", "Nuevo Edén de San Juan", "San Gerardo", "San Luis de la Reina", "Carolina", "San Antonio", "Chapeltique", "San Miguel", "Comacarán", "Chirilagua", "Moncagua", "Quelepa", "Uluazapa", "Chinameca", "El Tránsito", "Lolotique", "Nueva Guadalupe", "San Jorge", "San Rafael Oriente"),
+                13 to listOf("Arambala", "Cacaopera", "Corinto", "El Rosario", "Joateca", "Jocoaitique", "Meanguera", "Perquín", "San Fernando", "San Isidro", "Torola", "Chilanga", "Delicias de Concepción", "El Divisadero", "Gualococti", "Guatajiagua", "Jocoro", "Loloquique", "Osicala", "San Carlos", "San Francisco Gotera", "San Simón", "Sensembra", "Sociedad", "Yamabal", "Yoloaiquín"),
+                14 to listOf("Anamorós", "Bolívar", "Concepción de Oriente", "El Sauce", "Lislique", "Nueva Esparta", "Pasaquina", "Polorós", "San José", "Conchagua", "El Carmen", "Intipucá", "La Unión", "Meanguera del Golfo", "San Alejo", "Yayantique", "Yucuaiquín")
+            )
+
+            var muniId = 1
+            municipios.forEach { (deptoId, muniList) ->
+                muniList.forEach { nombre ->
+                    db.execSQL("INSERT INTO MUNICIPIO (ID_MUNICIPIO, ID_DEPARTAMENTO, NOMBRE_MUNICIPIO) VALUES ($muniId, $deptoId, '$nombre')")
+                    muniId++
+                }
+            }
+
+            db.setTransactionSuccessful()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            db.endTransaction()
+        }
+        db.close()
+    }
+    // 1. Obtener todos los departamentos
+    fun getAllDepartamentos(): List<Pair<Int, String>> {
+        val lista = mutableListOf<Pair<Int, String>>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT ID_DEPARTAMENTO, NOMBRE_DEPARTAMENTO FROM DEPARTAMENTO", null)
+        if (cursor.moveToFirst()) {
+            do {
+                lista.add(Pair(cursor.getInt(0), cursor.getString(1)))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return lista
     }
 
+    // 2. Obtener municipios por ID de departamento
+//    fun getMunicipiosByDepto(idDepto: Int): List<String> {
+//        val lista = mutableListOf<String>()
+//        val db = this.readableDatabase
+//        val cursor = db.rawQuery("SELECT NOMBRE_MUNICIPIO FROM MUNICIPIO WHERE ID_DEPARTAMENTO = ?", arrayOf(idDepto.toString()))
+//        if (cursor.moveToFirst()) {
+//            do {
+//                lista.add(cursor.getString(0))
+//            } while (cursor.moveToNext())
+//        }
+//        cursor.close()
+//        db.close()
+//        return lista
+//    }
+
+    // --- NUEVO MÉTODO: Insertar Proyecto ---
+    fun insertProyecto(nombre: String, fecha: String, direccion: String, idMunicipio: Int): Long {
+        val db = this.writableDatabase
+        val valores = ContentValues().apply {
+            put("NOMBRE_PROYECTO", nombre)
+            put("FECHA_INICIO", fecha)
+            put("DIRECCION", direccion)
+            put("ID_MUNICIPIO", idMunicipio)
+            put("ESTADO", "Iniciado")
+
+            // --- VALORES DE EMERGENCIA (Asegúrate de que el ID 1 exista en DB Browser) ---
+            put("ID_USUARIO", 1)
+            put("ID_DETALLEREQ", 1)
+        }
+
+        val id = db.insert("PROYECTO", null, valores)
+        db.close()
+        return id
+    }
+    // --- MODIFICACIÓN NECESARIA: Obtener Municipios con ID ---
+    // Reemplaza tu método actual 'getMunicipiosByDepto' por este para poder guardar el ID
+    fun getMunicipiosByDepto(idDepto: Int): List<Pair<Int, String>> {
+        val lista = mutableListOf<Pair<Int, String>>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT ID_MUNICIPIO, NOMBRE_MUNICIPIO FROM MUNICIPIO WHERE ID_DEPARTAMENTO = ?", arrayOf(idDepto.toString()))
+        if (cursor.moveToFirst()) {
+            do {
+                // Guardamos ID y NOMBRE para poder usar el ID al guardar el proyecto
+                lista.add(Pair(cursor.getInt(0), cursor.getString(1)))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return lista
+    }
+    fun obtenerProyectos(): List<Proyecto> {
+        val lista = ArrayList<Proyecto>()
+        val db = this.readableDatabase
+        // Seleccionamos específicamente lo que necesitamos
+        val sql = "SELECT ID_PROYECTO, NOMBRE_PROYECTO, FECHA_INICIO, DIRECCION, ID_MUNICIPIO, ESTADO FROM PROYECTO"
+        val cursor = db.rawQuery(sql, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                lista.add(Proyecto(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("ID_PROYECTO")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_PROYECTO")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("FECHA_INICIO")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("DIRECCION")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("ID_MUNICIPIO")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("ESTADO"))
+                ))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return lista
+    }
+    fun eliminarProyecto(id: Int): Boolean {
+        val db = this.writableDatabase
+        // Asegúrate de que el nombre de la columna sea ID_PROYECTO
+        val resultado = db.delete("PROYECTO", "ID_PROYECTO = ?", arrayOf(id.toString()))
+        db.close()
+        return resultado > 0
+    }
+
+    fun obtenerUsuarios(): List<Pair<Int, String>> {
+        val lista = mutableListOf<Pair<Int, String>>()
+        val db = this.readableDatabase
+        // Ajusta los nombres de las columnas a como los tengas en tu BD
+        val cursor = db.rawQuery("SELECT ID_USUARIO, NOMBRE_USUARIO, APELLIDO_USUARIO FROM USUARIO", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(0)
+                val nombreCompleto = "${cursor.getString(1)} ${cursor.getString(2)}"
+                lista.add(Pair(id, nombreCompleto))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return lista
+
+    }
+
+    // Actualiza el campo ID_USUARIO en la tabla PROYECTO
+    // Actualiza únicamente el encargado (ID_USUARIO)
+    // 1. EL QUE ACTUALIZA (El que hace el trabajo sucio)
+    fun actualizarProyectoEncargado(idProyecto: Int, idUsuario: Int): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put("ID_USUARIO", idUsuario)
+
+        val resultado = db.update("PROYECTO", values, "ID_PROYECTO = ?", arrayOf(idProyecto.toString()))
+        db.close()
+        return resultado > 0
+    }
+
+    // 2. EL QUE LEE EL ESTADO (Para saber si habilitar o no botones)
+    fun obtenerIdUsuarioDelProyecto(idProyecto: Int): Int {
+        val db = this.readableDatabase
+        var id = 1 // Por defecto, si no hay encargado
+        val cursor = db.rawQuery("SELECT ID_USUARIO FROM PROYECTO WHERE ID_PROYECTO = ?", arrayOf(idProyecto.toString()))
+        if (cursor.moveToFirst()) {
+            id = cursor.getInt(0)
+        }
+        cursor.close()
+        db.close()
+        return id
+    }
+
+    // 3. EL QUE OBTIENE EL NOMBRE (Para que aparezca en el TextView)
+    fun obtenerNombreEncargadoPorId(idUsuario: Int): String {
+        val db = this.readableDatabase
+        var nombre = "Sin asignar"
+        val cursor = db.rawQuery("SELECT NOMBRE_USUARIO || ' ' || APELLIDO_USUARIO FROM USUARIO WHERE ID_USUARIO = ?", arrayOf(idUsuario.toString()))
+        if (cursor.moveToFirst()) {
+            nombre = cursor.getString(0)
+        }
+        cursor.close()
+        db.close()
+        return nombre
+    }
+    // Agrega este método a tu DatabaseHelper para obtener unidades vinculadas
+    fun obtenerUnidadPorIdMaterial(idMaterial: Int): String {
+        val db = this.readableDatabase
+        var nombreUnidad = "U" // Valor por defecto
+        val sql = "SELECT U.NOMBRE_UNIDAD FROM MATERIAL M INNER JOIN UNIDAD_MEDIDA U ON M.ID_UNIDAD = U.ID_UNIDAD WHERE M.ID_MATERIAL = ?"
+        val cursor = db.rawQuery(sql, arrayOf(idMaterial.toString()))
+        if (cursor.moveToFirst()) {
+            nombreUnidad = cursor.getString(0)
+        }
+        cursor.close()
+        db.close()
+        return nombreUnidad
+    }
 }

@@ -12,15 +12,38 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvTituloAjustes"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ajustes de Sistema"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvTituloAjustes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Ajustes de Sistema"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+<!--Boton para cargar los 14 departamentos con sus municipios-->
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_recargar_db"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:padding="0dp"-->
+<!--                app:backgroundTint="#D32F2F"-->
+<!--                app:cornerRadius="20dp"-->
+<!--                app:icon="@android:drawable/stat_notify_sync"-->
+<!--                app:iconSize="20dp"-->
+<!--                app:iconTint="@color/white"-->
+<!--                app:iconGravity="textStart"-->
+<!--                app:iconPadding="0dp" />-->
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -297,51 +320,51 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnVerPerfilAjustes"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:text="Perfil"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textAllCaps="false"
-            app:backgroundTint="#2E7D32"
-            app:cornerRadius="16dp"
-            app:icon="@drawable/account_circle"
-            app:iconTint="#FFFFFF"
-            app:iconSize="24dp"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            android:elevation="0dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerPerfilAjustes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Perfil"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                app:backgroundTint="#2E7D32"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/account_circle"
+                app:iconTint="#FFFFFF"
+                app:iconSize="24dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:elevation="0dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCerrarSesionAjustes"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:text="Salir"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textAllCaps="false"
-            app:backgroundTint="#D32F2F"
-            app:cornerRadius="16dp"
-            app:icon="@android:drawable/ic_lock_power_off"
-            app:iconTint="#FFFFFF"
-            app:iconSize="24dp"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            android:elevation="0dp" />
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCerrarSesionAjustes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Salir"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                app:backgroundTint="#D32F2F"
+                app:cornerRadius="16dp"
+                app:icon="@android:drawable/ic_lock_power_off"
+                app:iconTint="#FFFFFF"
+                app:iconSize="24dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:elevation="0dp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

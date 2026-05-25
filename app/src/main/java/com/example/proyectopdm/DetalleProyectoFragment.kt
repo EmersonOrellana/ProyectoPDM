@@ -4,18 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 
-class DetalleProyectoFragment : Fragment() {
+class DetalleProyectoFragment : Fragment(), SeleccionarEncargadoDialog.OnEncargadoSeleccionado {
 
     private lateinit var txtNombreProyecto: TextView
+    private lateinit var txtNombreEncargado: TextView
     private lateinit var spEstado: Spinner
+    private var idProyectoActual: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,78 +24,87 @@ class DetalleProyectoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inicializar vistas del encabezado
-        txtNombreProyecto = view.findViewById(R.id.txtDetalleNombreProyecto)
-        spEstado = view.findViewById(R.id.spDetalleEstado)
+        // 1. Obtención de datos
+        idProyectoActual = arguments?.getInt("id_proyecto") ?: 0
+        val nombreProyecto = arguments?.getString("nombre_proyecto") ?: "Proyecto"
 
-        // Inicializar botones de acciones
+        // 2. Inicialización de vistas
+        txtNombreProyecto = view.findViewById(R.id.txtDetalleNombreProyecto)
+        txtNombreEncargado = view.findViewById(R.id.txtNombreEncargado)
+        spEstado = view.findViewById(R.id.spDetalleEstado)
+        txtNombreProyecto.text = nombreProyecto
+
+        // 3. Spinner de Estados
+        val estadosArray = arrayOf("Iniciado", "En proceso", "Finalizado")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estadosArray)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spEstado.adapter = adapter
+
+        // 4. Botones
         val btnElegirEncargado = view.findViewById<Button>(R.id.btnElegirEncargado)
         val btnAgregarMateriales = view.findViewById<Button>(R.id.btnAgregarMateriales)
         val btnAgregarCotizacion = view.findViewById<Button>(R.id.btnAgregarCotizacion)
         val btnComparar = view.findViewById<Button>(R.id.btnCompararCotizaciones)
         val btnGuardar = view.findViewById<Button>(R.id.btnGuardarDetalles)
 
-        // Recuperar el nombre del proyecto enviado desde la lista
-        val nombreProyecto = arguments?.getString("nombre_proyecto") ?: "Proyecto"
-        txtNombreProyecto.text = nombreProyecto
+        // ID del contenedor dinámico
+        val idContenedor = (view.parent as ViewGroup).id
 
-        // Opciones actualizadas para el Spinner de estados
-        val estadosArray = arrayOf("Iniciado", "En proceso", "Finalizado")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estadosArray)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spEstado.adapter = adapter
-
-        // Preseleccionar el estado simulado según el proyecto que viene de la lista
-        when (nombreProyecto) {
-            "Proyecto X" -> spEstado.setSelection(0) // Iniciado
-            "Proyecto Y" -> spEstado.setSelection(1) // En proceso
-            "Proyecto Z" -> spEstado.setSelection(2) // Finalizado
-        }
-
-        // Evento para abrir el Diálogo de Seleccionar Encargado
+        // --- ACCIONES DIÁLOGOS (.show) ---
         btnElegirEncargado.setOnClickListener {
-            SeleccionarEncargadoDialog().show(parentFragmentManager, "SeleccionarEncargadoDialog")
+            SeleccionarEncargadoDialog(idProyectoActual).show(childFragmentManager, "SeleccionarEncargadoDialog")
         }
 
         btnAgregarMateriales.setOnClickListener {
-            AgregarMaterialDialog().show(parentFragmentManager, "AgregarMaterialDialog")
+            // Este es Dialog, usa .show
+            AgregarMaterialDialog(idProyectoActual).show(childFragmentManager, "AgregarMaterialDialog")
         }
 
-        // CONEXIÓN: Abre la pantalla de Registro de Cotización (Vista Previa)
+        // --- ACCIONES NAVEGACIÓN FRAGMENT (.replace) ---
         btnAgregarCotizacion.setOnClickListener {
+            // Este es Fragment, usa .replace
             val fragmentCotizacion = AgregarCotizacionFragment()
             val bundle = Bundle()
-            bundle.putString("nombre_proyecto", nombreProyecto)
+            bundle.putInt("id_proyecto", idProyectoActual)
             fragmentCotizacion.arguments = bundle
-
-            val idContenedor = (view.parent as ViewGroup).id
 
             parentFragmentManager.beginTransaction()
                 .replace(idContenedor, fragmentCotizacion)
-                .addToBackStack(null) // Para que al dar "Atrás" regrese al detalle perfectamente
+                .addToBackStack(null)
                 .commit()
         }
 
-        // CONEXIÓN COMPLETA: Abre la pantalla general de Comparación de Cotizaciones
         btnComparar.setOnClickListener {
-            val fragmentoComparar = CompararCotizacionesFragment()
+            val fragmentComparar = CompararCotizacionesFragment()
             val bundle = Bundle()
-            bundle.putString("nombre_proyecto", nombreProyecto)
-            fragmentoComparar.arguments = bundle
-
-            // Buscamos el ID del contenedor dinámicamente para inyectar la vista completa
-            val idContenedor = (view.parent as ViewGroup).id
+            bundle.putInt("id_proyecto", idProyectoActual)
+            fragmentComparar.arguments = bundle
 
             parentFragmentManager.beginTransaction()
-                .replace(idContenedor, fragmentoComparar)
-                .addToBackStack(null) // Guarda el estado en la pila para volver sin problemas
+                .replace(idContenedor, fragmentComparar)
+                .addToBackStack(null)
                 .commit()
         }
 
         btnGuardar.setOnClickListener {
-            val estadoSeleccionado = spEstado.selectedItem.toString()
-            Toast.makeText(context, "Cambios de $nombreProyecto guardados como [$estadoSeleccionado]", Toast.LENGTH_SHORT).show()
             parentFragmentManager.popBackStack()
         }
+
+        actualizarDatos()
+    }
+
+    private fun actualizarDatos() {
+        val db = DatabaseHelper(requireContext())
+        val idUsuario = db.obtenerIdUsuarioDelProyecto(idProyectoActual)
+        txtNombreEncargado.text = if (idUsuario > 1) db.obtenerNombreEncargadoPorId(idUsuario) else "Sin asignar (Elija un encargado)"
+    }
+
+    override fun onEncargadoElegido(nombre: String) {
+        actualizarDatos()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        actualizarDatos()
     }
 }

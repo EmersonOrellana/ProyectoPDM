@@ -1,39 +1,49 @@
 package com.example.proyectopdm
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class InicioFragment : Fragment(R.layout.fragment_inicio) { // Asegúrate que el XML se llame así
+class InicioFragment : Fragment(R.layout.fragment_inicio) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Configuración de los Proyectos X, Y, Z
-        configurarProyecto(view, "Proyecto X", R.id.btnDetallesX, R.id.btnEditarX, R.id.btnEliminarX)
-        configurarProyecto(view, "Proyecto Y", R.id.btnDetallesY, R.id.btnEditarY, R.id.btnEliminarY)
-        configurarProyecto(view, "Proyecto Z", R.id.btnDetallesZ, R.id.btnEditarZ, R.id.btnEliminarZ)
-
-        // Configuración de botones flotantes (FABs)
+        val contenedor = view.findViewById<LinearLayout>(R.id.contenedorProyectos)
+        cargarProyectos(contenedor)
         configurarFABs(view)
     }
 
-    private fun configurarProyecto(view: View, nombreProyecto: String, idDetalle: Int, idEditar: Int, idEliminar: Int) {
-        view.findViewById<Button>(idDetalle).setOnClickListener {
-            // ─── AGREGADO MANUAL PARA EL BOTÓN VERDE ───
-            if (idDetalle == R.id.btnDetallesZ) {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.content_container, TransportistasFragment())
-                    .addToBackStack(null)
-                    .commit()
-            } else {
-                // Lógica original para Proyecto X e Y
+    private fun cargarProyectos(contenedor: LinearLayout) {
+        val dbHelper = DatabaseHelper(requireContext())
+        val listaProyectos = dbHelper.obtenerProyectos()
+
+        contenedor.removeAllViews()
+        val inflater = LayoutInflater.from(context)
+
+        for (proyecto in listaProyectos) {
+            val card = inflater.inflate(R.layout.item_proyecto, contenedor, false)
+
+            // ASIGNACIÓN EXACTA:
+            // 1. Título arriba (NOMBRE_PROYECTO)
+            card.findViewById<TextView>(R.id.tvTitulo).text = proyecto.nombre
+
+            // 2. Estado arriba derecha (ESTADO)
+            card.findViewById<TextView>(R.id.tvEstado).text = proyecto.estado
+
+            // 3. Fecha abajo (FECHA_INICIO)
+            card.findViewById<TextView>(R.id.tvFecha).text = "Inicio: ${proyecto.fecha}"
+
+            // Botones
+            card.findViewById<Button>(R.id.btnDetalles).setOnClickListener {
                 val fragmentoDetalle = DetalleProyectoFragment().apply {
                     arguments = Bundle().apply {
-                        putString("nombre_proyecto", nombreProyecto)
+                        putString("nombre_proyecto", proyecto.nombre)
+                        putInt("id_proyecto", proyecto.id)
                     }
                 }
                 parentFragmentManager.beginTransaction()
@@ -41,15 +51,19 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) { // Asegúrate que el
                     .addToBackStack(null)
                     .commit()
             }
-            // ───────────────────────────────────────────
-        }
 
-        view.findViewById<Button>(idEditar).setOnClickListener {
-            Toast.makeText(context, "Abriendo edición de $nombreProyecto", Toast.LENGTH_SHORT).show()
-        }
+            card.findViewById<Button>(R.id.btnEditar).setOnClickListener {
+                Toast.makeText(context, "Editar ${proyecto.nombre}", Toast.LENGTH_SHORT).show()
+            }
 
-        view.findViewById<Button>(idEliminar).setOnClickListener {
-            Toast.makeText(context, "$nombreProyecto eliminado", Toast.LENGTH_SHORT).show()
+            card.findViewById<Button>(R.id.btnEliminar).setOnClickListener {
+                if (dbHelper.eliminarProyecto(proyecto.id)) {
+                    Toast.makeText(context, "Proyecto eliminado", Toast.LENGTH_SHORT).show()
+                    cargarProyectos(contenedor)
+                }
+            }
+
+            contenedor.addView(card)
         }
     }
 
@@ -64,13 +78,11 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) { // Asegúrate que el
                 .commit()
         }
 
-        // ─── CAMBIO AQUÍ: Navegación al botón del rombo ───
         fabAuto.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, TransportistasFragment())
                 .addToBackStack(null)
                 .commit()
         }
-        // ──────────────────────────────────────────────────
     }
 }

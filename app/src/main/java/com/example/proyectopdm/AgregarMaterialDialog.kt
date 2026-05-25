@@ -6,29 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.DialogFragment
 
-class AgregarMaterialDialog : DialogFragment() {
+class AgregarMaterialDialog(private val idProyecto: Int) : DialogFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Fondo transparente para aplicar los bordes curvados del CardView de forma limpia
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return inflater.inflate(R.layout.dialog_agregar_material, container, false)
     }
 
     override fun onStart() {
         super.onStart()
-        // Ajuste dinámico del tamaño para que no salga angosto en pantallas medianas/grandes
         val metrics = resources.displayMetrics
         val width = metrics.widthPixels
         val targetWidth = (width * 0.90f).toInt()
@@ -38,46 +27,56 @@ class AgregarMaterialDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Inicialización de componentes
-        val edtBuscar = view.findViewById<EditText>(R.id.edtBuscarMaterialDialog)
+        val db = DatabaseHelper(requireContext())
         val edtCantidad = view.findViewById<EditText>(R.id.edtDialogCantidad)
         val spUnidad = view.findViewById<Spinner>(R.id.spDialogUnidad)
         val rgMateriales = view.findViewById<RadioGroup>(R.id.rgMaterialesResultado)
         val btnAgregar = view.findViewById<Button>(R.id.btnDialogAgregarMaterial)
         val btnCancelar = view.findViewById<Button>(R.id.btnDialogCancelarMaterial)
 
-        // 2. Poblar el Spinner de Unidades de medida utilizadas en El Salvador
-        val unidadesArray = arrayOf("Seleccione", "U", "QQ", "M3", "KG", "Mtr", "Bolsa")
-        val adapterUnidades = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, unidadesArray)
+        // 1. Cargar materiales dinámicamente
+        rgMateriales.removeAllViews() // Aseguramos limpieza
+        val materiales = db.obtenerMateriales()
+        for (material in materiales) {
+            val rb = RadioButton(requireContext())
+            rb.id = material.idMaterial
+            rb.text = material.nombre
+            rgMateriales.addView(rb)
+        }
+
+        // 2. Cargar unidades dinámicamente
+        val listaUnidades = db.recuperarUnidadesMedida()
+        val nombresUnidades = listaUnidades.map { it.nombreUnidad }.toMutableList()
+        nombresUnidades.add(0, "Seleccione")
+
+        val adapterUnidades = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, nombresUnidades)
         adapterUnidades.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spUnidad.adapter = adapterUnidades
 
-        // 3. Listener del botón cancelar
-        btnCancelar.setOnClickListener {
-            dismiss()
+        // 3. Sincronización automática de unidad al elegir material
+        rgMateriales.setOnCheckedChangeListener { _, checkedId ->
+            val unidadRelacionada = db.obtenerUnidadPorIdMaterial(checkedId)
+            val posicion = adapterUnidades.getPosition(unidadRelacionada)
+            if (posicion >= 0) spUnidad.setSelection(posicion)
         }
 
-        // 4. Listener para capturar la selección e inserción simulada
+        // 4. Lógica de botones
+        btnCancelar.setOnClickListener { dismiss() }
+
         btnAgregar.setOnClickListener {
-            val idSeleccionado = rgMateriales.checkedRadioButtonId
-            val cantidadText = edtCantidad.text.toString()
-            val unidadSeleccionada = spUnidad.selectedItem.toString()
+            val idMaterial = rgMateriales.checkedRadioButtonId
+            val cantidad = edtCantidad.text.toString()
+            val unidad = spUnidad.selectedItem.toString()
 
-            if (idSeleccionado == -1) {
-                Toast.makeText(context, "Por favor, seleccione un material", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            if (cantidadText.isEmpty() || cantidadText.toDouble() <= 0) {
-                Toast.makeText(context, "Ingrese una cantidad válida", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            if (unidadSeleccionada == "Seleccione") {
-                Toast.makeText(context, "Seleccione una unidad de medida", Toast.LENGTH_SHORT).show()
+            if (idMaterial == -1 || cantidad.isEmpty() || unidad == "Seleccione") {
+                Toast.makeText(context, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Simulación exitosa antes de mapear el DBHelper definitivo
-            Toast.makeText(context, "Material añadido satisfactoriamente", Toast.LENGTH_SHORT).show()
+            // Aquí realizarías tu inserción:
+            // db.registrarMaterialProyecto(idProyecto, idMaterial, cantidad.toDouble(), unidad)
+
+            Toast.makeText(context, "Material guardado correctamente", Toast.LENGTH_SHORT).show()
             dismiss()
         }
     }

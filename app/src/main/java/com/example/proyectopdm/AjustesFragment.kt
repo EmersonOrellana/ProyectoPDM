@@ -17,23 +17,24 @@ class AjustesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Asegúrate de que el XML se llame fragment_ajustes
         return inflater.inflate(R.layout.fragment_ajustes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Inicializar Tarjetas (IDs según tu XML anterior)
+        // 1. Inicializar Tarjetas
         val cardMatriz = view.findViewById<MaterialCardView>(R.id.cardMatrizAcceso)
         val cardRoles = view.findViewById<MaterialCardView>(R.id.cardGestionRoles)
         val cardMedida = view.findViewById<MaterialCardView>(R.id.cardUnidadMedida)
         val cardConversion = view.findViewById<MaterialCardView>(R.id.cardReglasConversion)
         val cardCategorias = view.findViewById<MaterialCardView>(R.id.cardCategorias)
 
-        // 2. Inicializar Botones (IDs según tu XML anterior)
+        // 2. Inicializar Botones
         val btnPerfil = view.findViewById<MaterialButton>(R.id.btnVerPerfilAjustes)
         val btnSalir = view.findViewById<MaterialButton>(R.id.btnCerrarSesionAjustes)
+        // Nuevo botón de recarga
+       // val btnRecargar = view.findViewById<MaterialButton>(R.id.btn_recargar_db)
 
         // EVENTOS DE CLIC
         cardMatriz.setOnClickListener {
@@ -43,17 +44,13 @@ class AjustesFragment : Fragment() {
                 .commit()
         }
 
-        // ====== AQUÍ ACTUALIZAMOS LA NAVEGACIÓN DE ROLES ======
         cardRoles.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, RolesListaFragment())
-                .addToBackStack("Ajustes") // Vital para mantener el historial
+                .addToBackStack("Ajustes")
                 .commit()
-
-            // Actualizar título al diseño principal
             activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "COTMAN"
         }
-        // =======================================================
 
         cardMedida.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -65,29 +62,38 @@ class AjustesFragment : Fragment() {
         cardCategorias.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, CategoriasFragment())
-                .addToBackStack("Ajustes") // Vital para poder volver atrás
+                .addToBackStack("Ajustes")
                 .commit()
-
-            // Actualizar título
             activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "CATEGORÍAS"
         }
 
         cardConversion.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.content_container, ReglasConversionFragment()) // Asegúrate de crear este fragmento
+                .replace(R.id.content_container, ReglasConversionFragment())
                 .addToBackStack("Ajustes")
                 .commit()
-
             activity?.findViewById<TextView>(R.id.tvHeaderTitle)?.text = "REGLAS DE CONVERSIÓN"
         }
 
-
+        // LÓGICA DEL NUEVO BOTÓN DE RECARGA
+        /*btnRecargar.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Reiniciar Datos")
+                .setMessage("¿Deseas borrar los registros actuales y recargar los 14 departamentos y municipios desde el código?")
+                .setPositiveButton("Confirmar") { _, _ ->
+                    val dbHelper = DatabaseHelper(requireContext())
+                    dbHelper.recargarDatosIniciales()
+                    Toast.makeText(requireContext(), "Base de datos actualizada", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Cancelar", null)
+                .show()
+        }
 
         btnPerfil.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.content_container, VerPerfilFragment())
                 .commit()
-        }
+        }*/
 
         // BOTÓN CERRAR SESIÓN
         btnSalir.setOnClickListener {
