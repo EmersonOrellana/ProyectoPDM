@@ -241,6 +241,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         db.close()
         return lista
     }
+
     fun actualizarMaterial(id: Int, nombre: String, idCat: Int, idUni: Int, desc: String): Boolean {
         val db = this.writableDatabase
         val valores = ContentValues().apply {
@@ -434,42 +435,4 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         return resultado > 0
     }
 
-    // 2. EL QUE LEE EL ESTADO (Para saber si habilitar o no botones)
-    fun obtenerIdUsuarioDelProyecto(idProyecto: Int): Int {
-        val db = this.readableDatabase
-        var id = 1 // Por defecto, si no hay encargado
-        val cursor = db.rawQuery("SELECT ID_USUARIO FROM PROYECTO WHERE ID_PROYECTO = ?", arrayOf(idProyecto.toString()))
-        if (cursor.moveToFirst()) {
-            id = cursor.getInt(0)
-        }
-        cursor.close()
-        db.close()
-        return id
-    }
-
-    // 3. EL QUE OBTIENE EL NOMBRE (Para que aparezca en el TextView)
-    fun obtenerNombreEncargadoPorId(idUsuario: Int): String {
-        val db = this.readableDatabase
-        var nombre = "Sin asignar"
-        val cursor = db.rawQuery("SELECT NOMBRE_USUARIO || ' ' || APELLIDO_USUARIO FROM USUARIO WHERE ID_USUARIO = ?", arrayOf(idUsuario.toString()))
-        if (cursor.moveToFirst()) {
-            nombre = cursor.getString(0)
-        }
-        cursor.close()
-        db.close()
-        return nombre
-    }
-    // Agrega este método a tu DatabaseHelper para obtener unidades vinculadas
-    fun obtenerUnidadPorIdMaterial(idMaterial: Int): String {
-        val db = this.readableDatabase
-        var nombreUnidad = "U" // Valor por defecto
-        val sql = "SELECT U.NOMBRE_UNIDAD FROM MATERIAL M INNER JOIN UNIDAD_MEDIDA U ON M.ID_UNIDAD = U.ID_UNIDAD WHERE M.ID_MATERIAL = ?"
-        val cursor = db.rawQuery(sql, arrayOf(idMaterial.toString()))
-        if (cursor.moveToFirst()) {
-            nombreUnidad = cursor.getString(0)
-        }
-        cursor.close()
-        db.close()
-        return nombreUnidad
-    }
 }
