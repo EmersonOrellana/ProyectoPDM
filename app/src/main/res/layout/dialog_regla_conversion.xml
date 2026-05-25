@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Registro de nueva regla"
+            android:text="Nueva Regla de Conversión"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -29,90 +29,76 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Unidad de Medida Origen"
+            android:text="Unidad Origen (Ej: Saco)"
             android:textColor="#000000"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner_origen"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_input_box"
-            android:paddingHorizontal="8dp">
-            <Spinner
-                android:id="@+id/spinner_origen"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="#ABABAB" />
-        </LinearLayout>
+            android:background="@drawable/bg_input_box" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Unidad de Medida Destino"
+            android:text="Unidad Destino (Ej: Kg)"
             android:textColor="#000000"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner_destino"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_input_box"
-            android:paddingHorizontal="8dp">
-            <Spinner
-                android:id="@+id/spinner_destino"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="#ABABAB" />
-        </LinearLayout>
+            android:background="@drawable/bg_input_box" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Factor de Conversión"
+            android:text="Factor (¿Cuántos Kg tiene 1 Saco?)"
             android:textColor="#000000"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/et_factor_conversion"
+            android:id="@+id/et_factor_regla"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/bg_input_box"
-            android:hint="Ej. 2.20462"
+            android:hint="Ej: 50"
             android:inputType="numberDecimal"
             android:paddingHorizontal="12dp"
-            android:textColor="#333333"
-            android:textSize="14sp" />
+            android:textColor="#333333" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Descripción y Notas"
+            android:text="Descripción Corta"
             android:textColor="#000000"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_descripcion_regla"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/bg_input_box"
-            android:gravity="top|start"
             android:hint="Conversión estándar..."
-            android:padding="12dp"
-            android:textColor="#333333"
-            android:textSize="14sp" />
+            android:inputType="text"
+            android:paddingHorizontal="12dp"
+            android:textColor="#333333" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_confirmar_regla"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
-            android:text="Confirmar"
+            android:text="Guardar Regla"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"

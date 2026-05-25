@@ -66,85 +66,12 @@
         app:layout_constraintTop_toBottomOf="@id/search_bar_container_reglas">
 
         <LinearLayout
+            android:id="@+id/llContenedorReglas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#1565C0"
-                app:strokeWidth="1dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:id="@+id/img_icon_regla"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_reglas_conversion"
-                        app:tint="#1565C0" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_toEndOf="@id/img_icon_regla"
-                        android:layout_toStartOf="@id/contenedor_acciones_reglas"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1 Kilogramo ="
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2.20462 Libras"
-                            android:textColor="#555555"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/contenedor_acciones_reglas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/btn_editar_regla"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/ic_gestion_roles"
-                            app:tint="#1565C0" />
-
-                        <ImageView
-                            android:id="@+id/btn_eliminar_regla"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/delete"
-                            app:tint="#D32F2F" />
-                    </LinearLayout>
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
+            android:padding="20dp"
+            android:paddingBottom="90dp">
 
         </LinearLayout>
     </ScrollView>
