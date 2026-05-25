@@ -74,6 +74,19 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         return resultado != -1L
     }
 
+    // ================= FUNCIÓN NUEVA: ACTUALIZAR CONTRASEÑA =================
+    fun actualizarPassword(correo: String, nuevaPassword: String): Boolean {
+        val db = this.writableDatabase
+        val valores = ContentValues().apply {
+            put("CONTRASENA", nuevaPassword) // Tu columna real
+        }
+        // Buscamos al usuario por su CORREO_ELECTRONICO
+        val filasAfectadas = db.update("USUARIO", valores, "CORREO_ELECTRONICO = ?", arrayOf(correo))
+        db.close()
+        return filasAfectadas > 0 // Retorna true si encontró el correo y lo modificó
+    }
+    // =========================================================================
+
     fun obtenerCategorias(): List<Categoria> {
         val listaCategorias = ArrayList<Categoria>()
         val db = this.readableDatabase
@@ -149,9 +162,9 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         db.close()
         return lista
     }
+
     //CRUD DE MATERIALES
     // Método para recuperar unidades reales de la BD
-// Agrega esto a DatabaseHelper.kt
     fun recuperarUnidadesMedida(): List<Unidad> {
         val lista = ArrayList<Unidad>()
         val db = this.readableDatabase
@@ -171,13 +184,14 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         val valores = ContentValues().apply {
             put("NOMBRE_MATERIAL", nombre)
             put("ID_CATEGORIA", idCat)
-            put("ID_UNIDAD", idUni) // Ahora enviamos el entero
+            put("ID_UNIDAD", idUni)
             put("DESCRIPCION", desc)
         }
         val resultado = db.insert("MATERIAL", null, valores)
         db.close()
         return resultado != -1L
     }
+
     fun obtenerMateriales(): List<Material> {
         val lista = ArrayList<Material>()
         val db = this.readableDatabase
@@ -206,6 +220,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         db.close()
         return lista
     }
+
     // Método para eliminar un material
     fun eliminarMaterial(idMaterial: Int): Boolean {
         val db = this.writableDatabase
@@ -241,6 +256,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         db.close()
         return lista
     }
+
     fun actualizarMaterial(id: Int, nombre: String, idCat: Int, idUni: Int, desc: String): Boolean {
         val db = this.writableDatabase
         val valores = ContentValues().apply {
@@ -249,8 +265,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
             put("ID_UNIDAD", idUni)
             put("DESCRIPCION", desc)
         }
-
-        // El 'WHERE' es ID_MATERIAL = ?
         val resultado = db.update("MATERIAL", valores, "ID_MATERIAL = ?", arrayOf(id.toString()))
         db.close()
         return resultado > 0

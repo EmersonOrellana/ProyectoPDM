@@ -22,25 +22,24 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         try {
-            // 1. Instanciamos nuestra clase Helper
+            //Instanciamos nuestra clase Helper
             val dbHelper = DatabaseHelper(requireContext())
 
-            // 2. Abrimos la base de datos en modo lectura/escritura
+            //Abrimos la base de datos en modo lectura/escritura
             val db = dbHelper.openDatabase()
 
-            // 3. Hacemos una consulta de prueba a la tabla ROL
+            //Hacemos una consulta de prueba a la tabla ROL
             val cursor = db.rawQuery("SELECT * FROM ROL", null)
 
             if (cursor.moveToFirst()) {
                 do {
                     // Extraemos el nombre del rol
                     val nombreRol = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_ROL"))
-                    // Lo imprimimos en la consola de Android Studio (Logcat)
                     android.util.Log.d("PRUEBA_BD", "Rol encontrado en SQLite: $nombreRol")
                 } while (cursor.moveToNext())
             }
 
-            // 4. Siempre cerramos el cursor y la base de datos
+            // Siempre cerramos el cursor y la base de datos
             cursor.close()
             db.close()
         } catch (e: Exception) {
@@ -68,7 +67,9 @@ class LoginFragment : Fragment() {
             if (esValido) {
                 Toast.makeText(requireContext(), "¡Bienvenido a COTMAN!", Toast.LENGTH_SHORT).show()
 
+                // Ocultamos el login de golpe para evitar el parpadeo de la UI
                 requireView().visibility = View.GONE
+
                 val mainActivity = activity as MainActivity
                 mainActivity.cambiarPantalla(InicioFragment(), R.id.nav_inicio, "COTMAN")
             } else {
@@ -76,14 +77,18 @@ class LoginFragment : Fragment() {
             }
         }
 
-        //Texto de "Olvidé mi contraseña" (En mantenimiento)
+        //RECUPERAR CONTRASEÑA
         val tvForgotPassword = view.findViewById<TextView>(R.id.tv_forgot_password)
 
         tvForgotPassword.setOnClickListener {
-            // Muestra el mensaje flotante
-            Toast.makeText(requireContext(), "Función en proceso de creación", Toast.LENGTH_SHORT).show()
+            // Transición a la pantalla de Recuperar Contraseña
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.content_container, RecuperarPasswordFragment())
+                .addToBackStack(null) // Permite regresar al Login con el botón del celular
+                .commit()
         }
 
+        //REGISTRAR USUARIO
         val tvRegister = view.findViewById<TextView>(R.id.tv_register)
 
         tvRegister.setOnClickListener {
