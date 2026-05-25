@@ -48,6 +48,7 @@
                 app:tint="#9E9E9E" />
 
             <EditText
+                android:id="@+id/et_buscar_unidades"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
@@ -56,8 +57,12 @@
                 android:textColorHint="#9E9E9E"
                 android:textColor="#000000"
                 android:textSize="14sp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivSearch" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
