@@ -21,7 +21,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // --- INICIO PRUEBA BASE DE DATOS ---
         try {
             // 1. Instanciamos nuestra clase Helper
             val dbHelper = DatabaseHelper(requireContext())
@@ -47,7 +46,6 @@ class LoginFragment : Fragment() {
         } catch (e: Exception) {
             android.util.Log.e("PRUEBA_BD", "Error al leer la base de datos", e)
         }
-        // --- FIN PRUEBA BASE DE DATOS ---
 
         val btnIngresar = view.findViewById<MaterialButton>(R.id.btn_ingresar)
         // Ahora usamos los IDs que acabamos de poner en el XML
