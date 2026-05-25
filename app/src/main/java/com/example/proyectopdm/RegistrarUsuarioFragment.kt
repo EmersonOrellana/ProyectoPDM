@@ -9,6 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RegistrarUsuarioFragment : Fragment() {
 
@@ -22,7 +26,6 @@ class RegistrarUsuarioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Enlazamos los componentes usando los IDs
         val etNombres = view.findViewById<EditText>(R.id.et_nombres)
         val etApellidos = view.findViewById<EditText>(R.id.et_apellidos)
         val etCorreo = view.findViewById<EditText>(R.id.et_correo_reg)
@@ -38,27 +41,52 @@ class RegistrarUsuarioFragment : Fragment() {
             val password = etPassword.text.toString().trim()
             val confirmPassword = etConfirmPassword.text.toString().trim()
 
-            // Validaciones
             if (nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || password.isEmpty()) {
-                Toast.makeText(context, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Completa los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password != confirmPassword) {
-                Toast.makeText(context, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Llamada a la base de datos (DatabaseHelper)
+            // 1. Guardar local (SQLite)
             val dbHelper = DatabaseHelper(requireContext())
-            val exito = dbHelper.registrarUsuario(nombres, apellidos, correo, password)
+            val exitoLocal = dbHelper.registrarUsuario(nombres, apellidos, correo, password)
 
-            if (exito) {
-                Toast.makeText(context, "¡Cuenta creada con éxito!", Toast.LENGTH_LONG).show()
-                // Regresa al login
-                requireActivity().supportFragmentManager.popBackStack()
+            if (exitoLocal) {
+                // Capturamos el contexto antes de lanzar nada
+                val context = requireContext()
+
+                // 2. Intentar guardar remoto (API)
+                val usuarioRemoto = UsuarioRemoto(0, 2, nombres, apellidos, correo, password)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val response = RetrofitClient.instance.registrarUsuario(usuarioRemoto)
+                        withContext(Dispatchers.Main) {
+                            if (isAdded) { // Verifica si el fragmento sigue activo
+                                if (response.isSuccessful) {
+                                    Toast.makeText(context, "Sincronizado con Laragon", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(context, "Error en servidor: ${response.code()}", Toast.LENGTH_SHORT).show()
+                                }
+                                requireActivity().supportFragmentManager.popBackStack()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            if (isAdded) {
+                                Toast.makeText(context, "Error de red: ${e.message}", Toast.LENGTH_SHORT).show()
+                                requireActivity().supportFragmentManager.popBackStack()
+                            }
+                        }
+                    }
+                }
+                Toast.makeText(context, "Cuenta creada localmente", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(context, "Error al registrar en la base de datos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error al registrar en BD local", Toast.LENGTH_SHORT).show()
             }
         }
 
