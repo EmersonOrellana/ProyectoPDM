@@ -3,11 +3,8 @@ package com.example.proyectopdm
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -20,58 +17,32 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class UnidadesMedidaFragment : Fragment(R.layout.fragment_unidades_medida) {
 
     private lateinit var contenedorUnidades: LinearLayout
-    private lateinit var etBuscar: EditText // Declaramos el EditText
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val fabAgregar = view.findViewById<FloatingActionButton>(R.id.fab_agregar_unidad)
         contenedorUnidades = view.findViewById(R.id.llContenedorUnidades)
-        etBuscar = view.findViewById(R.id.et_buscar_unidades) // Lo vinculamos al ID que acabamos de crear
 
-        // Cargar datos al iniciar (sin ningún filtro)
-        cargarDatos("")
-
-        //  BUSCADOR EN TIEMPO REAL
-        etBuscar.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Filtramos la lista cada vez que se escribe una letra
-                cargarDatos(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        // Cargar datos al iniciar
+        cargarDatos()
 
         // Botón flotante para Agregar
         fabAgregar.setOnClickListener {
+            // Pasamos null porque es una unidad nueva
             val dialog = UnidadMedidaDialog(unidadAEditar = null) {
-
-                etBuscar.setText("")
-                cargarDatos("")
+                cargarDatos() // Se ejecuta al guardar
             }
             dialog.show(parentFragmentManager, "UnidadMedidaDialog_Add")
         }
     }
 
-
-    fun cargarDatos(filtro: String) {
+    fun cargarDatos() {
         contenedorUnidades.removeAllViews()
         val repo = UnidadMedidaRepository(requireContext())
         val lista = repo.obtenerUnidades()
 
         for (unidad in lista) {
-
-            // --- LÓGICA DE FILTRADO ---
-
-            val textoBusqueda = "${unidad.nombreUnidad} ${unidad.abreviatura} ${unidad.descripcionUso}".lowercase()
-
-
-            if (filtro.isNotEmpty() && !textoBusqueda.contains(filtro.lowercase())) {
-                continue
-            }
-
             val vistaTarjeta = LayoutInflater.from(context).inflate(R.layout.item_unidad, contenedorUnidades, false)
 
             val tvNombre = vistaTarjeta.findViewById<TextView>(R.id.tvNombreUnidad)
@@ -85,8 +56,7 @@ class UnidadesMedidaFragment : Fragment(R.layout.fragment_unidades_medida) {
             // --- BOTÓN EDITAR ---
             btnEditar.setOnClickListener {
                 val dialog = UnidadMedidaDialog(unidadAEditar = unidad) {
-                    // Refrescamos manteniendo el texto actual del buscador
-                    cargarDatos(etBuscar.text.toString())
+                    cargarDatos() // Refresca la lista al cerrar el diálogo
                 }
                 dialog.show(parentFragmentManager, "UnidadMedidaDialog_Edit")
             }
@@ -116,8 +86,7 @@ class UnidadesMedidaFragment : Fragment(R.layout.fragment_unidades_medida) {
             val eliminado = repo.eliminarUnidad(unidad.idUnidad)
             if (eliminado) {
                 Toast.makeText(context, "Unidad eliminada", Toast.LENGTH_SHORT).show()
-
-                cargarDatos(etBuscar.text.toString())
+                cargarDatos()
             } else {
                 Toast.makeText(context, "Error al eliminar", Toast.LENGTH_SHORT).show()
             }
