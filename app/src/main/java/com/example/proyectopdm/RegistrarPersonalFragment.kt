@@ -19,12 +19,16 @@ class RegistrarPersonalFragment : Fragment(R.layout.fragment_registrar_personal)
 
     private lateinit var dbHelper: DatabaseHelper
 
+    // 💥 MAPA PARA RELACIONAR EL NOMBRE DEL ROL CON SU ID REAL DE LA BASE DE DATOS
+    private val mapaRoles = HashMap<String, Int>()
+    private val listaNombresRoles = ArrayList<String>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         dbHelper = DatabaseHelper(requireContext())
 
-        // 1. Mapeo de vistas con sus nuevos IDs del XML
+        // 1. Mapeo de vistas con sus IDs del XML
         val etNombre = view.findViewById<EditText>(R.id.etRegNombre)
         val etApellidos = view.findViewById<EditText>(R.id.etRegApellidos)
         val etDui = view.findViewById<EditText>(R.id.etRegDui)
@@ -35,10 +39,12 @@ class RegistrarPersonalFragment : Fragment(R.layout.fragment_registrar_personal)
         val etPassword = view.findViewById<EditText>(R.id.etRegPassword)
         val autoCompleteRol = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteRol)
 
-        // Configuración del desplegable de Rol (Calza con la visualización anterior)
-        val roles = listOf("Administrador", "Usuario Operativo")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, roles)
-        autoCompleteRol.setAdapter(adapter)
+        // 💥 2. CARGA DINÁMICA DE ROLES DESDE SQLITE
+        obtenerRolesDesdeBD()
+
+        // Configuramos el adaptador usando la lista dinámica recuperada de la BD
+        val adapterRoles = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, listaNombresRoles)
+        autoCompleteRol.setAdapter(adapterRoles)
 
         // 🗓️ DATEPICKER AUTOMÁTICO PARA LA FECHA DE CONTRATACIÓN
         etFecha.setOnClickListener {
@@ -101,7 +107,7 @@ class RegistrarPersonalFragment : Fragment(R.layout.fragment_registrar_personal)
             parentFragmentManager.popBackStack()
         }
 
-        // 💾 BOTÓN CREAR USUARIO (LÓGICA DATABASE SELECT / INSERT)
+        // 💾 BOTÓN CREAR USUARIO
         view.findViewById<Button>(R.id.btnCrearUsuario).setOnClickListener {
             val nombre = etNombre.text.toString().trim()
             val apellido = etApellidos.text.toString().trim()
@@ -124,8 +130,12 @@ class RegistrarPersonalFragment : Fragment(R.layout.fragment_registrar_personal)
                 return@setOnClickListener
             }
 
-            // Mapeo del ID de rol basado en tu estructura anterior
-            val idRol = if (rolSeleccionado == "Administrador") 1 else 2
+            // 💥 MAPEO AUTOMÁTICO: Jalamos el ID real correspondiente al texto seleccionado del mapa
+            val idRol = mapaRoles[rolSeleccionado]
+            if (idRol == null) {
+                Toast.makeText(context, "Rol seleccionado no válido", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val db = dbHelper.openDatabase()
             var cursor: Cursor? = null
@@ -140,7 +150,7 @@ class RegistrarPersonalFragment : Fragment(R.layout.fragment_registrar_personal)
                     return@setOnClickListener
                 }
 
-                // 2. Insertamos el nuevo personal en la BD
+                // 2. Insertamos el nuevo personal en la BD con el ID_ROL automático
                 val valores = ContentValues().apply {
                     put("ID_ROL", idRol)
                     put("NOMBRE_USUARIO", nombre)
@@ -151,14 +161,14 @@ class RegistrarPersonalFragment : Fragment(R.layout.fragment_registrar_personal)
                     put("NIT_USUARIO", nit)
                     put("FECHA_CONTRATACION", fecha)
                     put("TELEFONO_USUARIO", telefono)
-                    put("ESTADO", "Activo") // Alta por defecto
+                    put("ESTADO", "Activo")
                 }
 
                 val resultado = db.insert("USUARIO", null, valores)
 
                 if (resultado != -1L) {
                     Toast.makeText(context, "¡Personal creado con éxito! Ya puede iniciar sesión", Toast.LENGTH_LONG).show()
-                    parentFragmentManager.popBackStack() // Volver al listado o panel principal
+                    parentFragmentManager.popBackStack()
                 } else {
                     Toast.makeText(context, "Error interno al insertar en SQLite", Toast.LENGTH_SHORT).show()
                 }
@@ -170,6 +180,36 @@ class RegistrarPersonalFragment : Fragment(R.layout.fragment_registrar_personal)
                 cursor?.close()
                 db.close()
             }
+        }
+    }
+
+    // 🔍 SELECCIÓN DE ROLES REALES PARA EL COMBOBOX
+    private fun obtenerRolesDesdeBD() {
+        listaNombresRoles.clear()
+        mapaRoles.clear()
+
+        val db = dbHelper.openDatabase()
+        var cursor: Cursor? = null
+        try {
+            val query = "SELECT ID_ROL, NOMBRE_ROL FROM ROL ORDER BY NOMBRE_ROL ASC"
+            cursor = db.rawQuery(query, null)
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    val id = cursor.getInt(cursor.getColumnIndexOrThrow("ID_ROL"))
+                    val nombre = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_ROL")) ?: ""
+
+                    // Llenamos las colecciones dinámicas
+                    listaNombresRoles.add(nombre)
+                    mapaRoles[nombre] = id // "Administrador" -> 1, "Operativo" -> 2...
+                } while (cursor.moveToNext())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Error al cargar catálogo de roles: ${e.message}", Toast.LENGTH_SHORT).show()
+        } finally {
+            cursor?.close()
+            db.close()
         }
     }
 }

@@ -4,55 +4,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
     app:strokeColor="#1565C0"
-    app:strokeWidth="1dp">
+    app:strokeWidth="1dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="8dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvNombreRol"
+            android:id="@+id/tvNombreRolItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="ROL: Administrador"
+            android:text="Nombre del Rol"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvDescripcionRolItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:orientation="vertical">
+            android:layout_marginTop="4dp"
+            android:text="Descripción o privilegios del rol en el sistema"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="end">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditar"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:id="@+id/btnEditarRolItem"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Editar"
-                android:textAllCaps="false"
-                android:textSize="12sp"
                 android:textColor="#1565C0"
-                app:backgroundTint="#A9C9E8"
-                app:cornerRadius="8dp" />
+                app:icon="@android:drawable/ic_menu_edit"
+                app:iconTint="#1565C0"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEliminar"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="5dp"
+                android:id="@+id/btnEliminarRolItem"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="Eliminar"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                android:textColor="#FF1744"
-                app:backgroundTint="#FFCDD2"
-                app:cornerRadius="8dp" />
+                android:textColor="#D32F2F"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconTint="#D32F2F"/>
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

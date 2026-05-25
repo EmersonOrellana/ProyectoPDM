@@ -90,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:gravity="top|start"
-                        android:hint="Ej. Conversión estándar de Kilogramos a Libras"
+                        android:hint="Ej.Funcion"
                         android:padding="16dp"
                         android:textSize="14sp"
                         android:inputType="textMultiLine"

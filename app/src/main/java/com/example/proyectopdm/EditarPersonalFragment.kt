@@ -21,6 +21,11 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
     private lateinit var dbHelper: DatabaseHelper
     private var correoEmpleadoAEditar: String? = null
 
+    // 💥 MAPAS GLOBALES PARA ASOCIACIÓN DINÁMICA DE ROLES
+    private val mapaRolesNombreAId = HashMap<String, Int>()
+    private val mapaRolesIdANombre = HashMap<Int, String>()
+    private val listaNombresRoles = ArrayList<String>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,9 +44,11 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
         val etPassword = view.findViewById<EditText>(R.id.etEditarPassword)
         val autoCompleteRol = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteEditarRol)
 
-        // Configuración de los roles en el desplegable
-        val roles = listOf("Administrador", "Usuario Operativo")
-        val adapterRoles = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, roles)
+        // 💥 3. CARGAMOS LOS ROLES REALES DESDE LA BASE DE DATOS
+        obtenerRolesDesdeBD()
+
+        // Configuración dinámica del desplegable
+        val adapterRoles = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, listaNombresRoles)
         autoCompleteRol.setAdapter(adapterRoles)
 
         // 🗓️ CALENDARIO AUTOMÁTICO EN LA FECHA DE CONTRATACIÓN
@@ -100,14 +107,14 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
             }
         })
 
-        // 3. CARGAR LOS DATOS ACTUALES DESDE SQLITE
+        // 4. CARGAR LOS DATOS ACTUALES DESDE SQLITE
         if (!correoEmpleadoAEditar.isNullOrEmpty()) {
             cargarDatosEmpleado(correoEmpleadoAEditar!!, etNombreCompleto, etDui, etNit, etFecha, etTelefono, etCorreo, etPassword, autoCompleteRol)
         } else {
             Toast.makeText(context, "Error: No se recibió credencial de edición", Toast.LENGTH_SHORT).show()
         }
 
-        // 4. LÓGICA DEL BOTÓN GUARDAR CAMBIOS (UPDATE)
+        // 5. LÓGICA DEL BOTÓN GUARDAR CAMBIOS (UPDATE)
         view.findViewById<Button>(R.id.btnGuardarCambios).setOnClickListener {
             val nombreCompletoTxt = etNombreCompleto.text.toString().trim()
             val duiTxt = etDui.text.toString().trim()
@@ -118,7 +125,6 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
             val passwordTxt = etPassword.text.toString().trim()
             val rolSeleccionado = autoCompleteRol.text.toString()
 
-            // Validaciones de seguridad de campos críticos
             if (nombreCompletoTxt.isEmpty() || correoTxt.isEmpty() || passwordTxt.isEmpty() || rolSeleccionado.isEmpty()) {
                 Toast.makeText(context, "Nombre, Rol, Correo y Contraseña son campos obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -129,12 +135,16 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
                 return@setOnClickListener
             }
 
-            // Separación del Nombre Completo en Nombre y Apellido para la base de datos
             val partesNombre = nombreCompletoTxt.split(" ", limit = 2)
             val nombreParaBD = partesNombre.getOrElse(0) { "" }
             val apellidoParaBD = partesNombre.getOrElse(1) { "" }
 
-            val idRolMapeado = if (rolSeleccionado == "Administrador") 1 else 2
+            // 💥 MAPEO AUTOMÁTICO DE IDA: Obtenemos el ID del rol seleccionado desde el mapa
+            val idRolMapeado = mapaRolesNombreAId[rolSeleccionado]
+            if (idRolMapeado == null) {
+                Toast.makeText(context, "Rol seleccionado no es válido", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val db = dbHelper.openDatabase()
             try {
@@ -150,7 +160,6 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
                     put("CONTRASENA", passwordTxt)
                 }
 
-                // Hacemos el UPDATE basándonos en el correo original como llave de búsqueda
                 val filasAfectadas = db.update(
                     "USUARIO",
                     valores,
@@ -181,6 +190,36 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
         }
     }
 
+    // 🔍 SELECCIÓN DE ROLES DINÁMICOS
+    private fun obtenerRolesDesdeBD() {
+        listaNombresRoles.clear()
+        mapaRolesNombreAId.clear()
+        mapaRolesIdANombre.clear()
+
+        val db = dbHelper.openDatabase()
+        var cursor: Cursor? = null
+        try {
+            val query = "SELECT ID_ROL, NOMBRE_ROL FROM ROL ORDER BY NOMBRE_ROL ASC"
+            cursor = db.rawQuery(query, null)
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    val id = cursor.getInt(cursor.getColumnIndexOrThrow("ID_ROL"))
+                    val nombre = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_ROL")) ?: ""
+
+                    listaNombresRoles.add(nombre)
+                    mapaRolesNombreAId[nombre] = id     // Para cuando guardemos (Nombre -> ID)
+                    mapaRolesIdANombre[id] = nombre     // Para cuando carguemos (ID -> Nombre)
+                } while (cursor.moveToNext())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            cursor?.close()
+            db.close()
+        }
+    }
+
     // 🔍 CONSULTA SELECT PARA RELLENAR EL FORMULARIO
     private fun cargarDatosEmpleado(
         correo: String,
@@ -203,9 +242,7 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
                 val nombre = cursor.getString(cursor.getColumnIndexOrThrow("NOMBRE_USUARIO")) ?: ""
                 val apellido = cursor.getString(cursor.getColumnIndexOrThrow("APELLIDO_USUARIO")) ?: ""
 
-                // Unimos nombre y apellido para tu caja unificada "Nombre Completo"
                 etNombreCompleto.setText("$nombre $apellido".trim())
-
                 etCorreo.setText(cursor.getString(cursor.getColumnIndexOrThrow("CORREO_ELECTRONICO")) ?: "")
                 etPassword.setText(cursor.getString(cursor.getColumnIndexOrThrow("CONTRASENA")) ?: "")
                 etDui.setText(cursor.getString(cursor.getColumnIndexOrThrow("DUI_USUARIO")) ?: "")
@@ -213,8 +250,9 @@ class EditarPersonalFragment : Fragment(R.layout.fragment_editar_personal) {
                 etFecha.setText(cursor.getString(cursor.getColumnIndexOrThrow("FECHA_CONTRATACION")) ?: "")
                 etTelefono.setText(cursor.getString(cursor.getColumnIndexOrThrow("TELEFONO_USUARIO")) ?: "")
 
+                // 💥 MAPEO AUTOMÁTICO DE VUELTA: Obtenemos el string correspondiente al ID desde nuestro mapa inverso
                 val idRol = cursor.getInt(cursor.getColumnIndexOrThrow("ID_ROL"))
-                val nombreRol = if (idRol == 1) "Administrador" else "Usuario Operativo"
+                val nombreRol = mapaRolesIdANombre[idRol] ?: "Sin Rol"
                 autoCompleteRol.setText(nombreRol, false)
             }
         } catch (e: Exception) {
